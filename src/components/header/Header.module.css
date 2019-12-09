@@ -1,0 +1,28 @@
+header {
+  width: calc(100% - 20px);
+  min-width: 991px;
+  padding: 10px;
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff0048;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+}
+nav {
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  justify-content: space-between;
+  align-items: center;
+}
+.item {
+  margin: 10px;
+  padding: 5px 20px;
+}
+.logo {
+  font-size: 25px;
+  font-weight: 600;
+}
