@@ -21,8 +21,19 @@ nav {
 .item {
   margin: 10px;
   padding: 5px 20px;
+  text-decoration: none;
+  color: #ffffff;
+  border-radius: 5px;
+}
+.item:hover {
+  background-color: #ffffff;
+  color: #ff0048;
 }
 .logo {
   font-size: 25px;
   font-weight: 600;
+}
+.active {
+  background-color: #ffffff;
+  color: #ff0048;
 }

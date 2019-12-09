@@ -1,9 +1,10 @@
-import React from 'react'
-import h from './Header.module.css'
+import React from 'react';
+import h from './Header.module.css';
+import {NavLink} from 'react-router-dom';
 
 const NavigationItem = (props) => {
   return(
-    <p className={h.item}>{props.title}</p>
+    <NavLink to={props.href} className={h.item} activeClassName={h.active}>{props.title}</NavLink>
   );
 }
 
@@ -12,9 +13,9 @@ const Header = () => {
     <header>
       <div className={h.logo}>On-Keeper</div>
       <nav>
-        <NavigationItem title="Меню"/>
-        <NavigationItem title="Персонал"/>
-        <NavigationItem title="Заказы"/>
+        <NavigationItem title="Меню" href="/menu"/>
+        <NavigationItem title="Персонал" href="/personal"/>
+        <NavigationItem title="Заказы" href="/orders" />
       </nav>
       <div className="admin_btn"> 
         <span>Администратор</span>
