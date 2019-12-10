@@ -24,14 +24,12 @@ const Categories = () => {
     {id: 4, name: 'Холодные закуски'},
     {id: 5, name: 'Другие'},
   ]
+  let categoryItems = categories.map(item => <CategoryItem name={item.name} href={item.id} />)
   return(
     <div className={m.category_block}>
       <h3 className={m.title}>Категории</h3>
       <div className={m.category_items}>
-        <CategoryItem name="Десерты" href="" />
-        <CategoryItem name="Салаты" href=""/>
-        <CategoryItem name="Супы" href=""/>
-        <CategoryItem name="Холодные закуски" href=""/>
+        {categoryItems}
         <div className={m.category_input}>
           <input type="text" placeholder="Добавить категорию..."/>
         </div>

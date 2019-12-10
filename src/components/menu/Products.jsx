@@ -20,8 +20,7 @@ const Products = () => {
     {id: 2, title: 'Product 2', img: 'https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/02/red-velvet-cake-slice-2.jpg'},
   ]
 
-  let productItems = products
-    .map(item => <ProductItem title={item.title} href={item.id} img={item.img}/>)
+  let productItems = products.map(item => <ProductItem title={item.title} href={item.id} img={item.img}/>)
   
     return(
     <div className={m.products}>
