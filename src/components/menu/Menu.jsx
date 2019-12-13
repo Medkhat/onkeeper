@@ -1,13 +1,13 @@
 import React from 'react'
 import m from './Menu.module.css'
-import Categories from './Categories'
-import Products from './Products'
+import Categories from './categories/Categories'
+import Products from './products/Products'
 
-const Menu = () => {
+const Menu = (props) => {
   return (
     <div className={m.content}>
-      <Categories />
-      <Products />
+      <Categories categories={props.categories}/>
+      <Products products={props.products}/>
     </div>
   );
 }
