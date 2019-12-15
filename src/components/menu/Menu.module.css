@@ -63,15 +63,23 @@
   opacity: 1;
   visibility: visible;
 }
+.category_input {
+  position: relative;
+}
 .category_input input{
   border: 1px solid transparent;
-  width: 90%;
+  width: 100%;
   border-radius: 0 15px 15px 0;
   outline: none;
   font-size: 16px;
   padding: 4px 4px 4px 20px;
   border-left: none;
   color: #ff0048;
+}
+.category_input button {
+  position: absolute;
+  right: 5px;
+  top: 0;
 }
 .category_input input:focus {
   border-color: #ff0048;

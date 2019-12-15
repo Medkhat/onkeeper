@@ -6,7 +6,10 @@ import Products from './products/Products'
 const Menu = (props) => {
   return (
     <div className={m.content}>
-      <Categories categories={props.categories}/>
+      <Categories 
+        categories={props.categories}
+        addCatItem={props.addCatItem}
+      />
       <Products products={props.products}/>
     </div>
   );

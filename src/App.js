@@ -14,7 +14,15 @@ function App(props) {
         <Route 
           exact 
           path='/' 
-          render={() => <Menu categories={props.state.menuPage.categories} products={props.state.menuPage.products}/>}
+          render={() => {
+            return (
+              <Menu 
+                categories={props.state.menuPage.categories} 
+                products={props.state.menuPage.products}
+                addCatItem={props.addCatItem}
+              />
+            )
+          }}
         />
         <Route path='/order' render={() => <Orders />}/>
         <Route path='/personal' render={() => <Personal />}/>

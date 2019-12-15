@@ -14,4 +14,12 @@ let state = {
   }
 }
 
+export let addCatItem = (name) => {
+  let newItem = {
+    id: 6,
+    name: name
+  }
+  state.menuPage.categories.push(newItem)
+}
+
 export default state;
