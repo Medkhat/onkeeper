@@ -1,3 +1,5 @@
+import { rerenderEntiredTree } from "../render"
+
 let state = {
   menuPage: {
     categories: [
@@ -11,15 +13,15 @@ let state = {
       {id: 1, title: 'Product 1', img: 'https://www.good-menu.ru/img/postre/tort-brauni63.jpg'},
       {id: 2, title: 'Product 2', img: 'https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/02/red-velvet-cake-slice-2.jpg'},
     ]
+  },
+  addCatItem: function(name) {
+    let newItem = {
+      id: 6,
+      name: name
+    }
+    this.menuPage.categories.push(newItem)
+    rerenderEntiredTree(this)
   }
 }
 
-export let addCatItem = (name) => {
-  let newItem = {
-    id: 6,
-    name: name
-  }
-  state.menuPage.categories.push(newItem)
-}
-
-export default state;
+export default state

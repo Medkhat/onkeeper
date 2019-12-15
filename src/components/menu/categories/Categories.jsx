@@ -3,15 +3,18 @@ import m from '../Menu.module.css'
 import CategoryItem from './CategoryItem'
 
 const Categories = (props) => {
-  let categoryItems = props.categories.map(item => <CategoryItem name={item.name} href={item.id}/>)
 
-  let newCatItem = React.createRef();
+  let categoryItems = props.categories.map(item => {
+    return <CategoryItem name={item.name} href={item.id}/>
+  })
+
+  let newCatItem = React.createRef()
 
   let addCatItem = () => {
     let itemTitle = newCatItem.current.value
     props.addCatItem(itemTitle)
+    console.log(itemTitle);
   }
-
   return(
     <div className={m.category_block}>
       <h3 className={m.title}>Категории</h3>

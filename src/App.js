@@ -19,7 +19,7 @@ function App(props) {
               <Menu 
                 categories={props.state.menuPage.categories} 
                 products={props.state.menuPage.products}
-                addCatItem={props.addCatItem}
+                addCatItem={props.state.addCatItem}
               />
             )
           }}

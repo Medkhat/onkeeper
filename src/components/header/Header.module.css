@@ -1,5 +1,5 @@
 header {
-  width: calc(100% - 20px);
+  width: 100%;
   min-width: 991px;
   padding: 10px;
   display: flex;
