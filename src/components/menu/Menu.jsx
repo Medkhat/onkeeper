@@ -8,7 +8,9 @@ const Menu = (props) => {
     <div className={m.content}>
       <Categories 
         categories={props.categories}
+        newCategoryTitle={props.newCategoryTitle}
         addCatItem={props.addCatItem}
+        updateNewCategoryTitle={props.updateNewCategoryTitle}
       />
       <Products products={props.products}/>
     </div>

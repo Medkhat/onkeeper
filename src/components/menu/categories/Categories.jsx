@@ -10,19 +10,32 @@ const Categories = (props) => {
 
   let newCatItem = React.createRef()
 
-  let addCatItem = () => {
-    let itemTitle = newCatItem.current.value
-    props.addCatItem(itemTitle)
-    console.log(itemTitle);
+  let addCatItemFunc = () => {
+    props.addCatItem()
   }
+
+  let onCategoryTitleChange = () => {
+    let newItemTitle = newCatItem.current.value
+    props.updateNewCategoryTitle(newItemTitle)
+  }
+
   return(
     <div className={m.category_block}>
       <h3 className={m.title}>Категории</h3>
       <div className={m.category_items}>
         {categoryItems}
         <div className={m.category_input}>
-          <input type="text" ref={newCatItem} placeholder="Добавить категорию..."/>
-          <button type="button" onClick={addCatItem}>Добавить</button>
+          <input 
+            type="text" 
+            ref={newCatItem} 
+            value={props.newCategoryTitle} 
+            onChange={onCategoryTitleChange}
+            placeholder="Добавить категорию..."
+          />
+          <button 
+            type="button" 
+            onClick={addCatItemFunc}
+          >Добавить</button>
         </div>
       </div>
     </div>

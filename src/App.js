@@ -19,7 +19,9 @@ function App(props) {
               <Menu 
                 categories={props.state.menuPage.categories} 
                 products={props.state.menuPage.products}
-                addCatItem={props.state.addCatItem}
+                newCategoryTitle={props.state.menuPage.newCategoryTitle}
+                addCatItem={props.addCatItem}
+                updateNewCategoryTitle={props.updateNewCategoryTitle}
               />
             )
           }}

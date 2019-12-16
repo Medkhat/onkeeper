@@ -1,5 +1,4 @@
-import { rerenderEntiredTree } from "../render"
-
+let rerenderEntiredTree = () => {};
 let state = {
   menuPage: {
     categories: [
@@ -9,19 +8,27 @@ let state = {
       {id: 4, name: 'Холодные закуски'},
       {id: 5, name: 'Другие'},
     ],
+    newCategoryTitle: "Category Title",
     products: [
       {id: 1, title: 'Product 1', img: 'https://www.good-menu.ru/img/postre/tort-brauni63.jpg'},
       {id: 2, title: 'Product 2', img: 'https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/02/red-velvet-cake-slice-2.jpg'},
     ]
   },
-  addCatItem: function(name) {
-    let newItem = {
-      id: 6,
-      name: name
-    }
-    this.menuPage.categories.push(newItem)
-    rerenderEntiredTree(this)
-  }
 }
-
+export const addCatItem = () => {
+  let newItem = {
+    id: 6,
+    name: state.menuPage.newCategoryTitle
+  }
+  state.menuPage.categories.push(newItem)
+  state.menuPage.newCategoryTitle = ''
+  rerenderEntiredTree(state)
+}
+export const updateNewCategoryTitle = (newTitle) => {
+  state.menuPage.newCategoryTitle = newTitle
+  rerenderEntiredTree(state)
+}
+export const subscribe = (observer) => {
+  rerenderEntiredTree = observer
+}
 export default state

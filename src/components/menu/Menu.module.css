@@ -87,14 +87,12 @@
   border-radius: 10px;
   padding: 3px 10px;
   opacity: 0;
-  visibility: hidden;
 }
 .category_input input:focus {
   border-color: #ff0048;
 }
 .category_input input:focus + button {
   opacity: 1;
-  visibility: visible;
 }
 
 /* Styles for products block */
