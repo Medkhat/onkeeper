@@ -22,11 +22,11 @@ export const addCatItem = () => {
   }
   state.menuPage.categories.push(newItem)
   state.menuPage.newCategoryTitle = ''
-  rerenderEntiredTree(state)
+  rerenderEntiredTree()
 }
 export const updateNewCategoryTitle = (newTitle) => {
   state.menuPage.newCategoryTitle = newTitle
-  rerenderEntiredTree(state)
+  rerenderEntiredTree()
 }
 export const subscribe = (observer) => {
   rerenderEntiredTree = observer
