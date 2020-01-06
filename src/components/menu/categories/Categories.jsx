@@ -5,7 +5,7 @@ import CategoryItem from './CategoryItem'
 const Categories = (props) => {
 
   let categoryItems = props.categories.map(item => {
-    return <CategoryItem name={item.name} href={item.id}/>
+    return <CategoryItem name={item.name} href={item.id} />
   })
 
   let newCatItem = React.createRef()
@@ -19,21 +19,21 @@ const Categories = (props) => {
     props.updateNewCategoryTitle(newItemTitle)
   }
 
-  return(
+  return (
     <div className={m.category_block}>
       <h3 className={m.title}>Категории</h3>
       <div className={m.category_items}>
         {categoryItems}
         <div className={m.category_input}>
-          <input 
-            type="text" 
-            ref={newCatItem} 
-            value={props.newCategoryTitle} 
+          <input
+            type="text"
+            ref={newCatItem}
+            value={props.newCategoryTitle}
             onChange={onCategoryTitleChange}
             placeholder="Добавить категорию..."
           />
-          <button 
-            type="button" 
+          <button
+            type="button"
             onClick={addCatItemFunc}
           >Добавить</button>
         </div>

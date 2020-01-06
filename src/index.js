@@ -1,24 +1,23 @@
-import state, { subscribe } from './data/state';
+import store from './data/state';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {BrowserRouter} from 'react-router-dom';
-import { addCatItem, updateNewCategoryTitle } from './data/state';
+import { BrowserRouter } from 'react-router-dom';
 //import * as serviceWorker from './serviceWorker';
 
-let rerenderEntiredTree = () => {
+let rerenderEntiredTree = (state) => {
   ReactDOM.render(
     <BrowserRouter>
-      <App 
-        state={state} 
-        addCatItem={addCatItem}
-        updateNewCategoryTitle={updateNewCategoryTitle}
+      <App
+        state={state}
+        addCatItem={store.addCatItem.bind(store)}
+        updateNewCategoryTitle={store.updateNewCategoryTitle.bind(store)}
       />
-    </BrowserRouter>, 
+    </BrowserRouter>,
     document.getElementById('app')
   );
 }
-rerenderEntiredTree()
-subscribe(rerenderEntiredTree)
+rerenderEntiredTree(store.getState())
+store.subscribe(rerenderEntiredTree)
 //serviceWorker.unregister();
