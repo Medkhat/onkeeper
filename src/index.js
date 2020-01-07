@@ -11,8 +11,7 @@ let rerenderEntiredTree = (state) => {
     <BrowserRouter>
       <App
         state={state}
-        addCatItem={store.addCatItem.bind(store)}
-        updateNewCategoryTitle={store.updateNewCategoryTitle.bind(store)}
+        dispatch={store.dispatch.bind(store)}
       />
     </BrowserRouter>,
     document.getElementById('app')

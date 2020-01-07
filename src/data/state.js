@@ -18,22 +18,23 @@ let store = {
   getState() {
     return this._state
   },
-  _callSubscriber() { },
-  addCatItem() {
-    let newItem = {
-      id: 6,
-      name: this._state.menuPage.newCategoryTitle
-    }
-    this._state.menuPage.categories.push(newItem)
-    this._state.menuPage.newCategoryTitle = ''
-    this._callSubscriber(this._state)
-  },
-  updateNewCategoryTitle(newTitle) {
-    this._state.menuPage.newCategoryTitle = newTitle
-    this._callSubscriber(this._state)
-  },
   subscribe(observer) {
     this._callSubscriber = observer
+  },
+  _callSubscriber() { },
+  dispatch(action) {
+    if (action.type === "ADD_CATEGORY_ITEM") {
+      let newItem = {
+        id: 6,
+        name: this._state.menuPage.newCategoryTitle
+      }
+      this._state.menuPage.categories.push(newItem)
+      this._state.menuPage.newCategoryTitle = ''
+      this._callSubscriber(this._state)
+    } else if (action.type === "UPDATE_NEW_CATEGORY_TITLE") {
+      this._state.menuPage.newCategoryTitle = action.newTitle
+      this._callSubscriber(this._state)
+    }
   }
 }
 

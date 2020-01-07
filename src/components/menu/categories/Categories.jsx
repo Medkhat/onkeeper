@@ -11,12 +11,16 @@ const Categories = (props) => {
   let newCatItem = React.createRef()
 
   let addCatItemFunc = () => {
-    props.addCatItem()
+    props.dispatch({ type: "ADD_CATEGORY_ITEM" })
   }
 
   let onCategoryTitleChange = () => {
     let newItemTitle = newCatItem.current.value
-    props.updateNewCategoryTitle(newItemTitle)
+    let action = {
+      type: "UPDATE_NEW_CATEGORY_TITLE",
+      newTitle: newItemTitle
+    }
+    props.dispatch(action)
   }
 
   return (
