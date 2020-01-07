@@ -25,7 +25,7 @@ function App(props) {
             )
           }}
         />
-        <Route path='/order' render={() => <Orders />} />
+        <Route path='/orders' render={() => <Orders />} />
         <Route path='/personal' render={() => <Personal />} />
       </div>
     </div>

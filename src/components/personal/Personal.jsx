@@ -1,9 +1,9 @@
 import React from 'react'
 
 const Personal = () => {
-  return  (
+  return (
     <div>Personal</div>
-  );
+  )
 }
 
 export default Personal;

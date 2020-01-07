@@ -1,0 +1,18 @@
+.content {
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 30px;
+  min-width: 991px;
+  padding: 10px;
+}
+.left_block {
+  background-color: aqua;
+  width: 71%;
+}
+.right_block {
+  width: 26%;
+  background-color: blueviolet;
+}

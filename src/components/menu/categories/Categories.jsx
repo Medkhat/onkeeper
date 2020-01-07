@@ -1,6 +1,7 @@
 import React from 'react'
 import m from '../Menu.module.css'
 import CategoryItem from './CategoryItem'
+import { addCatItemActionCreator, updateNewCategoryTiteActionCreator } from '../../../data/state'
 
 const Categories = (props) => {
 
@@ -11,15 +12,12 @@ const Categories = (props) => {
   let newCatItem = React.createRef()
 
   let addCatItemFunc = () => {
-    props.dispatch({ type: "ADD_CATEGORY_ITEM" })
+    props.dispatch(addCatItemActionCreator())
   }
 
   let onCategoryTitleChange = () => {
     let newItemTitle = newCatItem.current.value
-    let action = {
-      type: "UPDATE_NEW_CATEGORY_TITLE",
-      newTitle: newItemTitle
-    }
+    let action = updateNewCategoryTiteActionCreator(newItemTitle)
     props.dispatch(action)
   }
 

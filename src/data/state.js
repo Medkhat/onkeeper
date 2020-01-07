@@ -1,3 +1,5 @@
+const ADD_CATEGORY_ITEM = "ADD_CATEGORY_ITEM"
+const UPDATE_NEW_CATEGORY_TITLE = "UPDATE_NEW_CATEGORY_TITLE"
 let store = {
   _state: {
     menuPage: {
@@ -23,7 +25,7 @@ let store = {
   },
   _callSubscriber() { },
   dispatch(action) {
-    if (action.type === "ADD_CATEGORY_ITEM") {
+    if (action.type === ADD_CATEGORY_ITEM) {
       let newItem = {
         id: 6,
         name: this._state.menuPage.newCategoryTitle
@@ -31,11 +33,19 @@ let store = {
       this._state.menuPage.categories.push(newItem)
       this._state.menuPage.newCategoryTitle = ''
       this._callSubscriber(this._state)
-    } else if (action.type === "UPDATE_NEW_CATEGORY_TITLE") {
+    } else if (action.type === UPDATE_NEW_CATEGORY_TITLE) {
       this._state.menuPage.newCategoryTitle = action.newTitle
       this._callSubscriber(this._state)
     }
   }
 }
+
+export const addCatItemActionCreator = () => ({
+  type: ADD_CATEGORY_ITEM
+})
+export const updateNewCategoryTiteActionCreator = (title) => ({
+  type: UPDATE_NEW_CATEGORY_TITLE,
+  newTitle: title
+})
 
 export default store
