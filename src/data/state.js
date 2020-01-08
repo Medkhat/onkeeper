@@ -16,6 +16,45 @@ let store = {
         { id: 2, title: 'Product 2', img: 'https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/02/red-velvet-cake-slice-2.jpg' },
       ]
     },
+    personalPage: {
+      personal: [
+        {
+          id: 1,
+          fullName: 'Отарбай Даурен',
+          salary: 134000,
+          working_days: ['Пн', 'Ср', 'Пт'],
+          img: 'https://media.daysoftheyear.com/20171223131119/waiters-day.jpg'
+        },
+        {
+          id: 2,
+          fullName: 'Әкімбек Медхат',
+          salary: 135000,
+          working_days: ['Вт', 'Чт', 'Сб'],
+          img: 'https://media.daysoftheyear.com/20171223131119/waiters-day.jpg'
+        },
+        {
+          id: 3,
+          fullName: 'Бахытов Ернияз',
+          salary: 136000,
+          working_days: ['Пн', 'Ср', 'Пт'],
+          img: 'https://media.daysoftheyear.com/20171223131119/waiters-day.jpg'
+        },
+        {
+          id: 4,
+          fullName: 'Шомат Ілияс',
+          salary: 137000,
+          working_days: ['Вт', 'Чт', 'Сб'],
+          img: 'https://media.daysoftheyear.com/20171223131119/waiters-day.jpg'
+        },
+        {
+          id: 5,
+          fullName: 'Нұрбек',
+          salary: 138000,
+          working_days: ['Пн', 'Ср', 'Пт'],
+          img: 'https://media.daysoftheyear.com/20171223131119/waiters-day.jpg'
+        },
+      ]
+    }
   },
   getState() {
     return this._state

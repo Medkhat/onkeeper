@@ -15,7 +15,7 @@ const Products = (props) => {
     <div className={m.products}>
       {productItems}
       <div className={m.item_card}>
-        <NavLink to="/menu/add-product" className={m.product_name}>Добавить блюдо</NavLink>
+        <NavLink to="/products/add-product" className={m.product_name}>Добавить блюдо</NavLink>
       </div>
     </div>
   );

@@ -26,7 +26,14 @@ function App(props) {
           }}
         />
         <Route path='/orders' render={() => <Orders />} />
-        <Route path='/personal' render={() => <Personal />} />
+        <Route
+          path='/personal'
+          render={() => {
+            return (
+              <Personal personal={props.state.personalPage.personal} />
+            )
+          }}
+        />
       </div>
     </div>
   );
