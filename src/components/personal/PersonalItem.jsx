@@ -21,6 +21,7 @@ const PersonalItem = (props) => {
           {workingDays}
         </div>
       </NavLink>
+      <span className={p.times}>&times;</span>
     </div>
   )
 }

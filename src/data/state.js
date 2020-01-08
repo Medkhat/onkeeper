@@ -1,3 +1,7 @@
+import waiter from '../img/waiter.jpg'
+import brauni from '../img/brauni.jpg'
+import red_bar from '../img/red_bar.png'
+
 const ADD_CATEGORY_ITEM = "ADD_CATEGORY_ITEM"
 const UPDATE_NEW_CATEGORY_TITLE = "UPDATE_NEW_CATEGORY_TITLE"
 let store = {
@@ -12,8 +16,8 @@ let store = {
       ],
       newCategoryTitle: "Category Title",
       products: [
-        { id: 1, title: 'Product 1', img: 'https://www.good-menu.ru/img/postre/tort-brauni63.jpg' },
-        { id: 2, title: 'Product 2', img: 'https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/02/red-velvet-cake-slice-2.jpg' },
+        { id: 1, title: 'Product 1', img: brauni },
+        { id: 2, title: 'Product 2', img: red_bar },
       ]
     },
     personalPage: {
@@ -23,35 +27,35 @@ let store = {
           fullName: 'Отарбай Даурен',
           salary: 134000,
           working_days: ['Пн', 'Ср', 'Пт'],
-          img: 'https://media.daysoftheyear.com/20171223131119/waiters-day.jpg'
+          img: waiter
         },
         {
           id: 2,
           fullName: 'Әкімбек Медхат',
           salary: 135000,
           working_days: ['Вт', 'Чт', 'Сб'],
-          img: 'https://media.daysoftheyear.com/20171223131119/waiters-day.jpg'
+          img: waiter
         },
         {
           id: 3,
           fullName: 'Бахытов Ернияз',
           salary: 136000,
           working_days: ['Пн', 'Ср', 'Пт'],
-          img: 'https://media.daysoftheyear.com/20171223131119/waiters-day.jpg'
+          img: waiter
         },
         {
           id: 4,
           fullName: 'Шомат Ілияс',
           salary: 137000,
           working_days: ['Вт', 'Чт', 'Сб'],
-          img: 'https://media.daysoftheyear.com/20171223131119/waiters-day.jpg'
+          img: waiter
         },
         {
           id: 5,
           fullName: 'Нұрбек',
           salary: 138000,
           working_days: ['Пн', 'Ср', 'Пт'],
-          img: 'https://media.daysoftheyear.com/20171223131119/waiters-day.jpg'
+          img: waiter
         },
       ]
     }
