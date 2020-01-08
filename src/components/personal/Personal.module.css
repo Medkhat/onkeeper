@@ -29,7 +29,7 @@
   position: relative;
 }
 .img {
-  width: 80%;
+  width: 75%;
   height: 95px;
   border-radius: 50%;
 }
@@ -68,4 +68,56 @@
   cursor: pointer;
   top: -5px;
   right: -7px;
+}
+.img_label {
+  display: block;
+  cursor: pointer;
+}
+.img_label:hover {
+  color: #ff0048;
+}
+.upload_img {
+  text-align: center;
+}
+.upload_img img {
+  width: 70px;
+  border: 2px solid #ff0048;
+  padding: 5px;
+  border-radius: 50%;
+}
+.personal_form {
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  margin-right: 10px;
+}
+@media only screen and (min-width: 1500px) {
+  .left_block {
+    width: 73%;
+  }
+  .card {
+    width: 15%;
+  }
+  .right_block {
+    width: 24%;
+  }
+  .img {
+    width: 65%;
+  }
+}
+@media only screen and (min-width: 1700px) {
+  .left_block {
+    width: 75%;
+  }
+  .right_block {
+    width: 22%;
+  }
+  .card {
+    width: 13%;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  .card {
+    width: 20%;
+  }
 }
