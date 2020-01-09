@@ -2,6 +2,21 @@ import React from 'react'
 import p from './Personal.module.css'
 import def_user from '../../img/user.png'
 
+const FormInputs = (props) => {
+  return (
+    <div className={p.form_input}>
+      <label>
+        {props.label} <br />
+        <input type={props.type} placeholder={props.placeholder} />
+      </label>
+    </div>
+  )
+}
+
+const SelectOption = (props) => {
+  return <option value={props.value}>{props.option}</option>
+}
+
 const PersonalForm = () => {
   return (
     <div className={p.personal_form}>
@@ -12,21 +27,25 @@ const PersonalForm = () => {
           <input type="file" style={{ display: "none" }} />
         </label>
       </div>
-      <div className={p.form_input}>
-        <input type="text" placeholder="Логин..." />
-      </div>
-      <div className={p.form_input}>
-        <input type="password" placeholder="Пароль..." />
-      </div>
-      <div className={p.form_input}>
-        <input type="text" placeholder="Полное имя..." />
-      </div>
-      <div className={p.form_input}>
-        <input type="number" placeholder="Номер телефона..." />
-      </div>
-      <div className={p.form_input}>
-        <input type="email" placeholder="Email..." />
-      </div>
+      <FormInputs type="text" placeholder="example_login" label="Логин" />
+      <FormInputs type="password" placeholder="password123" label="Пароль" />
+      <FormInputs type="text" placeholder="Ф.И.О" label="Полное имя" />
+      <FormInputs type="number" placeholder="+7 XXX XXX XXXX" label="Номер телефона" />
+      <FormInputs type="email" placeholder="Email" label="Электронная почта" />
+      <FormInputs type="date" label="Дата устройства на работу" />
+      <select className={p.form_select} name="person_position" id="">
+        <option selected>Должность</option>
+        <SelectOption value="waiter" option="Официант" />
+        <SelectOption value="security" option="Охрана" />
+        <SelectOption value="cook" option="Повар" />
+      </select>
+      <select className={p.form_select} name="salaty_type" id="">
+        <option selected>Тип зарплаты</option>
+        <SelectOption value="usd" option="USD" />
+        <SelectOption value="euro" option="EUR" />
+        <SelectOption value="kzt" option="KZT" />
+      </select>
+      <FormInputs type="number" placeholder="0.00 тг" label="Заработная плата" />
     </div>
   )
 }
