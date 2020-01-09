@@ -4,6 +4,10 @@ import red_bar from '../img/red_bar.png'
 
 const ADD_CATEGORY_ITEM = "ADD_CATEGORY_ITEM"
 const UPDATE_NEW_CATEGORY_TITLE = "UPDATE_NEW_CATEGORY_TITLE"
+const ADD_NEW_EMPLOYEE = "ADD_NEW_EMPLOYEE"
+const UPDATE_NEW_EMPLOYEE_NAME = "UPDATE_NEW_EMPLOYEE_NAME"
+const UPDATE_NEW_EMPLOYEE_SALARY = "UPDATE_NEW_EMPLOYEE_SALARY"
+
 let store = {
   _state: {
     menuPage: {
@@ -57,7 +61,9 @@ let store = {
           working_days: ['Пн', 'Ср', 'Пт'],
           img: waiter
         },
-      ]
+      ],
+      newEmployeeName: "",
+      newEmployeeSalary: 0,
     }
   },
   getState() {
@@ -69,6 +75,7 @@ let store = {
   _callSubscriber() { },
   dispatch(action) {
     if (action.type === ADD_CATEGORY_ITEM) {
+
       let newItem = {
         id: 6,
         name: this._state.menuPage.newCategoryTitle
@@ -76,9 +83,36 @@ let store = {
       this._state.menuPage.categories.push(newItem)
       this._state.menuPage.newCategoryTitle = ''
       this._callSubscriber(this._state)
+
     } else if (action.type === UPDATE_NEW_CATEGORY_TITLE) {
+
       this._state.menuPage.newCategoryTitle = action.newTitle
       this._callSubscriber(this._state)
+
+    } else if (action.type === ADD_NEW_EMPLOYEE) {
+
+      let newEmployee = {
+        id: 6,
+        fullName: this._state.personalPage.newEmployeeName,
+        salary: this._state.personalPage.newEmployeeSalary,
+        working_days: ['Вт', 'Чт', 'Сб'],
+        img: waiter
+      }
+      this._state.personalPage.personal.push(newEmployee)
+      this._state.personalPage.newEmployeeName = ''
+      this._state.personalPage.newEmployeeSalary = ''
+      this._callSubscriber(this._state)
+
+    } else if (action.type === UPDATE_NEW_EMPLOYEE_NAME) {
+
+      this._state.personalPage.newEmployeeName = action.fullName
+      this._callSubscriber(this._state)
+
+    } else if (action.type === UPDATE_NEW_EMPLOYEE_SALARY) {
+
+      this._state.personalPage.newEmployeeSalary = action.salary
+      this._callSubscriber(this._state)
+
     }
   }
 }
@@ -89,6 +123,17 @@ export const addCatItemActionCreator = () => ({
 export const updateNewCategoryTiteActionCreator = (title) => ({
   type: UPDATE_NEW_CATEGORY_TITLE,
   newTitle: title
+})
+export const addNewEmployeeCreator = () => ({
+  type: ADD_NEW_EMPLOYEE
+})
+export const updateNewEmployeeNameCreator = (name) => ({
+  type: UPDATE_NEW_EMPLOYEE_NAME,
+  fullName: name
+})
+export const updateNewEmployeeSalaryCreator = (salary) => ({
+  type: UPDATE_NEW_EMPLOYEE_SALARY,
+  salary: salary
 })
 
 export default store

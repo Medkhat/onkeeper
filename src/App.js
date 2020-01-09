@@ -30,7 +30,7 @@ function App(props) {
           path='/personal'
           render={() => {
             return (
-              <Personal personal={props.state.personalPage.personal} />
+              <Personal personal={props.state.personalPage.personal} dispatch={props.dispatch} />
             )
           }}
         />

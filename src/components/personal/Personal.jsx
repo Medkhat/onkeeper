@@ -19,7 +19,7 @@ const Personal = (props) => {
         {personalItem}
       </div>
       <div className={p.right_block}>
-        <PersonalForm />
+        <PersonalForm dispatch={props.dispatch} />
       </div>
     </div>
   )
