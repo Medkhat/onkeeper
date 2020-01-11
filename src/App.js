@@ -17,9 +17,9 @@ function App(props) {
           render={() => {
             return (
               <Menu
-                categories={props.state.menuPage.categories}
-                products={props.state.menuPage.products}
-                newCategoryTitle={props.state.menuPage.newCategoryTitle}
+                categories={props.state.menuReducer.categories}
+                products={props.state.menuReducer.products}
+                newCategoryTitle={props.state.menuReducer.newCategoryTitle}
                 dispatch={props.dispatch}
               />
             )
@@ -30,7 +30,7 @@ function App(props) {
           path='/personal'
           render={() => {
             return (
-              <Personal personal={props.state.personalPage.personal} dispatch={props.dispatch} />
+              <Personal personal={props.state.personalReducer.personal} dispatch={props.dispatch} />
             )
           }}
         />

@@ -4,7 +4,49 @@ const ADD_NEW_EMPLOYEE = "ADD_NEW_EMPLOYEE"
 const UPDATE_NEW_EMPLOYEE_NAME = "UPDATE_NEW_EMPLOYEE_NAME"
 const UPDATE_NEW_EMPLOYEE_SALARY = "UPDATE_NEW_EMPLOYEE_SALARY"
 
-const personalReducer = (state, action) => {
+let initialState = {
+  personal: [
+    {
+      id: 1,
+      fullName: 'Отарбай Даурен',
+      salary: 134000,
+      working_days: ['Пн', 'Ср', 'Пт'],
+      img: waiter
+    },
+    {
+      id: 2,
+      fullName: 'Әкімбек Медхат',
+      salary: 135000,
+      working_days: ['Вт', 'Чт', 'Сб'],
+      img: waiter
+    },
+    {
+      id: 3,
+      fullName: 'Бахытов Ернияз',
+      salary: 136000,
+      working_days: ['Пн', 'Ср', 'Пт'],
+      img: waiter
+    },
+    {
+      id: 4,
+      fullName: 'Шомат Ілияс',
+      salary: 137000,
+      working_days: ['Вт', 'Чт', 'Сб'],
+      img: waiter
+    },
+    {
+      id: 5,
+      fullName: 'Нұрбек',
+      salary: 138000,
+      working_days: ['Пн', 'Ср', 'Пт'],
+      img: waiter
+    },
+  ],
+  newEmployeeName: "",
+  newEmployeeSalary: 0,
+}
+
+const personalReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW_EMPLOYEE:
       let newEmployee = {

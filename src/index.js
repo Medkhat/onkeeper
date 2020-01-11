@@ -1,4 +1,4 @@
-import store from './data/state';
+import store from './data/redux-store';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -18,5 +18,5 @@ let rerenderEntiredTree = (state) => {
   );
 }
 rerenderEntiredTree(store.getState())
-store.subscribe(rerenderEntiredTree)
+store.subscribe(() => rerenderEntiredTree(store.getState()))
 //serviceWorker.unregister();
