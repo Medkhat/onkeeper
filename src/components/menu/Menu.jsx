@@ -3,11 +3,11 @@ import m from './Menu.module.css'
 import Products from './products/Products'
 import CategoriesContainer from './categories/CategoriesContainer'
 
-const Menu = (props) => {
+const Menu = () => {
   return (
     <div className={m.content}>
-      <CategoriesContainer store={props.store} />
-      <Products products={props.store.getState().menuReducer.products} />
+      <CategoriesContainer />
+      <Products />
     </div>
   );
 }
