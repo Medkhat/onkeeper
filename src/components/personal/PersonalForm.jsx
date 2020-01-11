@@ -1,11 +1,6 @@
 import React from 'react'
 import p from './Personal.module.css'
 import def_user from '../../img/user.png'
-import {
-  updateNewEmployeeNameCreator,
-  addNewEmployeeCreator,
-  updateNewEmployeeSalaryCreator
-} from '../../data/personal-reducer'
 
 const FormInputs = (props) => {
   return (
@@ -24,20 +19,18 @@ const SelectOption = (props) => {
 
 const PersonalForm = (props) => {
 
-  let addNewEmplayee = () => {
-    props.dispatch(addNewEmployeeCreator())
+  let onAddNewEmplayee = () => {
+    props.addNewEmplayee()
   }
 
   let onChangeNameInput = (e) => {
     let newEmployeeName = e.target.value
-    let action = updateNewEmployeeNameCreator(newEmployeeName)
-    props.dispatch(action)
+    props.updateNewEmployeeName(newEmployeeName)
   }
 
   let onChangeSalaryInput = (e) => {
     let newEmployeeSalary = e.target.value
-    let action = updateNewEmployeeSalaryCreator(newEmployeeSalary)
-    props.dispatch(action)
+    props.updateNewEmployeeSalary(newEmployeeSalary)
   }
 
   return (
@@ -70,7 +63,7 @@ const PersonalForm = (props) => {
         </select>
         <FormInputs type="number" onchangeEvent={onChangeSalaryInput} placeholder="0.00 тг" label="Заработная плата" />
         <div className={p.form_btn}>
-          <button type="button" onClick={addNewEmplayee} className={p.add}>Добавить</button>
+          <button type="button" onClick={onAddNewEmplayee} className={p.add}>Добавить</button>
           <button type="reset" className={p.reset}>Отмена</button>
         </div>
       </form>

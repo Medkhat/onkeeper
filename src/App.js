@@ -17,10 +17,7 @@ function App(props) {
           render={() => {
             return (
               <Menu
-                categories={props.state.menuReducer.categories}
-                products={props.state.menuReducer.products}
-                newCategoryTitle={props.state.menuReducer.newCategoryTitle}
-                dispatch={props.dispatch}
+                store={props.store}
               />
             )
           }}
@@ -30,7 +27,7 @@ function App(props) {
           path='/personal'
           render={() => {
             return (
-              <Personal personal={props.state.personalReducer.personal} dispatch={props.dispatch} />
+              <Personal store={props.store} />
             )
           }}
         />

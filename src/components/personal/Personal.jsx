@@ -1,10 +1,10 @@
 import React from 'react'
 import p from './Personal.module.css'
 import PersonalItem from './PersonalItem'
-import PersonalForm from './PersonalForm'
+import PersonalFormContainer from './PersonalFormContainer'
 
 const Personal = (props) => {
-  let personalItem = props.personal.map(item => {
+  let personalItem = props.store.getState().personalReducer.personal.map(item => {
     return <PersonalItem
       fullName={item.fullName}
       href={item.id}
@@ -19,7 +19,7 @@ const Personal = (props) => {
         {personalItem}
       </div>
       <div className={p.right_block}>
-        <PersonalForm dispatch={props.dispatch} />
+        <PersonalFormContainer store={props.store} />
       </div>
     </div>
   )

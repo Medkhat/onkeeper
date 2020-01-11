@@ -1,7 +1,6 @@
 import React from 'react'
 import m from '../Menu.module.css'
 import CategoryItem from './CategoryItem'
-import { addCatItemActionCreator, updateNewCategoryTiteActionCreator } from '../../../data/menu-reducer'
 
 const Categories = (props) => {
 
@@ -12,13 +11,12 @@ const Categories = (props) => {
   let newCatItem = React.createRef()
 
   let addCatItemFunc = () => {
-    props.dispatch(addCatItemActionCreator())
+    props.addCategoryItem()
   }
 
   let onCategoryTitleChange = () => {
     let newItemTitle = newCatItem.current.value
-    let action = updateNewCategoryTiteActionCreator(newItemTitle)
-    props.dispatch(action)
+    props.updateNewCategoryItem(newItemTitle)
   }
 
   return (
