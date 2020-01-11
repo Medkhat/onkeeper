@@ -1,6 +1,8 @@
 import waiter from '../img/waiter.jpg'
 import brauni from '../img/brauni.jpg'
 import red_bar from '../img/red_bar.png'
+import menuReducer from './menu-reducer'
+import personalReducer from './personal-reducer'
 
 const ADD_CATEGORY_ITEM = "ADD_CATEGORY_ITEM"
 const UPDATE_NEW_CATEGORY_TITLE = "UPDATE_NEW_CATEGORY_TITLE"
@@ -74,46 +76,9 @@ let store = {
   },
   _callSubscriber() { },
   dispatch(action) {
-    if (action.type === ADD_CATEGORY_ITEM) {
-
-      let newItem = {
-        id: 6,
-        name: this._state.menuPage.newCategoryTitle
-      }
-      this._state.menuPage.categories.push(newItem)
-      this._state.menuPage.newCategoryTitle = ''
-      this._callSubscriber(this._state)
-
-    } else if (action.type === UPDATE_NEW_CATEGORY_TITLE) {
-
-      this._state.menuPage.newCategoryTitle = action.newTitle
-      this._callSubscriber(this._state)
-
-    } else if (action.type === ADD_NEW_EMPLOYEE) {
-
-      let newEmployee = {
-        id: 6,
-        fullName: this._state.personalPage.newEmployeeName,
-        salary: this._state.personalPage.newEmployeeSalary,
-        working_days: ['Вт', 'Чт', 'Сб'],
-        img: waiter
-      }
-      this._state.personalPage.personal.push(newEmployee)
-      this._state.personalPage.newEmployeeName = ''
-      this._state.personalPage.newEmployeeSalary = ''
-      this._callSubscriber(this._state)
-
-    } else if (action.type === UPDATE_NEW_EMPLOYEE_NAME) {
-
-      this._state.personalPage.newEmployeeName = action.fullName
-      this._callSubscriber(this._state)
-
-    } else if (action.type === UPDATE_NEW_EMPLOYEE_SALARY) {
-
-      this._state.personalPage.newEmployeeSalary = action.salary
-      this._callSubscriber(this._state)
-
-    }
+    this._state.menuPage = menuReducer(this._state.menuPage, action)
+    this._state.personalPage = personalReducer(this._state.personalPage, action)
+    this._callSubscriber(this._state)
   }
 }
 

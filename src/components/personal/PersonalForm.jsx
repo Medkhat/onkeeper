@@ -64,9 +64,9 @@ const PersonalForm = (props) => {
         </select>
         <select className={p.form_select} name="salary_type" id="">
           <option selected>Тип зарплаты</option>
-          <SelectOption value="usd" option="USD" />
-          <SelectOption value="euro" option="EUR" />
-          <SelectOption value="kzt" option="KZT" />
+          <SelectOption value="percent" option="Процент" />
+          <SelectOption value="hourly" option="Часовой" />
+          <SelectOption value="monthly" option="Месячный" />
         </select>
         <FormInputs type="number" onchangeEvent={onChangeSalaryInput} placeholder="0.00 тг" label="Заработная плата" />
         <div className={p.form_btn}>
