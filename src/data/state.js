@@ -4,12 +4,6 @@ import red_bar from '../img/red_bar.png'
 import menuReducer from './menu-reducer'
 import personalReducer from './personal-reducer'
 
-const ADD_CATEGORY_ITEM = "ADD_CATEGORY_ITEM"
-const UPDATE_NEW_CATEGORY_TITLE = "UPDATE_NEW_CATEGORY_TITLE"
-const ADD_NEW_EMPLOYEE = "ADD_NEW_EMPLOYEE"
-const UPDATE_NEW_EMPLOYEE_NAME = "UPDATE_NEW_EMPLOYEE_NAME"
-const UPDATE_NEW_EMPLOYEE_SALARY = "UPDATE_NEW_EMPLOYEE_SALARY"
-
 let store = {
   _state: {
     menuPage: {
@@ -81,24 +75,5 @@ let store = {
     this._callSubscriber(this._state)
   }
 }
-
-export const addCatItemActionCreator = () => ({
-  type: ADD_CATEGORY_ITEM
-})
-export const updateNewCategoryTiteActionCreator = (title) => ({
-  type: UPDATE_NEW_CATEGORY_TITLE,
-  newTitle: title
-})
-export const addNewEmployeeCreator = () => ({
-  type: ADD_NEW_EMPLOYEE
-})
-export const updateNewEmployeeNameCreator = (name) => ({
-  type: UPDATE_NEW_EMPLOYEE_NAME,
-  fullName: name
-})
-export const updateNewEmployeeSalaryCreator = (salary) => ({
-  type: UPDATE_NEW_EMPLOYEE_SALARY,
-  salary: salary
-})
 
 export default store

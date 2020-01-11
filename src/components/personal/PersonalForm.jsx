@@ -5,7 +5,7 @@ import {
   updateNewEmployeeNameCreator,
   addNewEmployeeCreator,
   updateNewEmployeeSalaryCreator
-} from '../../data/state'
+} from '../../data/personal-reducer'
 
 const FormInputs = (props) => {
   return (

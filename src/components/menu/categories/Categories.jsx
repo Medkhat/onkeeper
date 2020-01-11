@@ -1,7 +1,7 @@
 import React from 'react'
 import m from '../Menu.module.css'
 import CategoryItem from './CategoryItem'
-import { addCatItemActionCreator, updateNewCategoryTiteActionCreator } from '../../../data/state'
+import { addCatItemActionCreator, updateNewCategoryTiteActionCreator } from '../../../data/menu-reducer'
 
 const Categories = (props) => {
 
