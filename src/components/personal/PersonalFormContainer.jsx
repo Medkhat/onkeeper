@@ -1,4 +1,3 @@
-//import React from 'react'
 import {
   updateNewEmployeeNameCreator,
   addNewEmployeeCreator,
@@ -7,34 +6,7 @@ import {
 import PersonalForm from './PersonalForm'
 import { connect } from 'react-redux'
 
-// const PersonalFormContainer = (props) => {
-
-//   let addNewEmplayee = () => {
-//     props.store.dispatch(addNewEmployeeCreator())
-//   }
-
-//   let updateNewEmployeeName = (newEmployeeName) => {
-//     let action = updateNewEmployeeNameCreator(newEmployeeName)
-//     props.store.dispatch(action)
-//   }
-
-//   let updateNewEmployeeSalary = (newEmployeeSalary) => {
-//     let action = updateNewEmployeeSalaryCreator(newEmployeeSalary)
-//     props.store.dispatch(action)
-//   }
-
-//   return <PersonalForm
-//     updateNewEmployeeSalary={updateNewEmployeeSalary}
-//     updateNewEmployeeName={updateNewEmployeeName}
-//     addNewEmplayee={addNewEmplayee}
-//   />
-// }
-
-let mapStateToProps = (state) => {
-  return {
-
-  }
-}
+let mapStateToProps = (state) => ({})
 
 let mapDispatchToProps = (dispatch) => {
   return {

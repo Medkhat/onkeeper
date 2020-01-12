@@ -56,16 +56,22 @@ const personalReducer = (state = initialState, action) => {
         working_days: ['Вт', 'Чт', 'Сб'],
         img: waiter
       }
-      state.personal.push(newEmployee)
-      state.newEmployeeName = ''
-      state.newEmployeeSalary = ''
-      return state
+      return {
+        ...state,
+        personal: [...state.personal, newEmployee],
+        newEmployeeName: '',
+        newEmployeeSalary: ''
+      }
     case UPDATE_NEW_EMPLOYEE_NAME:
-      state.newEmployeeName = action.fullName
-      return state
+      return {
+        ...state,
+        newEmployeeName: action.fullName
+      }
     case UPDATE_NEW_EMPLOYEE_SALARY:
-      state.newEmployeeSalary = action.salary
-      return state
+      return {
+        ...state,
+        newEmployeeSalary: action.salary
+      }
     default:
       return state
   }

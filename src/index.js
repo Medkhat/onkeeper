@@ -7,16 +7,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 //import * as serviceWorker from './serviceWorker';
 
-let rerenderEntiredTree = () => {
-  ReactDOM.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>,
-    document.getElementById('app')
-  );
-}
-rerenderEntiredTree()
-store.subscribe(() => rerenderEntiredTree())
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById('app')
+);
 //serviceWorker.unregister();

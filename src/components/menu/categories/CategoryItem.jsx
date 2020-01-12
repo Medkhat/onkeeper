@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 const CategoryItem = (props) => {
   return (
     <div className={m.item_block}>
-      <NavLink to={props.href} className={m.item} activeClassName={m.active}>
+      <NavLink to={`${props.href}`} className={m.item} activeClassName={m.active}>
         {props.name}
       </NavLink>
       <div className={m.item_btns}>

@@ -5,7 +5,7 @@ import CategoryItem from './CategoryItem'
 const Categories = (props) => {
 
   let categoryItems = props.categories.map(item => {
-    return <CategoryItem name={item.name} href={item.id} />
+    return <CategoryItem name={item.name} key={item.id} href={item.id} />
   })
 
   let newCatItem = React.createRef()

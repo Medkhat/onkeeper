@@ -1,13 +1,13 @@
 import React from 'react'
 import m from './Menu.module.css'
-import Products from './products/Products'
 import CategoriesContainer from './categories/CategoriesContainer'
+import ProductsContainer from './products/ProductsContainer'
 
 const Menu = () => {
   return (
     <div className={m.content}>
       <CategoriesContainer />
-      <Products />
+      <ProductsContainer />
     </div>
   );
 }

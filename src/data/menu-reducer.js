@@ -12,7 +12,7 @@ let initialState = {
     { id: 4, name: 'Холодные закуски' },
     { id: 5, name: 'Другие' },
   ],
-  newCategoryTitle: "Category Title",
+  newCategoryTitle: "Item Title",
   products: [
     { id: 1, title: 'Product 1', img: brauni },
     { id: 2, title: 'Product 2', img: red_bar },
@@ -21,17 +21,19 @@ let initialState = {
 
 const menuReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_CATEGORY_ITEM:
-      let newItem = {
-        id: 6,
-        name: state.newCategoryTitle
+    case ADD_CATEGORY_ITEM: {
+      return {
+        ...state,
+        categories: [...state.categories, { id: 6, name: state.newCategoryTitle }],
+        newCategoryTitle: ''
       }
-      state.categories.push(newItem)
-      state.newCategoryTitle = ''
-      return state
-    case UPDATE_NEW_CATEGORY_TITLE:
-      state.newCategoryTitle = action.newTitle
-      return state
+    }
+    case UPDATE_NEW_CATEGORY_TITLE: {
+      return {
+        ...state,
+        newCategoryTitle: action.newTitle
+      }
+    }
     default:
       return state
   }

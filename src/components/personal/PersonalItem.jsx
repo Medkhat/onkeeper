@@ -7,9 +7,8 @@ const WorkingDays = (props) => {
 }
 
 const PersonalItem = (props) => {
-
   let workingDays = props.working_days.map(item => {
-    return <WorkingDays working_days={item} />
+    return <WorkingDays working_days={item} key={item} />
   })
   return (
     <div className={p.card}>

@@ -4,10 +4,11 @@ import PersonalItem from './PersonalItem'
 import PersonalFormContainer from './PersonalFormContainer'
 
 const Personal = (props) => {
-  let personalItem = props.store.getState().personalReducer.personal.map(item => {
+  let personalItem = props.personal.map(item => {
     return <PersonalItem
       fullName={item.fullName}
       href={item.id}
+      key={item.id}
       salary={item.salary}
       working_days={item.working_days}
       img={item.img}

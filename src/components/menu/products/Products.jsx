@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom'
 const Products = (props) => {
   let productItems = props.products.map(item => {
     return <ProductItem
+      key={item.id}
       title={item.title}
       href={item.id}
       img={item.img}
