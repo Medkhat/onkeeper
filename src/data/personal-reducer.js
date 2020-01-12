@@ -3,47 +3,28 @@ import waiter from '../img/waiter.jpg'
 const ADD_NEW_EMPLOYEE = "ADD_NEW_EMPLOYEE"
 const UPDATE_NEW_EMPLOYEE_NAME = "UPDATE_NEW_EMPLOYEE_NAME"
 const UPDATE_NEW_EMPLOYEE_SALARY = "UPDATE_NEW_EMPLOYEE_SALARY"
+// const UPDATE_NEW_EMPLOYEE_POSITION = "UPDATE_NEW_EMPLOYEE_POSITION"
+// const UPDATE_NEW_EMPLOYEE_SALARY_TYPE = "UPDATE_NEW_EMPLOYEE_SALARY_TYPE"
 
 let initialState = {
   personal: [
     {
       id: 1,
-      fullName: 'Отарбай Даурен',
+      img: waiter,
+      fullName: 'Адамұлы Адам',
+      login: "adam01",
+      password: "12345",
+      phoneNumber: "+7 707 691 9131",
+      email: "adam@gmail.com",
+      employmentDate: "12.01.2020",
       salary: 134000,
       working_days: ['Пн', 'Ср', 'Пт'],
-      img: waiter
-    },
-    {
-      id: 2,
-      fullName: 'Әкімбек Медхат',
-      salary: 135000,
-      working_days: ['Вт', 'Чт', 'Сб'],
-      img: waiter
-    },
-    {
-      id: 3,
-      fullName: 'Бахытов Ернияз',
-      salary: 136000,
-      working_days: ['Пн', 'Ср', 'Пт'],
-      img: waiter
-    },
-    {
-      id: 4,
-      fullName: 'Шомат Ілияс',
-      salary: 137000,
-      working_days: ['Вт', 'Чт', 'Сб'],
-      img: waiter
-    },
-    {
-      id: 5,
-      fullName: 'Нұрбек',
-      salary: 138000,
-      working_days: ['Пн', 'Ср', 'Пт'],
-      img: waiter
-    },
+      position: "waiter",
+      salaryType: "monthly"
+    }
   ],
   newEmployeeName: "",
-  newEmployeeSalary: 0,
+  newEmployeeSalary: ""
 }
 
 const personalReducer = (state = initialState, action) => {
@@ -59,34 +40,31 @@ const personalReducer = (state = initialState, action) => {
       return {
         ...state,
         personal: [...state.personal, newEmployee],
-        newEmployeeName: '',
-        newEmployeeSalary: ''
+        newEmployeeName: "",
+        newEmployeeSalary: ""
       }
     case UPDATE_NEW_EMPLOYEE_NAME:
       return {
         ...state,
-        newEmployeeName: action.fullName
+        newEmployeeName: action.objKey
       }
     case UPDATE_NEW_EMPLOYEE_SALARY:
       return {
         ...state,
-        newEmployeeSalary: action.salary
+        newEmployeeSalary: action.objKey
       }
     default:
       return state
   }
 }
 
-export const addNewEmployeeCreator = () => ({
+export const addNewEmployeeAC = () => ({
   type: ADD_NEW_EMPLOYEE
 })
-export const updateNewEmployeeNameCreator = (name) => ({
-  type: UPDATE_NEW_EMPLOYEE_NAME,
-  fullName: name
+export const universalAC = (type, objKey) => ({
+  type: type,
+  objKey: objKey
 })
-export const updateNewEmployeeSalaryCreator = (salary) => ({
-  type: UPDATE_NEW_EMPLOYEE_SALARY,
-  salary: salary
-})
+
 
 export default personalReducer

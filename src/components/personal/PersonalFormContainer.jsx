@@ -1,23 +1,22 @@
 import {
-  updateNewEmployeeNameCreator,
-  addNewEmployeeCreator,
-  updateNewEmployeeSalaryCreator
+  addNewEmployeeAC,
+  universalAC
 } from '../../data/personal-reducer'
 import PersonalForm from './PersonalForm'
 import { connect } from 'react-redux'
 
-let mapStateToProps = (state) => ({})
+let mapStateToProps = (state) => ({
+  newEmployeeName: state.personalReducer.newEmployeeName,
+  newEmployeeSalary: state.personalReducer.newEmployeeSalary
+})
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    updateNewEmployeeSalary: (newEmployeeSalary) => {
-      dispatch(updateNewEmployeeSalaryCreator(newEmployeeSalary))
+    updateNewEmployeeData: (type, newEmployeeActionKey) => {
+      dispatch(universalAC(type, newEmployeeActionKey))
     },
-    updateNewEmployeeName: (newEmployeeName) => {
-      dispatch(updateNewEmployeeNameCreator(newEmployeeName))
-    },
-    addNewEmplayee: () => {
-      dispatch(addNewEmployeeCreator())
+    addNewEmployee: () => {
+      dispatch(addNewEmployeeAC())
     },
   }
 }

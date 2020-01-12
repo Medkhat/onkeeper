@@ -35,6 +35,7 @@
 }
 .link {
   text-decoration: none;
+  cursor: pointer;
 }
 .name, .salary{
   color: #292929;
