@@ -12,6 +12,7 @@ const Personal = (props) => {
       salary={item.salary}
       working_days={item.working_days}
       img={item.img}
+      getEmployeeData={props.getEmployeeData}
     />
   })
   return (

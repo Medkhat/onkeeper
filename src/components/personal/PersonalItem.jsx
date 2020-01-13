@@ -9,9 +9,15 @@ const PersonalItem = (props) => {
   let workingDays = props.working_days.map(item => {
     return <WorkingDays working_days={item} key={item} />
   })
+
+  let onClickPersonalItem = () => {
+    let userId = props.key
+    props.getEmployeeData(userId)
+  }
+
   return (
     <div className={p.card}>
-      <div className={p.link}>
+      <div className={p.link} onClick={onClickPersonalItem}>
         <img src={props.img} className={p.img} alt="USER_AVA" />
         <p className={p.name}>{props.fullName}</p>
         <p className={p.salary}>{props.salary} тг/мес</p>

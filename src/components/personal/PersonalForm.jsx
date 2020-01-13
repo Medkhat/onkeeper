@@ -35,18 +35,13 @@ const PersonalForm = (props) => {
     props.updateNewEmployeeData(newEmployeeActionType, newEmployeeActionKey)
   }
 
-  // let onChangeSalaryInput = (e) => {
-  //   let newEmployeeSalary = e.target.value
-  //   props.updateNewEmployeeSalary(newEmployeeSalary)
-  // }
-
   const inputProps = [
-    { id: 1, type: "text", placeholder: "login123", label: "Логин", onchangeEvent: onChangeInputs, value: "", dataActionType: "UPDATE_NEW_EMPLOYEE_LOGIN" },
-    { id: 2, type: "password", placeholder: "", label: "Пароль", onchangeEvent: onChangeInputs, value: "", dataActionType: "UPDATE_NEW_EMPLOYEE_PASSWORD" },
+    { id: 1, type: "text", placeholder: "login123", label: "Логин", onchangeEvent: onChangeInputs, value: props.newEmployeeLogin, dataActionType: "UPDATE_NEW_EMPLOYEE_LOGIN" },
+    { id: 2, type: "password", placeholder: "", label: "Пароль", onchangeEvent: onChangeInputs, value: props.newEmployeePassword, dataActionType: "UPDATE_NEW_EMPLOYEE_PASSWORD" },
     { id: 3, type: "text", placeholder: "Ф.И.О", label: "Полное имя", onchangeEvent: onChangeInputs, value: props.newEmployeeName, dataActionType: "UPDATE_NEW_EMPLOYEE_NAME" },
-    { id: 4, type: "text", placeholder: "+7 XXX XXX XXXX", label: "Номер телефона", onchangeEvent: onChangeInputs, value: "", dataActionType: "UPDATE_NEW_EMPLOYEE_PHONE" },
-    { id: 5, type: "text", placeholder: "example@gmail.com", label: "Электронная почта", onchangeEvent: onChangeInputs, value: "", dataActionType: "UPDATE_NEW_EMPLOYEE_EMAIL" },
-    { id: 6, type: "text", placeholder: "12.01.2020", label: "Дата устройства на работу", onchangeEvent: onChangeInputs, value: "", dataActionType: "UPDATE_NEW_EMPLOYEE_EMPLOYMENT_DATE" },
+    { id: 4, type: "text", placeholder: "+7 XXX XXX XXXX", label: "Номер телефона", onchangeEvent: onChangeInputs, value: props.newEmployeePhone, dataActionType: "UPDATE_NEW_EMPLOYEE_PHONE" },
+    { id: 5, type: "text", placeholder: "example@gmail.com", label: "Электронная почта", onchangeEvent: onChangeInputs, value: props.newEmployeeEmail, dataActionType: "UPDATE_NEW_EMPLOYEE_EMAIL" },
+    { id: 6, type: "text", placeholder: "12.01.2020", label: "Дата устройства на работу", onchangeEvent: onChangeInputs, value: props.newEmployeeEmploymentDate, dataActionType: "UPDATE_NEW_EMPLOYEE_EMPLOYMENT_DATE" },
     { id: 7, type: "number", placeholder: "0.00 тг", label: "Заработная плата", onchangeEvent: onChangeInputs, value: props.newEmployeeSalary, dataActionType: "UPDATE_NEW_EMPLOYEE_SALARY" },
   ]
 

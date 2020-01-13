@@ -1,14 +1,20 @@
 import {
   addNewEmployeeAC,
-  universalAC
+  universalAC,
 } from '../../data/personal-reducer'
 import PersonalForm from './PersonalForm'
 import { connect } from 'react-redux'
 
 let mapStateToProps = (state) => ({
   newEmployeeName: state.personalReducer.newEmployeeName,
-  newEmployeeSalary: state.personalReducer.newEmployeeSalary
+  newEmployeeSalary: state.personalReducer.newEmployeeSalary,
+  newEmployeeLogin: state.personalReducer.newEmployeeLogin,
+  newEmployeePassword: state.personalReducer.newEmployeePassword,
+  newEmployeePhone: state.personalReducer.newEmployeePhone,
+  newEmployeeEmail: state.personalReducer.newEmployeeEmail,
+  newEmployeeEmploymentDate: state.personalReducer.newEmployeeEmploymentDate,
 })
+
 
 let mapDispatchToProps = (dispatch) => {
   return {
@@ -17,7 +23,7 @@ let mapDispatchToProps = (dispatch) => {
     },
     addNewEmployee: () => {
       dispatch(addNewEmployeeAC())
-    },
+    }
   }
 }
 
