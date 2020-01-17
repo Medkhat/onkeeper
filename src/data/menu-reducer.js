@@ -1,8 +1,6 @@
-import brauni from '../img/brauni.jpg'
-import red_bar from '../img/red_bar.png'
-
 const ADD_CATEGORY_ITEM = "ADD_CATEGORY_ITEM"
 const UPDATE_NEW_CATEGORY_TITLE = "UPDATE_NEW_CATEGORY_TITLE"
+const GET_PRODUCTS = "GET_PRODUCTS"
 
 let initialState = {
   categories: [
@@ -13,10 +11,7 @@ let initialState = {
     { id: 5, name: 'Другие' },
   ],
   newCategoryTitle: "Item Title",
-  products: [
-    { id: 1, title: 'Product 1', img: brauni },
-    { id: 2, title: 'Product 2', img: red_bar },
-  ]
+  products: []
 }
 
 const menuReducer = (state = initialState, action) => {
@@ -34,6 +29,11 @@ const menuReducer = (state = initialState, action) => {
         newCategoryTitle: action.newTitle
       }
     }
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        products: [...state.products, action.products]
+      }
     default:
       return state
   }
@@ -45,6 +45,10 @@ export const addCatItemActionCreator = () => ({
 export const updateNewCategoryTiteActionCreator = (title) => ({
   type: UPDATE_NEW_CATEGORY_TITLE,
   newTitle: title
+})
+export const getProductsAC = (products) => ({
+  type: GET_PRODUCTS,
+  products: products
 })
 
 export default menuReducer

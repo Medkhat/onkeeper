@@ -137,12 +137,6 @@
 .product_name:hover {
   color: #ff0048;
 }
-@media only screen and (min-width: 1199px) {
-  .products {
-    flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-  }
-}
 @media only screen and (min-width: 1300px) {
   .item_card {
     width: 15%;

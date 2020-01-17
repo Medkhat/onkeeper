@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import Products from "./Products";
+import { getProductsAC } from "../../../data/menu-reducer";
 
 let mapStateToProps = state => {
   return {
@@ -7,8 +8,12 @@ let mapStateToProps = state => {
   }
 }
 
-let mapDispatchToProps = () => {
-  return {}
+let mapDispatchToProps = (dispatch) => {
+  return {
+    getProducts: (products) => {
+      dispatch(getProductsAC(products))
+    }
+  }
 }
 
 const ProductsContainer = connect(mapStateToProps, mapDispatchToProps)(Products)
