@@ -10,7 +10,7 @@ let initialState = {
     { id: 4, name: 'Холодные закуски' },
     { id: 5, name: 'Другие' },
   ],
-  newCategoryTitle: "Item Title",
+  newCategoryTitle: "",
   products: []
 }
 
@@ -32,7 +32,7 @@ const menuReducer = (state = initialState, action) => {
     case GET_PRODUCTS:
       return {
         ...state,
-        products: [...state.products, action.products]
+        products: action.products
       }
     default:
       return state
