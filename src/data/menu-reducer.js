@@ -1,15 +1,10 @@
 const ADD_CATEGORY_ITEM = "ADD_CATEGORY_ITEM"
 const UPDATE_NEW_CATEGORY_TITLE = "UPDATE_NEW_CATEGORY_TITLE"
 const GET_PRODUCTS = "GET_PRODUCTS"
+const GET_CATEGORY = "GET_CATEGORY"
 
 let initialState = {
-  categories: [
-    { id: 1, name: 'Десерты' },
-    { id: 2, name: 'Салаты' },
-    { id: 3, name: 'Супы' },
-    { id: 4, name: 'Холодные закуски' },
-    { id: 5, name: 'Другие' },
-  ],
+  categories: [],
   newCategoryTitle: "",
   products: []
 }
@@ -34,6 +29,11 @@ const menuReducer = (state = initialState, action) => {
         ...state,
         products: action.products
       }
+    case GET_CATEGORY:
+      return {
+        ...state,
+        categories: action.categories
+      }
     default:
       return state
   }
@@ -49,6 +49,10 @@ export const updateNewCategoryTiteActionCreator = (title) => ({
 export const getProductsAC = (products) => ({
   type: GET_PRODUCTS,
   products: products
+})
+export const getCategoryAC = (categories) => ({
+  type: GET_CATEGORY,
+  categories: categories
 })
 
 export default menuReducer

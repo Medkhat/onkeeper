@@ -11,6 +11,11 @@ class Menu extends React.Component {
       .then(response => {
         this.props.getProducts(response.data)
       })
+
+    axios.get("http://admin07.pythonanywhere.com/admin_rest/category/")
+      .then(response => {
+        this.props.getCategories(response.data)
+      })
   }
 
   render() {
