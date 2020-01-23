@@ -1,13 +1,16 @@
 import React from 'react'
 import m from '../Menu.module.css'
-import { NavLink } from 'react-router-dom'
 
 const CategoryItem = (props) => {
   return (
-    <div className={m.item_block}>
-      <NavLink to={`${props.href}`} className={m.item} activeClassName={m.active}>
+    <div
+      className={m.item_block}
+      id={props.categoryId}
+      onClick={props.onclickEvent}
+    >
+      <div className={m.item}>
         {props.name}
-      </NavLink>
+      </div>
       <div className={m.item_btns}>
         <button type="button">e</button>
         <button type="button">d</button>

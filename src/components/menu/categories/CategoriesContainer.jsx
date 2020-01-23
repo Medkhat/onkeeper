@@ -1,11 +1,17 @@
-import { addCatItemActionCreator, updateNewCategoryTiteActionCreator } from '../../../data/menu-reducer'
+import {
+  addCatItemActionCreator,
+  updateNewCategoryTiteActionCreator,
+  getCertainCategoryAC,
+  getCategoryAC
+} from '../../../data/menu-reducer'
 import Categories from './Categories'
 import { connect } from 'react-redux';
 
 let mapStateToProps = (state) => {
   return {
     categories: state.menuReducer.categories,
-    newCategoryTitle: state.menuReducer.newCategoryTitle
+    newCategoryTitle: state.menuReducer.newCategoryTitle,
+    currentCategory: state.menuReducer.currentCategory
   }
 }
 
@@ -16,6 +22,12 @@ let mapDispatchToProps = (dispatch) => {
     },
     addCategoryItem: () => {
       dispatch(addCatItemActionCreator())
+    },
+    getCertainCategory: (currentCategory) => {
+      dispatch(getCertainCategoryAC(currentCategory))
+    },
+    getCategories: (categories) => {
+      dispatch(getCategoryAC(categories))
     }
   }
 }
