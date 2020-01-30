@@ -53,26 +53,26 @@ const menuReducer = (state = initialState, action) => {
   }
 }
 
-export const addCatItemActionCreator = () => ({
+export const addCatItem = () => ({
   type: ADD_CATEGORY_ITEM
 })
-export const updateNewCategoryTiteActionCreator = (title) => ({
+export const updateNewCategoryTitle = (title) => ({
   type: UPDATE_NEW_CATEGORY_TITLE,
   newTitle: title
 })
-export const getProductsAC = (products) => ({
+export const getProducts = (products) => ({
   type: GET_PRODUCTS,
   products: products
 })
-export const getCategoryAC = (categories) => ({
+export const getCategories = (categories) => ({
   type: GET_CATEGORY,
   categories: categories
 })
-export const getCertainCategoryAC = (currentCategory) => ({
+export const getCertainCategory = (currentCategory) => ({
   type: GET_CERTAIN_CATEGORY,
   currentCategory: currentCategory
 })
-export const toggleLoaderAC = (isFetching) => ({
+export const toggleLoader = (isFetching) => ({
   type: TOGGLE_LOADER,
   isFetching
 })

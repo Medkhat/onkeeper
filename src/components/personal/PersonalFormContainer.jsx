@@ -1,6 +1,6 @@
 import {
-  addNewEmployeeAC,
-  universalAC,
+  addNewEmployee,
+  universal,
 } from '../../data/personal-reducer'
 import PersonalForm from './PersonalForm'
 import { connect } from 'react-redux'
@@ -16,15 +16,8 @@ let mapStateToProps = (state) => ({
 })
 
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    updateNewEmployeeData: (type, newEmployeeActionKey) => {
-      dispatch(universalAC(type, newEmployeeActionKey))
-    },
-    addNewEmployee: () => {
-      dispatch(addNewEmployeeAC())
-    }
-  }
+let mapDispatchToProps = {
+  updateNewEmployeeData: universal, addNewEmployee
 }
 
 const PersonalFormContainer = connect(mapStateToProps, mapDispatchToProps)(PersonalForm)

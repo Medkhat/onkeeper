@@ -6,12 +6,12 @@ import * as axios from 'axios'
 class Categories extends React.Component {
 
   addCatItemFunc = () => {
-    this.props.addCategoryItem()
+    this.props.addCatItem()
   }
 
   onCategoryTitleChange = (e) => {
     let newItemTitle = e.target.value
-    this.props.updateNewCategoryItem(newItemTitle)
+    this.props.updateNewCategoryTitle(newItemTitle)
   }
 
   onCategoryItemClick = (e) => {

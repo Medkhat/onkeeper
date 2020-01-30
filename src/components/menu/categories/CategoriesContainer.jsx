@@ -1,8 +1,8 @@
 import {
-  addCatItemActionCreator,
-  updateNewCategoryTiteActionCreator,
-  getCertainCategoryAC,
-  getCategoryAC
+  addCatItem,
+  updateNewCategoryTitle,
+  getCertainCategory,
+  getCategories
 } from '../../../data/menu-reducer'
 import Categories from './Categories'
 import { connect } from 'react-redux';
@@ -15,21 +15,8 @@ let mapStateToProps = (state) => {
   }
 }
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    updateNewCategoryItem: (newItemTitle) => {
-      dispatch(updateNewCategoryTiteActionCreator(newItemTitle))
-    },
-    addCategoryItem: () => {
-      dispatch(addCatItemActionCreator())
-    },
-    getCertainCategory: (currentCategory) => {
-      dispatch(getCertainCategoryAC(currentCategory))
-    },
-    getCategories: (categories) => {
-      dispatch(getCategoryAC(categories))
-    }
-  }
+let mapDispatchToProps = {
+  updateNewCategoryTitle, addCatItem, getCertainCategory, getCategories
 }
 
 const CategoriesContainer = connect(mapStateToProps, mapDispatchToProps)(Categories)

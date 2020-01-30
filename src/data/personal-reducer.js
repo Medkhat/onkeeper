@@ -118,14 +118,14 @@ const personalReducer = (state = initialState, action) => {
   }
 }
 
-export const addNewEmployeeAC = () => ({
+export const addNewEmployee = () => ({
   type: ADD_NEW_EMPLOYEE
 })
-export const universalAC = (type, objKey) => ({
+export const universal = (type, objKey) => ({
   type: type,
   objKey: objKey
 })
-export const getEmployeeDataAC = (userId) => ({
+export const getEmployeeData = (userId) => ({
   type: GET_EMPLOYEE_DATA,
   id: userId
 })
