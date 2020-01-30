@@ -1,0 +1,22 @@
+
+.preloader {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 70px);
+  background-color: rgb(255, 255, 255);
+  z-index: 999;
+}
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+}

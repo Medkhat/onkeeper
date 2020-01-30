@@ -3,12 +3,14 @@ const UPDATE_NEW_CATEGORY_TITLE = "UPDATE_NEW_CATEGORY_TITLE"
 const GET_PRODUCTS = "GET_PRODUCTS"
 const GET_CATEGORY = "GET_CATEGORY"
 const GET_CERTAIN_CATEGORY = "GET_CERTAIN_CATEGORY"
+const TOGGLE_LOADER = "TOGGLE_LOADER"
 
 let initialState = {
   categories: [],
   newCategoryTitle: "",
   products: [],
-  currentCategory: 1
+  currentCategory: 1,
+  isFetching: false
 }
 
 const menuReducer = (state = initialState, action) => {
@@ -41,6 +43,11 @@ const menuReducer = (state = initialState, action) => {
         ...state,
         currentCategory: action.currentCategory
       }
+    case TOGGLE_LOADER:
+      return {
+        ...state,
+        isFetching: action.isFetching
+      }
     default:
       return state
   }
@@ -64,6 +71,10 @@ export const getCategoryAC = (categories) => ({
 export const getCertainCategoryAC = (currentCategory) => ({
   type: GET_CERTAIN_CATEGORY,
   currentCategory: currentCategory
+})
+export const toggleLoaderAC = (isFetching) => ({
+  type: TOGGLE_LOADER,
+  isFetching
 })
 
 export default menuReducer

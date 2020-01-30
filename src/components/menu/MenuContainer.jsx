@@ -1,9 +1,15 @@
 import { connect } from "react-redux";
 import Menu from "./Menu";
-import { getProductsAC, getCategoryAC } from "../../data/menu-reducer";
+import {
+  getProductsAC,
+  getCategoryAC,
+  toggleLoaderAC
+} from "../../data/menu-reducer";
 
-let mapStateToProps = () => {
-  return {}
+let mapStateToProps = (state) => {
+  return {
+    isFetching: state.menuReducer.isFetching,
+  }
 }
 
 let mapDispatchToProps = (dispatch) => {
@@ -13,6 +19,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     getCategories: (categories) => {
       dispatch(getCategoryAC(categories))
+    },
+    toggleLoader: (isFetching) => {
+      dispatch(toggleLoaderAC(isFetching))
     }
   }
 }
