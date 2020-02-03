@@ -8,7 +8,7 @@ const NavigationItem = (props) => {
   }
   return (
     <NavLink
-      to={props.href}
+      to={`${props.href}`}
       isActive={() => isActivePage(props.href)}
       className={h.item}
       activeClassName={h.active}

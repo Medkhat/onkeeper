@@ -12,20 +12,6 @@ let mapStateToProps = (state) => {
   }
 }
 
-// let mapDispatchToProps = (dispatch) => {
-//   return {
-//     getProducts: (products) => {
-//       dispatch(getProductsAC(products))
-//     },
-//     getCategories: (categories) => {
-//       dispatch(getCategoryAC(categories))
-//     },
-//     toggleLoader: (isFetching) => {
-//       dispatch(toggleLoaderAC(isFetching))
-//     }
-//   }
-// }
-
 let mapDispatchToProps = {
   getProducts, getCategories, toggleLoader
 }
