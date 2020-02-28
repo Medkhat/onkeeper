@@ -101,8 +101,10 @@
 }
 
 /* Styles for products block */
-.products {
+.menu_content {
   width: 75%;
+}
+.products {
   display: flex;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -167,7 +169,7 @@
   .category_block {
     width: 22%;
   }
-  .products {
+  .menu_content {
     width: 77%;
   }
   .item_card {
@@ -178,7 +180,7 @@
   .category_block {
     width: 20%;
   }
-  .products {
+  .menu_content {
     width: 79%;
   }
   .item_card {

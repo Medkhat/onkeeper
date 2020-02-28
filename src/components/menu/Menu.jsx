@@ -28,8 +28,10 @@ class Menu extends React.Component {
       <div className={m.content}>
         {this.props.isFetching ? <Preloader /> : null}
         <CategoriesContainer />
-        <Route path='/products' render={() => <ProductsContainer />} />
-        <Route exact path='/products/add-product' render={() => <AddProduct />} />
+        <div className={m.menu_content}>
+          <Route exact path='/products' render={() => <ProductsContainer />} />
+          <Route exact path='/products/add-product' render={() => <AddProduct />} />
+        </div>
       </div>
     )
   }
