@@ -1,9 +1,12 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
+import * as axios from 'axios'
+
 import m from './Menu.module.css'
 import CategoriesContainer from './categories/CategoriesContainer'
 import ProductsContainer from './products/ProductsContainer'
-import * as axios from 'axios'
 import Preloader from '../preloader/Preloader'
+import AddProduct from './products/AddProduct'
 
 class Menu extends React.Component {
   componentDidMount() {
@@ -25,7 +28,8 @@ class Menu extends React.Component {
       <div className={m.content}>
         {this.props.isFetching ? <Preloader /> : null}
         <CategoriesContainer />
-        <ProductsContainer />
+        <Route path='/products' render={() => <ProductsContainer />} />
+        <Route exact path='/products/add-product' render={() => <AddProduct />} />
       </div>
     )
   }

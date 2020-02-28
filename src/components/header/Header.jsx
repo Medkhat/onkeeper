@@ -25,7 +25,7 @@ const Header = () => {
         On-Keeper
       </div>
       <nav>
-        <NavigationItem title="Меню" href="/" />
+        <NavigationItem title="Меню" href="/products" />
         <NavigationItem title="Заказы" href="/orders" />
         <NavigationItem title="Персонал" href="/personal" />
       </nav>
