@@ -6,7 +6,7 @@ import m from './Menu.module.css'
 import CategoriesContainer from './categories/CategoriesContainer'
 import ProductsContainer from './products/ProductsContainer'
 import Preloader from '../preloader/Preloader'
-import AddProduct from './products/AddProduct'
+import AddProduct from './products/add-product/AddProduct'
 
 class Menu extends React.Component {
   componentDidMount() {
