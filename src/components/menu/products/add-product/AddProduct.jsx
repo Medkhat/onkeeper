@@ -1,10 +1,19 @@
 import React from 'react'
 import add_prod from './AddProduct.module.css'
 import img_icon from '../../../../img/add_img.png'
+import when_empty from '../../../../img/when_empty.png'
+
+const WhenEmptyForm = () => {
+  return (
+    <div className={add_prod.empty_img_form}>
+      <div className={add_prod.centered} style={{ backgroundImage: `url(${when_empty})` }}></div>
+    </div>
+  )
+}
 
 const ProductImages = () => {
   return (
-    <div className={add_prod.img_form_content}>
+    <div className={add_prod.img_form}>
       <div className={add_prod.upload_img}>
         <label htmlFor="upload_img">
           <img src={img_icon} alt="IMG_ICON" />
@@ -12,6 +21,7 @@ const ProductImages = () => {
         </label>
         <input type="file" id="upload_img" style={{ display: 'none' }} />
       </div>
+      <WhenEmptyForm />
     </div>
   )
 }
@@ -33,6 +43,7 @@ const AddProduct = () => {
 
   let ProductFormInputs = inputProps.map(item => {
     return <ProductFormInput
+      key={item.id}
       id={item.id}
       type={item.type}
       placeholder={item.placeholder}
@@ -49,9 +60,7 @@ const AddProduct = () => {
             <textarea className={add_prod.name_desc} name="good_desc" id="good_desc" rows="7" placeholder="Описание"></textarea>
           </div>
         </div>
-        <div className={add_prod.img_form}>
-          <ProductImages />
-        </div>
+        <ProductImages />
       </div>
     </div>
   )

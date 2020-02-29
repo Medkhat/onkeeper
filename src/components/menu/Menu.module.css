@@ -1,5 +1,5 @@
 .content {
-  padding-right: 30px;
+  padding-right: 10px;
   display: flex;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -113,10 +113,22 @@
 }
 .item_card {
   width: 16%;
-  margin: 10px 9px;
+  margin: 10px 3px;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+.times {
+  border-radius: 50%;
+  position: absolute;
+  background-color: #ff0048;
+  color: #ffffff;
+  padding: 0px 6px 2px 6px;
+  font-size: 16px;
+  cursor: pointer;
+  top: -5px;
+  right: -7px;
 }
 .item_card.add_product {
   display: flex;
@@ -130,16 +142,6 @@
   height: 120px;
   border-radius: 10px;
   margin-bottom: 10px;
-}
-.delete_btn {
-  margin-top: 20px;
-  text-align: right;
-}
-.delete_btn button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: #ff0048;
 }
 .product_name {
   text-decoration: none;
@@ -162,7 +164,7 @@
 @media only screen and (min-width: 1300px) {
   .item_card {
     width: 15%;
-    margin: 10px 15px;
+    margin: 10px 7px;
   }
 }
 @media only screen and (min-width: 1500px) {
@@ -185,5 +187,6 @@
   }
   .item_card {
     width: 12%;
+    margin: 10px 15px;
   }
 }

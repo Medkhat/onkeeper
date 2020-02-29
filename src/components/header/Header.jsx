@@ -29,7 +29,7 @@ const Header = () => {
         <NavigationItem title="Заказы" href="/orders" />
         <NavigationItem title="Персонал" href="/personal" />
       </nav>
-      <div className="admin_btn">
+      <div className={h.admin_btn}>
         <span>Администратор</span>
       </div>
     </header>

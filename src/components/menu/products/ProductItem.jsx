@@ -7,9 +7,7 @@ const ProductItem = (props) => {
     <div className={m.item_card}>
       <img src={props.image} alt="PRODUCT_IMG" />
       <NavLink to={`${props.href}`} className={m.product_name}>{props.name}</NavLink>
-      <div className={m.delete_btn}>
-        <button type="button">Удалить</button>
-      </div>
+      <span className={m.times}>&times;</span>
     </div>
   );
 }

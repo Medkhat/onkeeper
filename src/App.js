@@ -8,7 +8,7 @@ import MenuContainer from './components/menu/MenuContainer';
 
 function App() {
   return (
-    <div className="App">
+    <div className="application">
       <Header />
       <div className="app_wrapper">
         <Route path='/products' render={() => <MenuContainer />} />
