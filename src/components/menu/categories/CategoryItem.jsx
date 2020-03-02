@@ -1,5 +1,6 @@
 import React from 'react'
 import m from '../Menu.module.css'
+import { NavLink } from 'react-router-dom'
 
 const CategoryItem = (props) => {
   return (
@@ -8,9 +9,9 @@ const CategoryItem = (props) => {
       id={props.categoryId}
       onClick={props.onclickEvent}
     >
-      <div className={m.item}>
+      <NavLink to={'/products/' + props.categoryId} className={m.item}>
         {props.name}
-      </div>
+      </NavLink>
       <div className={m.item_btns}>
         <button type="button">e</button>
         <button type="button">d</button>

@@ -6,7 +6,7 @@ import m from './Menu.module.css'
 import CategoriesContainer from './categories/CategoriesContainer'
 import ProductsContainer from './products/ProductsContainer'
 import Preloader from '../preloader/Preloader'
-import AddProduct from './products/add-product/AddProduct'
+import AddProductContainer from './products/add-product/AddProductContainer'
 
 class Menu extends React.Component {
   componentDidMount() {
@@ -30,7 +30,7 @@ class Menu extends React.Component {
         <CategoriesContainer />
         <div className={m.menu_content}>
           <Route exact path='/products' render={() => <ProductsContainer />} />
-          <Route exact path='/products/add-product' render={() => <AddProduct />} />
+          <Route exact path='/products/add-product' render={() => <AddProductContainer />} />
         </div>
       </div>
     )

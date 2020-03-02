@@ -2,7 +2,8 @@ import {
   addCatItem,
   updateNewCategoryTitle,
   getCertainCategory,
-  getCategories
+  getCategories,
+  getProducts
 } from '../../../data/menu-reducer'
 import Categories from './Categories'
 import { connect } from 'react-redux';
@@ -16,7 +17,7 @@ let mapStateToProps = (state) => {
 }
 
 let mapDispatchToProps = {
-  updateNewCategoryTitle, addCatItem, getCertainCategory, getCategories
+  updateNewCategoryTitle, addCatItem, getCertainCategory, getCategories, getProducts
 }
 
 const CategoriesContainer = connect(mapStateToProps, mapDispatchToProps)(Categories)

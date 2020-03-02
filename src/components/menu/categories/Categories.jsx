@@ -18,7 +18,7 @@ class Categories extends React.Component {
     const categoryId = parseInt(e.target.id)
     if (this.props.currentCategory !== categoryId) {
       this.props.getCertainCategory(categoryId)
-      axios.get(`http://admin07.pythonanywhere.com/admin_rest/restorans/1/category/${categoryId}`)
+      axios.get(`http://admin07.pythonanywhere.com/admin_rest/category/`)
         .then(response => {
           this.props.getProducts(response.data)
         })

@@ -11,7 +11,7 @@ const WhenEmptyForm = () => {
   )
 }
 
-const ProductImages = () => {
+const ProductImages = (props) => {
   return (
     <div className={add_prod.img_form}>
       <div className={add_prod.upload_img}>
@@ -22,7 +22,7 @@ const ProductImages = () => {
         <input type="file" id="upload_img" style={{ display: 'none' }} />
       </div>
       <WhenEmptyForm />
-      <button type="button" className={add_prod.btn}>Добавить</button>
+      <button type="button" onClick={props.onclickEvent} className={add_prod.btn}>Добавить</button>
     </div>
   )
 }
@@ -30,16 +30,34 @@ const ProductImages = () => {
 const ProductFormInput = props => {
   return (
     <div className={add_prod.inputs}>
-      <input type={props.type} className={add_prod.name_desc} id={props.id} placeholder={props.placeholder} />
+      <input
+        type={props.type}
+        className={add_prod.name_desc}
+        id={props.id}
+        placeholder={props.placeholder}
+        onChange={props.onchangeEvent}
+        data-action={props.dataActionType}
+        value={props.value}
+      />
     </div>
   )
 }
 
-const AddProduct = () => {
+const AddProduct = (props) => {
+
+  let onAddNewProduct = () => {
+    props.addNewProduct()
+  }
+
+  let onChangeInputs = (e) => {
+    let newProductActionKey = e.target.value
+    let newProductActionType = e.target.dataset.action
+    props.updateNewProductData(newProductActionType, newProductActionKey)
+  }
 
   let inputProps = [
-    { id: 1, type: "text", placeholder: "Название блюда / напитка", },
-    { id: 2, type: "number", placeholder: "0.00", },
+    { id: 1, type: "text", placeholder: "Название блюда / напитка", value: props.newProductTitle, onchangeEvent: onChangeInputs, dataActionType: "UPDATE_NEW_PRODUCT_TITLE" },
+    { id: 2, type: "number", placeholder: "0.00", value: props.newProductPrice, onchangeEvent: onChangeInputs, dataActionType: "UPDATE_NEW_PRODUCT_PRICE" },
   ]
 
   let ProductFormInputs = inputProps.map(item => {
@@ -48,6 +66,9 @@ const AddProduct = () => {
       id={item.id}
       type={item.type}
       placeholder={item.placeholder}
+      dataActionType={item.dataActionType}
+      onchangeEvent={item.onchangeEvent}
+      value={item.value}
     />
   })
 
@@ -58,10 +79,19 @@ const AddProduct = () => {
         <div className={add_prod.form}>
           {ProductFormInputs}
           <div className={add_prod.inputs}>
-            <textarea className={add_prod.name_desc} name="good_desc" id="good_desc" rows="7" placeholder="Описание"></textarea>
+            <textarea
+              className={add_prod.name_desc}
+              name="good_desc"
+              id="good_desc"
+              rows="7"
+              placeholder="Описание"
+              data-action="UPDATE_NEW_PRODUCT_DESC"
+              onChange={onChangeInputs}
+              value={props.newProductDesc}
+            ></textarea>
           </div>
         </div>
-        <ProductImages />
+        <ProductImages onclickEvent={onAddNewProduct} />
       </div>
     </div>
   )

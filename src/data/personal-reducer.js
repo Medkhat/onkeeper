@@ -105,8 +105,7 @@ const personalReducer = (state = initialState, action) => {
       return {
         ...state,
         personal: state.personal.map(item => {
-          debugger
-          if (item.id == action.userId) {
+          if (item.id === action.userId) {
             return {
               ...item
             }
