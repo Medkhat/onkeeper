@@ -11,7 +11,7 @@ const PersonalItem = (props) => {
   })
 
   let onClickPersonalItem = () => {
-    let userId = props.key
+    let userId = props.userId
     props.getEmployeeData(userId)
   }
 

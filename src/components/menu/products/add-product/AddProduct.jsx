@@ -22,6 +22,7 @@ const ProductImages = () => {
         <input type="file" id="upload_img" style={{ display: 'none' }} />
       </div>
       <WhenEmptyForm />
+      <button type="button" className={add_prod.btn}>Добавить</button>
     </div>
   )
 }

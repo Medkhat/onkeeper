@@ -7,8 +7,8 @@ const Personal = (props) => {
   let personalItem = props.personal.map(item => {
     return <PersonalItem
       fullName={item.fullName}
-      href={item.id}
       key={item.id}
+      userId={item.id}
       salary={item.salary}
       working_days={item.working_days}
       img={item.img}

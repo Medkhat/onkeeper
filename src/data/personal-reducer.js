@@ -105,7 +105,8 @@ const personalReducer = (state = initialState, action) => {
       return {
         ...state,
         personal: state.personal.map(item => {
-          if (item.id === action.userId) {
+          debugger
+          if (item.id == action.userId) {
             return {
               ...item
             }
@@ -127,7 +128,7 @@ export const universal = (type, objKey) => ({
 })
 export const getEmployeeData = (userId) => ({
   type: GET_EMPLOYEE_DATA,
-  id: userId
+  userId: userId
 })
 
 
