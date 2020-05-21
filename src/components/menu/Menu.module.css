@@ -116,8 +116,9 @@
   margin: 10px 3px;
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   position: relative;
+  border: 1px solid #eeeeee;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
 }
 .times {
   border-radius: 50%;
@@ -129,6 +130,12 @@
   cursor: pointer;
   top: -5px;
   right: -7px;
+  opacity: 0;
+  visibility: hidden;
+}
+.item_card:hover .times {
+  opacity: 1;
+  visibility: visible;
 }
 .item_card.add_product {
   display: flex;
@@ -147,8 +154,9 @@
   text-decoration: none;
   color: #000000;
   margin-top: 15px;
-  font-weight: 700;
-  font-size: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  display: block;
 }
 .product_name:hover {
   color: #ff0048;
