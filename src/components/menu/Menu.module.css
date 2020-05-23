@@ -121,14 +121,11 @@
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
 }
 .times {
-  border-radius: 50%;
   position: absolute;
-  background-color: #ff0048;
-  color: #ffffff;
-  padding: 0px 6px 2px 6px;
-  font-size: 16px;
+  color: #ff0048;
+  font-size: 20px;
   cursor: pointer;
-  top: -5px;
+  top: -7px;
   right: -7px;
   opacity: 0;
   visibility: hidden;
@@ -149,6 +146,8 @@
   height: 120px;
   border-radius: 10px;
   margin-bottom: 10px;
+  object-fit: cover;
+  -o-object-fit: cover;
 }
 .product_name {
   text-decoration: none;

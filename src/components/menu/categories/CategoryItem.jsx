@@ -1,6 +1,8 @@
 import React from 'react'
 import m from '../Menu.module.css'
 import { NavLink } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 const CategoryItem = (props) => {
   return (
@@ -13,8 +15,22 @@ const CategoryItem = (props) => {
         {props.name}
       </NavLink>
       <div className={m.item_btns}>
-        <button type="button">e</button>
-        <button type="button">d</button>
+        <button type="button">
+          <FontAwesomeIcon
+            icon={faPencilAlt}
+            style={{
+              fontSize: "16px"
+            }}
+          />
+        </button>
+        <button type="button">
+          <FontAwesomeIcon
+            icon={faTimesCircle}
+            style={{
+              fontSize: "16px"
+            }}
+          />
+        </button>
       </div>
     </div>
   );

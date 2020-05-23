@@ -1,5 +1,7 @@
 import React from 'react'
 import p from './Personal.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 const WorkingDays = (props) => {
   return <span>{props.working_days}</span>
@@ -25,7 +27,11 @@ const PersonalItem = (props) => {
           {workingDays}
         </div>
       </div>
-      <span className={p.times}>&times;</span>
+      <span className={p.times}>
+        <FontAwesomeIcon
+          icon={faTimesCircle}
+        />
+      </span>
     </div>
   )
 }
