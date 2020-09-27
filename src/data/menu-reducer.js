@@ -1,9 +1,10 @@
+import { productsAPI } from '../api/api'
 import def_prod from '../img/def_prod.png'
 
 const ADD_CATEGORY_ITEM = "ADD_CATEGORY_ITEM"
 const UPDATE_NEW_CATEGORY_TITLE = "UPDATE_NEW_CATEGORY_TITLE"
-const GET_PRODUCTS = "GET_PRODUCTS"
-const GET_CATEGORY = "GET_CATEGORY"
+const SET_PRODUCTS = "SET_PRODUCTS"
+const SET_CATEGORIES = "SET_CATEGORIES"
 const GET_CERTAIN_CATEGORY = "GET_CERTAIN_CATEGORY"
 const TOGGLE_LOADER = "TOGGLE_LOADER"
 const ADD_NEW_PRODUCT = "ADD_NEW_PRODUCT"
@@ -37,12 +38,12 @@ const menuReducer = (state = initialState, action) => {
         newCategoryTitle: action.newTitle
       }
     }
-    case GET_PRODUCTS:
+    case SET_PRODUCTS:
       return {
         ...state,
         products: action.products
       }
-    case GET_CATEGORY:
+    case SET_CATEGORIES:
       return {
         ...state,
         categories: action.categories
@@ -102,12 +103,12 @@ export const updateNewCategoryTitle = (title) => ({
   type: UPDATE_NEW_CATEGORY_TITLE,
   newTitle: title
 })
-export const getProducts = (products) => ({
-  type: GET_PRODUCTS,
+export const setProducts = (products) => ({
+  type: SET_PRODUCTS,
   products: products
 })
-export const getCategories = (categories) => ({
-  type: GET_CATEGORY,
+export const setCategories = (categories) => ({
+  type: SET_CATEGORIES,
   categories: categories
 })
 export const getCertainCategory = (currentCategory) => ({
@@ -120,4 +121,24 @@ export const toggleLoader = (isFetching) => ({
 })
 export const changeNewProductForm = (type, actionKey) => ({ type, actionKey })
 export const addNewProduct = () => ({ type: ADD_NEW_PRODUCT })
+
+
+const getMenuData = (requestType, action) => {
+  return async (dispatch) => {
+    dispatch(toggleLoader(true))
+    let response = await requestType()
+    dispatch(toggleLoader(false))
+    dispatch(action(response.data))
+  }
+}
+
+export const getProducts = () => {
+  return getMenuData(productsAPI.getProducts, setProducts)
+}
+
+export const getCategories = () => {
+  return getMenuData(productsAPI.getCategories, setCategories)
+} 
+
+
 export default menuReducer

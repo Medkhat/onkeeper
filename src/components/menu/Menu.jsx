@@ -1,26 +1,16 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import * as axios from 'axios'
 
 import m from './Menu.module.css'
 import CategoriesContainer from './categories/CategoriesContainer'
 import ProductsContainer from './products/ProductsContainer'
-import Preloader from '../preloader/Preloader'
+import Preloader from '../common/preloader/Preloader'
 import AddProductContainer from './products/add-product/AddProductContainer'
 
 class Menu extends React.Component {
   componentDidMount() {
-    this.props.toggleLoader(true)
-    axios.get("http://admin07.pythonanywhere.com/admin_rest/products/")
-      .then(response => {
-        this.props.getProducts(response.data)
-      })
-
-    axios.get("http://admin07.pythonanywhere.com/admin_rest/category/")
-      .then(response => {
-        this.props.toggleLoader(false)
-        this.props.getCategories(response.data)
-      })
+    this.props.getProducts()
+    this.props.getCategories()
   }
 
   render() {

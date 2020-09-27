@@ -2,8 +2,7 @@ import { connect } from "react-redux";
 import Menu from "./Menu";
 import {
   getProducts,
-  getCategories,
-  toggleLoader
+  getCategories
 } from "../../data/menu-reducer";
 
 let mapStateToProps = (state) => {
@@ -13,7 +12,7 @@ let mapStateToProps = (state) => {
 }
 
 let mapDispatchToProps = {
-  getProducts, getCategories, toggleLoader
+  getProducts, getCategories
 }
 
 const MenuContainer = connect(mapStateToProps, mapDispatchToProps)(Menu)

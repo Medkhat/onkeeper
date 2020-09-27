@@ -5,8 +5,9 @@ import Orders from './components/orders/Orders';
 import { Route } from 'react-router-dom';
 import PersonalContainer from './components/personal/PersonalContainer';
 import MenuContainer from './components/menu/MenuContainer';
+import Login from './components/Login/Login';
 
-function App() {
+const Application = () => {
   return (
     <div className="application">
       <Header />
@@ -16,7 +17,14 @@ function App() {
         <Route path='/personal' render={() => <PersonalContainer />} />
       </div>
     </div>
-  );
+  )
+}
+
+function App() {
+  return <>
+    <Route exact path='/' render={() => <Application />} />
+    <Route path='/login' render={() => <Login />} />
+  </>
 }
 
 export default App;
