@@ -3,7 +3,7 @@ import Menu from "./Menu";
 import {
   getProducts,
   getCategories
-} from "../../data/menu-reducer";
+} from "../../redux/menu-reducer";
 
 let mapStateToProps = (state) => {
   return {

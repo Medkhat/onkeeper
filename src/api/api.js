@@ -13,3 +13,9 @@ export const productsAPI = {
         return instance.get(`/category/`).then(response => response)
     }
 }
+
+export const authAPI = {
+    login(username, password) {
+        return instance.post(`/user/login/`, {username, password})
+    }
+}

@@ -1,7 +1,7 @@
 import {
   addNewEmployee,
   universal,
-} from '../../data/personal-reducer'
+} from '../../redux/personal-reducer'
 import PersonalForm from './PersonalForm'
 import { connect } from 'react-redux'
 

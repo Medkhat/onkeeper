@@ -4,7 +4,7 @@ import {
   getCertainCategory,
   getCategories,
   getProducts
-} from '../../../data/menu-reducer'
+} from '../../../redux/menu-reducer'
 import Categories from './Categories'
 import { connect } from 'react-redux';
 

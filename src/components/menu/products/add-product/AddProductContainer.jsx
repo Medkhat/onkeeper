@@ -1,4 +1,4 @@
-import { changeNewProductForm, addNewProduct } from "../../../../data/menu-reducer"
+import { changeNewProductForm, addNewProduct } from "../../../../redux/menu-reducer"
 import { connect } from "react-redux"
 import AddProduct from "./AddProduct"
 

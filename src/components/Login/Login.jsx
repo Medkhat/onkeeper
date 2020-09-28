@@ -1,11 +1,13 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
+import { required } from '../../utils/validators'
+import { createField, FormElement } from '../common/form-controls/FormControls'
 import { 
     Button, 
     Container, 
     ContainerWrapper, 
     FormGroup, 
-    FormInput, 
+    FormInput,
     LoginWrapper, 
     Logo 
 } from './StyledLogin'
@@ -14,7 +16,7 @@ const LoginForm = reduxForm({form: 'login'})(({handleSubmit, error}) => {
     return (
         <form onSubmit={handleSubmit}>
             <FormGroup>
-                <FormInput type="text" placeholder="Username" name="username" />
+                {createField("text", "Username", "username", FormElement(FormInput), [required], "")}
             </FormGroup>
             <FormGroup>
                 <FormInput type="password" placeholder="Password" name="password" />

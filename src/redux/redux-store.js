@@ -1,12 +1,14 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import menuReducer from "./menu-reducer";
 import personalReducer from "./personal-reducer";
+import authReducer from "./auth-reducer";
 import ThunkMiddleware from "redux-thunk"
 import { reducer as formReducer } from "redux-form";
 
 let reducers = combineReducers({ 
     menuReducer, 
     personalReducer,
+    authReducer,
     formReducer
 })
 

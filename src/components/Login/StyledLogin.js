@@ -19,10 +19,16 @@ export const ContainerWrapper = styled.div`
     background-color: rgba(255, 0, 72, 0.286);
 `
 export const Container = styled.div`
-    width: 40%;
+    width: 30%;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
+    @media (max-width: 1199px) {
+        width: 40%;
+    }
+    @media (max-width: 768px) {
+        width: 90%;
+    }
 `
 export const Logo = styled.h1`
     text-align: center;
