@@ -1,6 +1,8 @@
 import React from 'react';
 import h from './Header.module.css';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logout } from '../../redux/auth-reducer';
 
 const NavigationItem = (props) => {
   const isActivePage = (path) => {
@@ -18,7 +20,7 @@ const NavigationItem = (props) => {
   );
 }
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header>
       <div className={h.logo}>
@@ -30,10 +32,11 @@ const Header = () => {
         <NavigationItem title="Персонал" href="/personal" />
       </nav>
       <div className={h.admin_btn}>
-        <span>Администратор</span>
+        <span onClick={props.logout}>Logout</span>
       </div>
     </header>
   );
 }
+ let mapStateToProps = () => ({})
 
-export default Header;
+export default connect(mapStateToProps, {logout})(Header);

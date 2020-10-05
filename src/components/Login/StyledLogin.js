@@ -4,6 +4,9 @@ import bg from '../../img/restaurant-bg.jpg'
 export const LoginWrapper = styled.div`
     width: 100%;
     height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     background-image: url(${bg});
     background-position: center;
     background-repeat: no-repeat;

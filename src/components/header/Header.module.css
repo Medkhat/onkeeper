@@ -28,6 +28,7 @@ nav {
 }
 .admin_btn span{
   font-size: 15px;
+  cursor: pointer;
 }
 .item:hover {
   border-bottom-color: #ffffff;

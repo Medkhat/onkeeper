@@ -4,7 +4,8 @@ const SET_USER_DATA = 'SET_USER_DATA'
 
 let initialState = {
     userId: null,
-    username: null,
+    token: null,
+    status: null,
     isAuth: false
 }
 
@@ -21,16 +22,23 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-const setUserData = (username, password) => ({
+const setUserData = (userId, token, username, isAuth) => ({
     type: SET_USER_DATA,
-    payload: {username, password}
+    payload: {userId, token, username, isAuth}
 })
-
-
 
 export const login = (username, password) => {
     return async dispatch => {
         let response = await authAPI.login(username, password)
+        let { id, token, status } = response.data
+        dispatch(setUserData(id, token, status, true))
+    }
+}
+
+export const logout = () => {
+    console.log("SUCCESS");
+    return dispatch => {
+        dispatch(setUserData(null, null, null, false))
     }
 }
 

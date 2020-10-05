@@ -1,7 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { reduxForm } from 'redux-form'
+import { login } from '../../redux/auth-reducer'
 import { required } from '../../utils/validators'
-import { createField, FormElement } from '../common/form-controls/FormControls'
+import { createField, FormControl } from '../common/form-controls/FormControls'
 import { 
     Button, 
     Container, 
@@ -16,10 +19,10 @@ const LoginForm = reduxForm({form: 'login'})(({handleSubmit, error}) => {
     return (
         <form onSubmit={handleSubmit}>
             <FormGroup>
-                {createField("text", "Username", "username", FormElement(FormInput), [required], "")}
+                {createField("text", "Username", "username", FormControl(FormInput), [required], "")}
             </FormGroup>
             <FormGroup>
-                <FormInput type="password" placeholder="Password" name="password" />
+                {createField("password", "Password", "password", FormControl(FormInput), [required], "")}
             </FormGroup>
             <div style={{color: 'red'}}>{error}</div>
             <FormGroup thirdGroup>
@@ -32,10 +35,13 @@ const LoginForm = reduxForm({form: 'login'})(({handleSubmit, error}) => {
     )
 })
 
-const Login = () => {
+const Login = (props) => {
     const onLoginSubmit = (formData) => {
-        console.log(formData);
+        props.login(formData.username, formData.password)
     }
+    if (props.isAuth)
+        return <Redirect to={'/products'}/>
+
     return (
         <LoginWrapper>
             <ContainerWrapper>
@@ -48,4 +54,8 @@ const Login = () => {
     )
 }
 
-export default Login
+const mapStateToProps = (state) => ({
+    isAuth: state.authReducer.isAuth
+})
+
+export default connect(mapStateToProps, {login})(Login)

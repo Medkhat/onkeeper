@@ -4,6 +4,8 @@ import {
   getProducts,
   getCategories
 } from "../../redux/menu-reducer";
+import { compose } from "redux";
+import { withAuthRedirect } from "../hoc/withAuthRedirect";
 
 let mapStateToProps = (state) => {
   return {
@@ -15,5 +17,8 @@ let mapDispatchToProps = {
   getProducts, getCategories
 }
 
-const MenuContainer = connect(mapStateToProps, mapDispatchToProps)(Menu)
+const MenuContainer = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Menu)
 export default MenuContainer
