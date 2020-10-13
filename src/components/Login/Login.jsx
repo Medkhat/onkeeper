@@ -1,35 +1,43 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { reduxForm } from 'redux-form'
 import { login } from '../../redux/auth-reducer'
 import { required } from '../../utils/validators'
-import { createField, FormControl } from '../common/form-controls/FormControls'
+import { CustomField, FormControl } from '../common/form-controls/FormControls'
+
 import { 
     Button, 
     Container, 
-    ContainerWrapper, 
+    ContainerWrapper,
     FormGroup, 
     FormInput,
     LoginWrapper, 
     Logo 
 } from './StyledLogin'
+import { LoaderToButton } from '../common/preloader/Preloader'
 
-const LoginForm = reduxForm({form: 'login'})(({handleSubmit, error}) => {
+const FormElement = FormControl(FormInput)
+const LoginForm = reduxForm({form: 'login'})(({handleSubmit, error, isFetching}) => {
     return (
         <form onSubmit={handleSubmit}>
             <FormGroup>
-                {createField("text", "Username", "username", FormControl(FormInput), [required], "")}
+                {CustomField("text", "Username", "username", FormElement, [required], "")}
             </FormGroup>
             <FormGroup>
-                {createField("password", "Password", "password", FormControl(FormInput), [required], "")}
+                {CustomField("password", "Password", "password", FormElement, [required], "")}
             </FormGroup>
             <div style={{color: 'red'}}>{error}</div>
             <FormGroup thirdGroup>
                 <label>
-                    <input type="checkbox" name="rememberMe"/> Remember me
+                    {CustomField("checkbox", "", "rememberMe", FormElement, [], "Remember me")}
                 </label>
-                <Button>Sign in</Button>
+                <Link to={() => false} style={{textDecoration: 'none', color: 'rgb(255, 0, 72)'}}>Forgot password ?</Link>
+            </FormGroup>
+            <FormGroup>
+                <Button style={ isFetching ? {padding: '5px 0'} : {padding: '10px 20px'} }>
+                    { isFetching ? <LoaderToButton /> : 'Sign in' }
+                </Button>
             </FormGroup>
         </form>
     )
@@ -47,7 +55,7 @@ const Login = (props) => {
             <ContainerWrapper>
                 <Container>
                     <Logo>OnKeeper</Logo>
-                    <LoginForm onSubmit={onLoginSubmit} />
+                    <LoginForm onSubmit={onLoginSubmit} isFetching={props.isFetching}/>
                 </Container>
             </ContainerWrapper>
         </LoginWrapper>
@@ -55,7 +63,8 @@ const Login = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    isAuth: state.authReducer.isAuth
+    isAuth: state.authReducer.isAuth, 
+    isFetching: state.authReducer.isFetching, 
 })
 
 export default connect(mapStateToProps, {login})(Login)
