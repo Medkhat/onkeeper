@@ -1,61 +1,36 @@
-import React from 'react'
-import m from '../Menu.module.css'
-import CategoryItem from './CategoryItem'
-import * as axios from 'axios'
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import styles from "../Menu.module.css";
+import CategoryItem from "./CategoryItem";
 
-class Categories extends React.Component {
+const Categories = (props) => {
+    let categoryItems = props.categories.map((item) => {
+        return (
+            <CategoryItem name={item.name} key={item.id} categoryId={item.id} />
+        );
+    });
 
-  addCatItemFunc = () => {
-    this.props.addCatItem()
-  }
-
-  onCategoryTitleChange = (e) => {
-    let newItemTitle = e.target.value
-    this.props.updateNewCategoryTitle(newItemTitle)
-  }
-
-  onCategoryItemClick = (e) => {
-    const categoryId = parseInt(e.target.id)
-    if (this.props.currentCategory !== categoryId) {
-      this.props.getCertainCategory(categoryId)
-      axios.get(`http://admin07.pythonanywhere.com/admin_rest/category/`)
-        .then(response => {
-          this.props.getProducts(response.data)
-        })
-    }
-  }
-
-  render() {
-    let categoryItems = this.props.categories.map(item => {
-      return <CategoryItem
-        name={item.name}
-        key={item.id}
-        categoryId={item.id}
-        onclickEvent={this.onCategoryItemClick}
-      />
-    })
+    const onAddCategoryBtnClick = () => {
+        props.setModalState(true);
+    };
 
     return (
-      <div className={m.category_block}>
-        <h3 className={m.title}>Категории</h3>
-        <div className={m.category_items}>
-          {categoryItems}
-          <div className={m.category_input}>
-            <input
-              type="text"
-              value={this.props.newCategoryTitle}
-              onChange={this.onCategoryTitleChange}
-              placeholder="Добавить категорию..."
-            />
-            <button
-              type="button"
-              onClick={this.addCatItemFunc}
-            >Добавить</button>
-          </div>
-        </div>
-      </div>
-    )
-  }
-}
+        <>
+            <div className={styles.category_block}>
+                <h3 className={styles.title}>
+                    <span>Категории</span>
+                    <span
+                        className={styles.iconAsBtn}
+                        onClick={onAddCategoryBtnClick}
+                    >
+                        <FontAwesomeIcon icon={faPlusCircle} />
+                    </span>
+                </h3>
+                <div className={styles.category_items}>{categoryItems}</div>
+            </div>
+        </>
+    );
+};
 
 export default Categories;

@@ -15,13 +15,16 @@ const instance = axios.create({
 export const productsAPI = {
     getProducts() {
         return instance
-            .get(`admin_rest/products/`)
+            .get(`/admin_rest/products/`)
             .then((response) => response);
     },
     getCategories() {
         return instance
-            .get(`admin_rest/category/`)
+            .get(`/admin_rest/restoran/1/category/`)
             .then((response) => response);
+    },
+    addCategory() {
+        return instance.post(`/admin_rest/restoran/1/category/`);
     },
 };
 

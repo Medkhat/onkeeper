@@ -5,8 +5,8 @@
     display: -ms-flexbox;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 30px;
-    position: relative;
+    padding-top: 30px;
+    height: 100%;
 }
 
 /* Styles for category block */
@@ -15,12 +15,19 @@
 }
 .title {
     background-color: #ff0048;
-    padding: 10px 0 10px 20px;
+    padding: 7px 7px 7px 20px;
     margin-top: 0;
     color: #ffffff;
     font-weight: 500;
     border-radius: 0 30px 30px 0;
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.iconAsBtn {
+    cursor: pointer;
 }
 .category_items {
     width: 95%;
@@ -69,37 +76,6 @@
     opacity: 1;
     visibility: visible;
 }
-.category_input {
-    position: relative;
-}
-.category_input input {
-    border: 2px solid transparent;
-    width: 100%;
-    border-radius: 0 15px 15px 0;
-    outline: none;
-    font-size: 16px;
-    padding: 7px 4px 6px 20px;
-    border-left: none;
-    color: #ff0048;
-}
-.category_input button {
-    position: absolute;
-    right: 4px;
-    top: 4px;
-    background-color: #ff0048;
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-    padding: 6px 10px;
-    opacity: 0;
-}
-.category_input input:focus {
-    border-color: #ff0048;
-}
-.category_input input:focus + button {
-    opacity: 1;
-}
 
 /* Styles for products block */
 .menu_content {
@@ -115,7 +91,6 @@
 .item_card {
     width: 16%;
     margin: 10px 3px;
-    padding: 10px;
     border-radius: 10px;
     position: relative;
     border: 1px solid #eeeeee;
@@ -124,6 +99,7 @@
 .times {
     position: absolute;
     color: #ff0048;
+    border-radius: 50%;
     font-size: 20px;
     cursor: pointer;
     top: -7px;
@@ -145,7 +121,7 @@
 .item_card img {
     width: 100%;
     height: 120px;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     margin-bottom: 10px;
     object-fit: cover;
     -o-object-fit: cover;
@@ -153,7 +129,7 @@
 .product_name {
     text-decoration: none;
     color: #000000;
-    margin-top: 15px;
+    margin: 15px;
     font-weight: 500;
     font-size: 15px;
     display: block;
@@ -168,6 +144,17 @@
     border: 4px solid #ff0048;
     border-radius: 50%;
     margin-bottom: 0;
+}
+.img_input_label {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border: 1px solid #ff0048;
+    color: #ff0048;
+    border-radius: 5px;
+    cursor: pointer;
 }
 @media only screen and (min-width: 1300px) {
     .item_card {

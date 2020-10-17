@@ -46,6 +46,7 @@ export const FormInput = styled.input`
     padding: 10px;
     border-radius: 5px;
     outline: none;
+    font-size: 15px;
     border: 2px solid #e8e8e8;
     width: ${(props) => (props.type === "checkbox" ? "auto" : "100%")};
     &:focus {
