@@ -35,3 +35,18 @@
 .iconAsBtn {
     cursor: pointer;
 }
+@media only screen and (max-width: 1199px) {
+    .wrapper {
+        width: 40%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .wrapper {
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .wrapper {
+        width: 90%;
+    }
+}

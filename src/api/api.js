@@ -23,8 +23,12 @@ export const productsAPI = {
             .get(`/admin_rest/restoran/1/category/`)
             .then((response) => response);
     },
-    addCategory() {
-        return instance.post(`/admin_rest/restoran/1/category/`);
+    addCategory(name, image, restoran = 1) {
+        return instance.post(`/admin_rest/category/`, {
+            name,
+            image,
+            restoran,
+        });
     },
 };
 

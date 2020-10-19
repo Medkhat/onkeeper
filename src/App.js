@@ -9,7 +9,7 @@ import { initializeApp } from "./redux/app-reducer";
 import { Preloader } from "./components/common/preloader/Preloader";
 import { withSuspense } from "./components/hoc/withSuspense";
 import Modal from "./components/common/modal/Modal";
-import { setModalState } from "./redux/menu-reducer";
+import { addCategory, setModalState } from "./redux/menu-reducer";
 import AddCategoryForm from "./components/menu/categories/AddCategoryForm";
 
 const MenuContainer = React.lazy(() =>
@@ -24,8 +24,8 @@ const Main = (props) => {
     const [imgUrl, setImgUrl] = useState();
 
     const onAddCategoryFormSubmit = (formData) => {
-        console.log(formData);
-        console.log(imgUrl);
+        props.addCategory(formData.categoryName, imgUrl, 1);
+        if (!props.isFetching) props.setModalState(false);
     };
 
     return (
@@ -52,12 +52,21 @@ const Main = (props) => {
                 onAddCategoryFormSubmit={onAddCategoryFormSubmit}
                 component={AddCategoryForm}
                 setImgUrl={setImgUrl}
+                isFetching={props.isFetching}
+                imgUrl={imgUrl}
             />
         </>
     );
 };
 
-function App({ initializeApp, initialized, modalState, setModalState }) {
+function App({
+    initializeApp,
+    initialized,
+    modalState,
+    setModalState,
+    isFetching,
+    addCategory,
+}) {
     useEffect(() => {
         initializeApp();
     }, [initializeApp]);
@@ -73,6 +82,8 @@ function App({ initializeApp, initialized, modalState, setModalState }) {
                         <Main
                             modalState={modalState}
                             setModalState={setModalState}
+                            isFetching={isFetching}
+                            addCategory={addCategory}
                         />
                     )}
                 />
@@ -84,10 +95,11 @@ function App({ initializeApp, initialized, modalState, setModalState }) {
 let mapStateToProps = (state) => ({
     initialized: state.appReducer.initialized,
     modalState: state.menuReducer.modalState,
+    isFetching: state.menuReducer.isFetching,
 });
 const AppContainer = compose(
     withRouter,
-    connect(mapStateToProps, { initializeApp, setModalState })
+    connect(mapStateToProps, { initializeApp, setModalState, addCategory })
 )(App);
 
 export default AppContainer;

@@ -26,6 +26,9 @@ const Modal = (props) => {
                     <props.component
                         setImgUrl={props.setImgUrl}
                         onSubmit={props.onAddCategoryFormSubmit}
+                        isFetching={props.isFetching}
+                        setModalState={props.setModalState}
+                        imgUrl={props.imgUrl}
                     />
                 </div>
             </div>

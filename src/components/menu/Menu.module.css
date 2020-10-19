@@ -29,6 +29,30 @@
 .iconAsBtn {
     cursor: pointer;
 }
+.img {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+.img img {
+    width: 100%;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    height: 200px;
+    object-fit: cover;
+    -o-object-fit: cover;
+}
+.img_name {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    background-color: #dedede;
+    border-radius: 5px;
+}
+
 .category_items {
     width: 95%;
 }
@@ -76,7 +100,6 @@
     opacity: 1;
     visibility: visible;
 }
-
 /* Styles for products block */
 .menu_content {
     width: 75%;

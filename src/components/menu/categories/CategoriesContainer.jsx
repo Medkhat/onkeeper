@@ -1,6 +1,5 @@
 import {
     addCatItem,
-    updateNewCategoryTitle,
     getCertainCategory,
     getCategories,
     getProducts,
@@ -11,12 +10,10 @@ import { connect } from "react-redux";
 
 let mapStateToProps = (state) => ({
     categories: state.menuReducer.categories,
-    newCategoryTitle: state.menuReducer.newCategoryTitle,
     currentCategory: state.menuReducer.currentCategory,
 });
 
 let mapDispatchToProps = {
-    updateNewCategoryTitle,
     addCatItem,
     getCertainCategory,
     getCategories,

@@ -137,4 +137,21 @@ export const getCategories = () => {
     return getMenuData(productsAPI.getCategories, setCategories);
 };
 
+export const addCategory = (name, image, restoranId) => {
+    return async (dispatch) => {
+        try {
+            dispatch(toggleLoader(true));
+            let response = await productsAPI.addCategory(
+                name,
+                image,
+                restoranId
+            );
+            dispatch(toggleLoader(false));
+            dispatch(setCategories(response.data));
+        } catch (err) {
+            console.error("Error: " + err);
+        }
+    };
+};
+
 export default menuReducer;
