@@ -30,6 +30,9 @@ export const productsAPI = {
             restoran,
         });
     },
+    deleteCategory(categoryId) {
+        return instance.delete(`/admin_rest/category/${categoryId}/`);
+    },
 };
 
 export const authAPI = {

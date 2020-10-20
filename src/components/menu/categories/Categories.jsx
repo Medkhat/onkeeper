@@ -7,7 +7,12 @@ import CategoryItem from "./CategoryItem";
 const Categories = (props) => {
     let categoryItems = props.categories.map((item) => {
         return (
-            <CategoryItem name={item.name} key={item.id} categoryId={item.id} />
+            <CategoryItem
+                name={item.name}
+                key={item.id}
+                categoryId={item.id}
+                deleteCategory={props.deleteCategory}
+            />
         );
     });
 

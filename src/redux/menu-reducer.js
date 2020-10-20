@@ -1,7 +1,6 @@
 import { productsAPI } from "../api/api";
 import def_prod from "../img/def_prod.png";
 
-const ADD_CATEGORY_ITEM = "ADD_CATEGORY_ITEM";
 const SET_PRODUCTS = "SET_PRODUCTS";
 const SET_CATEGORIES = "SET_CATEGORIES";
 const GET_CERTAIN_CATEGORY = "GET_CERTAIN_CATEGORY";
@@ -11,6 +10,7 @@ const UPDATE_NEW_PRODUCT_TITLE = "UPDATE_NEW_PRODUCT_TITLE";
 const UPDATE_NEW_PRODUCT_PRICE = "UPDATE_NEW_PRODUCT_PRICE";
 const UPDATE_NEW_PRODUCT_DESC = "UPDATE_NEW_PRODUCT_DESC";
 const SET_MODAL_STATE = "SET_MODAL_STATE";
+const DELETE_CATEGORY = "DELETE_CATEGORY";
 
 let initialState = {
     categories: [],
@@ -25,12 +25,6 @@ let initialState = {
 
 const menuReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_CATEGORY_ITEM: {
-            return {
-                ...state,
-                categories: [...state.categories, action.categories],
-            };
-        }
         case SET_PRODUCTS:
             return {
                 ...state,
@@ -39,7 +33,16 @@ const menuReducer = (state = initialState, action) => {
         case SET_CATEGORIES:
             return {
                 ...state,
-                categories: action.categories,
+                categories: action.isNewCategory
+                    ? [...state.categories, action.categories]
+                    : action.categories,
+            };
+        case DELETE_CATEGORY:
+            return {
+                ...state,
+                categories: state.categories.filter(
+                    (item) => item.id !== action.categoryId
+                ),
             };
         case GET_CERTAIN_CATEGORY:
             return {
@@ -93,23 +96,24 @@ const menuReducer = (state = initialState, action) => {
             return state;
     }
 };
-
-export const addCatItem = () => ({
-    type: ADD_CATEGORY_ITEM,
-});
-export const setProducts = (products) => ({
+const setProducts = (products) => ({
     type: SET_PRODUCTS,
     products: products,
 });
-export const setCategories = (categories) => ({
+const setCategories = (categories, isNewCategory) => ({
     type: SET_CATEGORIES,
-    categories: categories,
+    categories,
+    isNewCategory,
+});
+const deleteCategoryFromState = (categoryId) => ({
+    type: DELETE_CATEGORY,
+    categoryId,
 });
 export const getCertainCategory = (currentCategory) => ({
     type: GET_CERTAIN_CATEGORY,
     currentCategory: currentCategory,
 });
-export const toggleLoader = (isFetching) => ({
+const toggleLoader = (isFetching) => ({
     type: TOGGLE_LOADER,
     isFetching,
 });
@@ -120,21 +124,26 @@ export const setModalState = (modalState) => ({
     modalState,
 });
 
-const getMenuData = (requestType, action) => {
+const getMenuData = (requestType, action, isCategory) => {
     return async (dispatch) => {
-        dispatch(toggleLoader(true));
-        let response = await requestType();
-        dispatch(toggleLoader(false));
-        dispatch(action(response.data));
+        try {
+            dispatch(toggleLoader(true));
+            let response = await requestType();
+            dispatch(toggleLoader(false));
+            if (isCategory) dispatch(action(response.data, false));
+            else dispatch(action(response.data));
+        } catch (err) {
+            console.error(`Error: ${err}`);
+        }
     };
 };
 
 export const getProducts = () => {
-    return getMenuData(productsAPI.getProducts, setProducts);
+    return getMenuData(productsAPI.getProducts, setProducts, false);
 };
 
 export const getCategories = () => {
-    return getMenuData(productsAPI.getCategories, setCategories);
+    return getMenuData(productsAPI.getCategories, setCategories, true);
 };
 
 export const addCategory = (name, image, restoranId) => {
@@ -147,7 +156,18 @@ export const addCategory = (name, image, restoranId) => {
                 restoranId
             );
             dispatch(toggleLoader(false));
-            dispatch(setCategories(response.data));
+            dispatch(setCategories(response.data, true));
+        } catch (err) {
+            console.error("Error: " + err);
+        }
+    };
+};
+export const deleteCategory = (categoryId) => {
+    return async (dispatch) => {
+        try {
+            let response = await productsAPI.deleteCategory(categoryId);
+            if (response.status >= 200 && response.status <= 400)
+                dispatch(deleteCategoryFromState(categoryId));
         } catch (err) {
             console.error("Error: " + err);
         }

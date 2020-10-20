@@ -19,7 +19,10 @@ const CategoryItem = (props) => {
                         }}
                     />
                 </button>
-                <button type="button">
+                <button
+                    type="button"
+                    onClick={() => props.deleteCategory(props.categoryId)}
+                >
                     <FontAwesomeIcon
                         icon={faTimesCircle}
                         style={{
