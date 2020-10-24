@@ -3,10 +3,10 @@ import { Route } from "react-router-dom";
 import m from "./Menu.module.css";
 import CategoriesContainer from "./categories/CategoriesContainer";
 import ProductsContainer from "./products/ProductsContainer";
-import { Preloader } from "../common/preloader/Preloader";
 import AddProductContainer from "./products/add-product/AddProductContainer";
+import { Preloader } from "../common/preloader/Preloader";
 
-const Menu = ({ getCategories, getProducts, ...props }) => {
+const Menu = React.memo(({ getCategories, getProducts, ...props }) => {
     useEffect(() => {
         getProducts();
         getCategories();
@@ -29,6 +29,6 @@ const Menu = ({ getCategories, getProducts, ...props }) => {
             </div>
         </div>
     );
-};
+});
 
 export default Menu;

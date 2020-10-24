@@ -1,5 +1,6 @@
 import { productsAPI } from "../api/api";
 import def_prod from "../img/def_prod.png";
+import TOGGLE_BTN_PRELOADER from "./auth-reducer";
 
 const SET_PRODUCTS = "SET_PRODUCTS";
 const SET_CATEGORIES = "SET_CATEGORIES";
@@ -20,6 +21,7 @@ let initialState = {
     newProductDesc: "",
     currentCategory: 1,
     isFetching: false,
+    addCategoryIsFetching: false,
     modalState: false,
 };
 
@@ -53,6 +55,11 @@ const menuReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: action.isFetching,
+            };
+        case TOGGLE_BTN_PRELOADER:
+            return {
+                ...state,
+                addCategoryIsFetching: action.addCategoryIsFetching,
             };
         case ADD_NEW_PRODUCT:
             let newProduct = {
@@ -100,15 +107,17 @@ const setProducts = (products) => ({
     type: SET_PRODUCTS,
     products: products,
 });
-const setCategories = (categories, isNewCategory) => ({
+const setCategories = (categories, isNewCategory, isEditedCategory) => ({
     type: SET_CATEGORIES,
     categories,
     isNewCategory,
+    isEditedCategory,
 });
 const deleteCategoryFromState = (categoryId) => ({
     type: DELETE_CATEGORY,
     categoryId,
 });
+
 export const getCertainCategory = (currentCategory) => ({
     type: GET_CERTAIN_CATEGORY,
     currentCategory: currentCategory,
@@ -116,6 +125,10 @@ export const getCertainCategory = (currentCategory) => ({
 const toggleLoader = (isFetching) => ({
     type: TOGGLE_LOADER,
     isFetching,
+});
+const toggleBtnPreloader = (addCategoryIsFetching) => ({
+    type: TOGGLE_BTN_PRELOADER,
+    addCategoryIsFetching,
 });
 export const changeNewProductForm = (type, actionKey) => ({ type, actionKey });
 export const addNewProduct = () => ({ type: ADD_NEW_PRODUCT });
@@ -149,13 +162,14 @@ export const getCategories = () => {
 export const addCategory = (name, image, restoranId) => {
     return async (dispatch) => {
         try {
-            dispatch(toggleLoader(true));
+            dispatch(toggleBtnPreloader(true));
             let response = await productsAPI.addCategory(
                 name,
                 image,
                 restoranId
             );
-            dispatch(toggleLoader(false));
+            dispatch(toggleBtnPreloader(false));
+            dispatch(setModalState(false));
             dispatch(setCategories(response.data, true));
         } catch (err) {
             console.error("Error: " + err);

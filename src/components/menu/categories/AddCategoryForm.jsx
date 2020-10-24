@@ -17,7 +17,16 @@ const CategoryImg = (props) => {
     return (
         <div className={styles.img}>
             <img src={props.imgUrl} alt="CATEGORY_IMG" />
-            <div className={styles.img_name}>
+            <span
+                className={styles.times_img}
+                style={!props.name ? { display: "block" } : { display: "none" }}
+            >
+                <FontAwesomeIcon icon={faTimesCircle} />
+            </span>
+            <div
+                className={styles.img_name}
+                style={!props.name ? { display: "none" } : { display: "flex" }}
+            >
                 <span>{props.name}</span>
                 <span
                     onClick={() => {
@@ -34,7 +43,13 @@ const CategoryImg = (props) => {
 };
 
 const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
-    ({ handleSubmit, imgUrl, setImgUrl, isFetching }) => {
+    ({
+        handleSubmit,
+        imgUrl,
+        setImgUrl,
+        addCategoryIsFetching,
+        categoryName,
+    }) => {
         const [img, setImg] = useState(null);
         useEffect(() => {
             let reader = new FileReader();
@@ -51,10 +66,10 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
         return (
             <form className={styles.form} onSubmit={handleSubmit}>
                 <FormGroup>
-                    {imgUrl && img ? (
+                    {imgUrl || img ? (
                         <CategoryImg
                             imgUrl={imgUrl}
-                            name={img.name}
+                            name={!img ? null : img.name}
                             setImg={setImg}
                             setImgUrl={setImgUrl}
                         />
@@ -82,12 +97,17 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
                         "categoryName",
                         FormElement,
                         [required],
+                        categoryName,
                         ""
                     )}
                 </FormGroup>
                 <FormGroup>
-                    <Button>
-                        {isFetching ? <LoaderToButton /> : "Добавить"}
+                    <Button style={{ display: "block" }}>
+                        {addCategoryIsFetching ? (
+                            <LoaderToButton />
+                        ) : (
+                            "Добавить"
+                        )}
                     </Button>
                 </FormGroup>
             </form>

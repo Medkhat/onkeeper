@@ -1,7 +1,7 @@
 import { authAPI } from "../api/api";
 
 const SET_USER_DATA = "SET_USER_DATA";
-const TOGGLE_PRELOADER = "TOGGLE_PRELOADER";
+export const TOGGLE_PRELOADER = "TOGGLE_PRELOADER";
 
 let initialState = {
     userId: null,

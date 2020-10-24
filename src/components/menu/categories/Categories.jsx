@@ -1,10 +1,36 @@
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
+import Modal from "../../common/modal/Modal";
 import styles from "../Menu.module.css";
+import AddCategoryForm from "./AddCategoryForm";
 import CategoryItem from "./CategoryItem";
 
-const Categories = (props) => {
+const Categories = React.memo((props) => {
+    const [imgUrl, setImgUrl] = useState(null);
+    const [enableForEdit, setEnableForEdit] = useState(null);
+
+    const editCategoryItem = (categoryId) => {
+        props.categories.forEach((item) => {
+            if (item.id === categoryId)
+                setEnableForEdit({
+                    id: item.id,
+                    name: item.name,
+                    image: item.image,
+                    restoran: item.restoran,
+                });
+        });
+    };
+
+    const onAddCategoryBtnClick = () => {
+        setEnableForEdit(null);
+        props.setModalState(true);
+    };
+
+    const onAddCategoryFormSubmit = (formData) => {
+        props.addCategory(formData.categoryName, imgUrl, 1);
+    };
+
     let categoryItems = props.categories.map((item) => {
         return (
             <CategoryItem
@@ -12,17 +38,15 @@ const Categories = (props) => {
                 key={item.id}
                 categoryId={item.id}
                 deleteCategory={props.deleteCategory}
+                editCategoryItem={editCategoryItem}
+                setModalState={props.setModalState}
             />
         );
     });
 
-    const onAddCategoryBtnClick = () => {
-        props.setModalState(true);
-    };
-
     return (
         <>
-            <div className={styles.category_block}>
+            <div className={styles.categories}>
                 <h3 className={styles.title}>
                     <span>Категории</span>
                     <span
@@ -34,8 +58,22 @@ const Categories = (props) => {
                 </h3>
                 <div className={styles.category_items}>{categoryItems}</div>
             </div>
+            <Modal
+                show={props.modalState}
+                title={
+                    enableForEdit ? "Изменить категорию" : "Добавить категорию"
+                }
+                name={enableForEdit ? enableForEdit.name : null}
+                setModalState={props.setModalState}
+                modalType="form"
+                onAddCategoryFormSubmit={onAddCategoryFormSubmit}
+                component={AddCategoryForm}
+                setImgUrl={setImgUrl}
+                addCategoryIsFetching={props.addCategoryIsFetching}
+                imgUrl={enableForEdit ? enableForEdit.image : imgUrl}
+            />
         </>
     );
-};
+});
 
 export default Categories;

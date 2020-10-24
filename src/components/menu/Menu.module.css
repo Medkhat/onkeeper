@@ -7,10 +7,11 @@
     align-items: flex-start;
     padding-top: 30px;
     height: 100%;
+    position: relative;
 }
 
 /* Styles for category block */
-.category_block {
+.categories {
     width: 24%;
 }
 .title {

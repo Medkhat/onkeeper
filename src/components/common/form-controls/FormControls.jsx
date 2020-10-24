@@ -8,7 +8,12 @@ export const FormControl = (FormElement) => {
         const controlStyles = hasError ? { border: `2px solid red` } : {};
         return (
             <>
-                <FormElement {...input} {...props} style={controlStyles} />
+                <FormElement
+                    {...input}
+                    value={input.value}
+                    {...props}
+                    style={controlStyles}
+                />
                 {hasError && (
                     <span
                         style={{
@@ -32,6 +37,7 @@ export const CustomField = (
     name,
     component,
     validators,
+    value = null,
     label
 ) => (
     <>
@@ -40,6 +46,7 @@ export const CustomField = (
             component={component}
             validate={validators}
             name={name}
+            value={value}
             placeholder={placeholder}
         />{" "}
         {label}
