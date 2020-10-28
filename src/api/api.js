@@ -45,8 +45,8 @@ export const productsAPI = {
 export const authAPI = {
     authMe() {
         return instance.post(`/user/login`, {
-            username: "User1",
-            password: "users",
+            username: "Admin",
+            password: "admin",
         });
     },
     login(username, password) {

@@ -4,7 +4,9 @@ import React from "react";
 import styles from "./Modal.module.css";
 
 const Modal = (props) => {
-    if (!props.show) return null;
+    if (!props.show) {
+        return null;
+    }
 
     const onCloseModalBtnClick = () => {
         props.setModalState(false);
@@ -26,10 +28,12 @@ const Modal = (props) => {
                     <props.component
                         setImgUrl={props.setImgUrl}
                         onSubmit={props.onAddCategoryFormSubmit}
+                        initialValues={{ name: props.name }}
                         addCategoryIsFetching={props.addCategoryIsFetching}
                         setModalState={props.setModalState}
                         imgUrl={props.imgUrl}
-                        categoryName={props.name}
+                        name={props.name}
+                        enableForEditImg={props.enableForEditImg}
                     />
                 </div>
             </div>

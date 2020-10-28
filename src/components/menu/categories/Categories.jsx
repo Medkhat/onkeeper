@@ -24,6 +24,7 @@ const Categories = React.memo((props) => {
 
     const onAddCategoryBtnClick = () => {
         setEnableForEdit(null);
+        setImgUrl(null);
         props.setModalState(true);
     };
 
@@ -64,13 +65,22 @@ const Categories = React.memo((props) => {
                     enableForEdit ? "Изменить категорию" : "Добавить категорию"
                 }
                 name={enableForEdit ? enableForEdit.name : null}
+                imgUrl={
+                    enableForEdit && enableForEdit.image
+                        ? enableForEdit.image
+                        : imgUrl
+                }
+                enableForEditImg={
+                    enableForEdit && enableForEdit.image
+                        ? enableForEdit.image
+                        : null
+                }
                 setModalState={props.setModalState}
                 modalType="form"
                 onAddCategoryFormSubmit={onAddCategoryFormSubmit}
                 component={AddCategoryForm}
                 setImgUrl={setImgUrl}
                 addCategoryIsFetching={props.addCategoryIsFetching}
-                imgUrl={enableForEdit ? enableForEdit.image : imgUrl}
             />
         </>
     );

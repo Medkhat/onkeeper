@@ -117,7 +117,6 @@ const deleteCategoryFromState = (categoryId) => ({
     type: DELETE_CATEGORY,
     categoryId,
 });
-
 export const getCertainCategory = (currentCategory) => ({
     type: GET_CERTAIN_CATEGORY,
     currentCategory: currentCategory,

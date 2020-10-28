@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { faImage, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { reduxForm } from "redux-form";
 import { required } from "../../../utils/validators";
@@ -13,31 +13,57 @@ import { LoaderToButton } from "../../common/preloader/Preloader";
 
 const FormElement = FormControl(FormInput);
 
+const ImgOverlay = ({ setImg, setImgUrl, enableForEditImg }) => {
+    const onRemoveImgBtnClick = () => {
+        if (enableForEditImg) enableForEditImg = null;
+        setImg(null);
+        setImgUrl(null);
+    };
+
+    const onCategoryImgInputChange = (event) => {
+        setImg(event.target.files[0]);
+    };
+
+    return (
+        <div className={styles.overlay}>
+            <div className={styles.centered}>
+                <span
+                    className={styles.remove_img}
+                    onClick={onRemoveImgBtnClick}
+                >
+                    <span style={{ marginRight: "10px" }}>
+                        <FontAwesomeIcon icon={faTimes} />
+                    </span>
+                    <span>Удалить изображение</span>
+                </span>
+                <label className={styles.img_input_label}>
+                    <input
+                        type="file"
+                        name="categoryImg"
+                        style={{ display: "none" }}
+                        accept="image/*"
+                        onChange={onCategoryImgInputChange}
+                    />{" "}
+                    <FontAwesomeIcon
+                        icon={faImage}
+                        style={{ marginRight: 10 }}
+                    />
+                    Загрузить новое
+                </label>
+            </div>
+        </div>
+    );
+};
+
 const CategoryImg = (props) => {
     return (
         <div className={styles.img}>
             <img src={props.imgUrl} alt="CATEGORY_IMG" />
-            <span
-                className={styles.times_img}
-                style={!props.name ? { display: "block" } : { display: "none" }}
-            >
-                <FontAwesomeIcon icon={faTimesCircle} />
-            </span>
-            <div
-                className={styles.img_name}
-                style={!props.name ? { display: "none" } : { display: "flex" }}
-            >
-                <span>{props.name}</span>
-                <span
-                    onClick={() => {
-                        props.setImg(null);
-                        props.setImgUrl(null);
-                    }}
-                    style={{ cursor: "pointer" }}
-                >
-                    <FontAwesomeIcon icon={faTimesCircle} />
-                </span>
-            </div>
+            <ImgOverlay
+                setImgUrl={props.setImgUrl}
+                setImg={props.setImg}
+                enableForEditImg={props.enableForEditImg}
+            />
         </div>
     );
 };
@@ -48,7 +74,7 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
         imgUrl,
         setImgUrl,
         addCategoryIsFetching,
-        categoryName,
+        enableForEditImg,
     }) => {
         const [img, setImg] = useState(null);
         useEffect(() => {
@@ -66,12 +92,12 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
         return (
             <form className={styles.form} onSubmit={handleSubmit}>
                 <FormGroup>
-                    {imgUrl || img ? (
+                    {imgUrl ? (
                         <CategoryImg
                             imgUrl={imgUrl}
-                            name={!img ? null : img.name}
                             setImg={setImg}
                             setImgUrl={setImgUrl}
+                            enableForEditImg={enableForEditImg}
                         />
                     ) : (
                         <label className={styles.img_input_label}>
@@ -94,10 +120,9 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
                     {CustomField(
                         "text",
                         "Название категории",
-                        "categoryName",
+                        "name",
                         FormElement,
                         [required],
-                        categoryName,
                         ""
                     )}
                 </FormGroup>
