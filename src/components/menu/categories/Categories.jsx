@@ -29,7 +29,7 @@ const Categories = React.memo((props) => {
     };
 
     const onAddCategoryFormSubmit = (formData) => {
-        props.addCategory(formData.categoryName, imgUrl, 1);
+        props.addCategory(formData.name, imgUrl, 1);
     };
 
     let categoryItems = props.categories.map((item) => {

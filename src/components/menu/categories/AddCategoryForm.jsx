@@ -21,6 +21,7 @@ const ImgOverlay = ({ setImg, setImgUrl, enableForEditImg }) => {
     };
 
     const onCategoryImgInputChange = (event) => {
+        if (enableForEditImg) enableForEditImg = null;
         setImg(event.target.files[0]);
     };
 
