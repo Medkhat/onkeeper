@@ -31,7 +31,7 @@ export const productsAPI = {
         });
     },
     editCategory(categoryId, name, image, restoran = 1) {
-        return instance.put(`/admin_rest/category/${categoryId}`, {
+        return instance.put(`/admin_rest/category/${categoryId}/`, {
             name,
             image,
             restoran,

@@ -6,19 +6,20 @@ import styles from "../Menu.module.css";
 import AddCategoryForm from "./AddCategoryForm";
 import CategoryItem from "./CategoryItem";
 
-const Categories = React.memo((props) => {
+const Categories = (props) => {
     const [imgUrl, setImgUrl] = useState(null);
     const [enableForEdit, setEnableForEdit] = useState(null);
-
     const editCategoryItem = (categoryId) => {
         props.categories.forEach((item) => {
-            if (item.id === categoryId)
+            if (item.id === categoryId) {
                 setEnableForEdit({
                     id: item.id,
                     name: item.name,
                     image: item.image,
                     restoran: item.restoran,
                 });
+                setImgUrl(item.image);
+            }
         });
     };
 
@@ -29,7 +30,14 @@ const Categories = React.memo((props) => {
     };
 
     const onAddCategoryFormSubmit = (formData) => {
-        props.addCategory(formData.name, imgUrl, 1);
+        if (enableForEdit)
+            props.editCategory(
+                enableForEdit.id,
+                formData.name,
+                formData.categoryImg,
+                enableForEdit.restoran
+            );
+        else props.addCategory(formData.name, imgUrl, 1);
     };
 
     let categoryItems = props.categories.map((item) => {
@@ -70,11 +78,7 @@ const Categories = React.memo((props) => {
                         ? enableForEdit.image
                         : imgUrl
                 }
-                enableForEditImg={
-                    enableForEdit && enableForEdit.image
-                        ? enableForEdit.image
-                        : null
-                }
+                enableForEdit={enableForEdit ? enableForEdit : null}
                 setModalState={props.setModalState}
                 modalType="form"
                 onAddCategoryFormSubmit={onAddCategoryFormSubmit}
@@ -84,6 +88,6 @@ const Categories = React.memo((props) => {
             />
         </>
     );
-});
+};
 
 export default Categories;

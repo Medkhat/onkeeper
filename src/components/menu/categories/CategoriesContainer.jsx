@@ -5,6 +5,7 @@ import {
     setModalState,
     deleteCategory,
     addCategory,
+    editCategory,
 } from "../../../redux/menu-reducer";
 import Categories from "./Categories";
 import { connect } from "react-redux";
@@ -22,6 +23,6 @@ let mapDispatchToProps = {
     setModalState,
     deleteCategory,
     addCategory,
+    editCategory,
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

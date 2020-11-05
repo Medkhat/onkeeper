@@ -33,7 +33,7 @@ const Modal = (props) => {
                         setModalState={props.setModalState}
                         imgUrl={props.imgUrl}
                         name={props.name}
-                        enableForEditImg={props.enableForEditImg}
+                        enableForEdit={props.enableForEdit}
                     />
                 </div>
             </div>

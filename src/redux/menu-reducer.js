@@ -12,6 +12,7 @@ const UPDATE_NEW_PRODUCT_PRICE = "UPDATE_NEW_PRODUCT_PRICE";
 const UPDATE_NEW_PRODUCT_DESC = "UPDATE_NEW_PRODUCT_DESC";
 const SET_MODAL_STATE = "SET_MODAL_STATE";
 const DELETE_CATEGORY = "DELETE_CATEGORY";
+const EDIT_CATEGORY = "EDIT_CATEGORY";
 
 let initialState = {
     categories: [],
@@ -38,6 +39,17 @@ const menuReducer = (state = initialState, action) => {
                 categories: action.isNewCategory
                     ? [...state.categories, action.categories]
                     : action.categories,
+            };
+        case EDIT_CATEGORY:
+            return {
+                ...state,
+                categories: state.categories.map((item) => {
+                    if (item.id === action.categoryId) {
+                        item.name = action.name;
+                        item.image = action.image;
+                    }
+                    return item;
+                }),
             };
         case DELETE_CATEGORY:
             return {
@@ -113,6 +125,12 @@ const setCategories = (categories, isNewCategory, isEditedCategory) => ({
     isNewCategory,
     isEditedCategory,
 });
+const editCategoryFromState = (categoryId, name, image) => ({
+    type: EDIT_CATEGORY,
+    categoryId,
+    name,
+    image,
+});
 const deleteCategoryFromState = (categoryId) => ({
     type: DELETE_CATEGORY,
     categoryId,
@@ -170,6 +188,19 @@ export const addCategory = (name, image, restoranId) => {
             dispatch(toggleBtnPreloader(false));
             dispatch(setModalState(false));
             dispatch(setCategories(response.data, true));
+        } catch (err) {
+            console.error("Error: " + err);
+        }
+    };
+};
+export const editCategory = (categoryId, name, image, restoranId) => {
+    return async (dispatch) => {
+        try {
+            dispatch(toggleBtnPreloader(true));
+            await productsAPI.editCategory(categoryId, name, image, restoranId);
+            dispatch(toggleBtnPreloader(false));
+            dispatch(setModalState(false));
+            dispatch(editCategoryFromState(categoryId, name, image));
         } catch (err) {
             console.error("Error: " + err);
         }

@@ -13,15 +13,8 @@ import { LoaderToButton } from "../../common/preloader/Preloader";
 
 const FormElement = FormControl(FormInput);
 
-const ImgOverlay = ({ setImg, setImgUrl, enableForEditImg }) => {
-    const onRemoveImgBtnClick = () => {
-        if (enableForEditImg) enableForEditImg = null;
-        setImg(null);
-        setImgUrl(null);
-    };
-
+const ImgOverlay = ({ setImg, onRemoveImgBtnClick }) => {
     const onCategoryImgInputChange = (event) => {
-        if (enableForEditImg) enableForEditImg = null;
         setImg(event.target.files[0]);
     };
 
@@ -63,7 +56,7 @@ const CategoryImg = (props) => {
             <ImgOverlay
                 setImgUrl={props.setImgUrl}
                 setImg={props.setImg}
-                enableForEditImg={props.enableForEditImg}
+                onRemoveImgBtnClick={props.onRemoveImgBtnClick}
             />
         </div>
     );
@@ -75,9 +68,10 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
         imgUrl,
         setImgUrl,
         addCategoryIsFetching,
-        enableForEditImg,
+        enableForEdit,
     }) => {
         const [img, setImg] = useState(null);
+
         useEffect(() => {
             let reader = new FileReader();
             reader.onloadend = function () {
@@ -90,15 +84,21 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
             setImg(event.target.files[0]);
         };
 
+        const onRemoveImgBtnClick = () => {
+            if (enableForEdit) enableForEdit.image = null;
+            setImg(null);
+            setImgUrl(null);
+        };
+
         return (
             <form className={styles.form} onSubmit={handleSubmit}>
                 <FormGroup>
-                    {imgUrl ? (
+                    {imgUrl !== null ? (
                         <CategoryImg
                             imgUrl={imgUrl}
                             setImg={setImg}
                             setImgUrl={setImgUrl}
-                            enableForEditImg={enableForEditImg}
+                            onRemoveImgBtnClick={onRemoveImgBtnClick}
                         />
                     ) : (
                         <label className={styles.img_input_label}>
@@ -131,6 +131,8 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
                     <Button style={{ display: "block" }}>
                         {addCategoryIsFetching ? (
                             <LoaderToButton />
+                        ) : enableForEdit ? (
+                            "Сохранить"
                         ) : (
                             "Добавить"
                         )}
