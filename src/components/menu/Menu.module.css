@@ -171,6 +171,7 @@
     display: -ms-flexbox;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 .item_card img {
     width: 100%;

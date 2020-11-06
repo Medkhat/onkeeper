@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
-import m from "./Menu.module.css";
+import styles from "./Menu.module.css";
 import CategoriesContainer from "./categories/CategoriesContainer";
 import ProductsContainer from "./products/ProductsContainer";
-import AddProductContainer from "./products/add-product/AddProductContainer";
 import { Preloader } from "../common/preloader/Preloader";
 
 const Menu = React.memo(({ getCategories, getProducts, ...props }) => {
@@ -12,20 +10,11 @@ const Menu = React.memo(({ getCategories, getProducts, ...props }) => {
         getCategories();
     }, [getCategories, getProducts]);
     return (
-        <div className={m.content}>
+        <div className={styles.content}>
             {props.isFetching ? <Preloader /> : null}
             <CategoriesContainer />
-            <div className={m.menu_content}>
-                <Route
-                    exact
-                    path="/products"
-                    render={() => <ProductsContainer />}
-                />
-                <Route
-                    exact
-                    path="/products/add-product"
-                    render={() => <AddProductContainer />}
-                />
+            <div className={styles.menu_content}>
+                <ProductsContainer />
             </div>
         </div>
     );

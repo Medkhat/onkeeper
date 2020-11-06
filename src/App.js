@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { initializeApp } from "./redux/app-reducer";
 import { Preloader } from "./components/common/preloader/Preloader";
 import { withSuspense } from "./components/hoc/withSuspense";
-import { addCategory, setModalState } from "./redux/menu-reducer";
 
 const MenuContainer = React.lazy(() =>
     import("./components/menu/MenuContainer")
@@ -56,11 +55,10 @@ function App({ initializeApp, initialized }) {
 
 let mapStateToProps = (state) => ({
     initialized: state.appReducer.initialized,
-    modalState: state.menuReducer.modalState,
 });
 const AppContainer = compose(
     withRouter,
-    connect(mapStateToProps, { initializeApp, setModalState, addCategory })
+    connect(mapStateToProps, { initializeApp })
 )(App);
 
 export default AppContainer;

@@ -1,16 +1,11 @@
 import { productsAPI } from "../api/api";
-import def_prod from "../img/def_prod.png";
 import TOGGLE_BTN_PRELOADER from "./auth-reducer";
+import { setCategoryModalState } from "./modal-reducer";
 
 const SET_PRODUCTS = "SET_PRODUCTS";
 const SET_CATEGORIES = "SET_CATEGORIES";
 const GET_CERTAIN_CATEGORY = "GET_CERTAIN_CATEGORY";
 const TOGGLE_LOADER = "TOGGLE_LOADER";
-const ADD_NEW_PRODUCT = "ADD_NEW_PRODUCT";
-const UPDATE_NEW_PRODUCT_TITLE = "UPDATE_NEW_PRODUCT_TITLE";
-const UPDATE_NEW_PRODUCT_PRICE = "UPDATE_NEW_PRODUCT_PRICE";
-const UPDATE_NEW_PRODUCT_DESC = "UPDATE_NEW_PRODUCT_DESC";
-const SET_MODAL_STATE = "SET_MODAL_STATE";
 const DELETE_CATEGORY = "DELETE_CATEGORY";
 const EDIT_CATEGORY = "EDIT_CATEGORY";
 
@@ -22,8 +17,7 @@ let initialState = {
     newProductDesc: "",
     currentCategory: 1,
     isFetching: false,
-    addCategoryIsFetching: false,
-    modalState: false,
+    loaderOnModalBtn: false,
 };
 
 const menuReducer = (state = initialState, action) => {
@@ -71,45 +65,7 @@ const menuReducer = (state = initialState, action) => {
         case TOGGLE_BTN_PRELOADER:
             return {
                 ...state,
-                addCategoryIsFetching: action.addCategoryIsFetching,
-            };
-        case ADD_NEW_PRODUCT:
-            let newProduct = {
-                id: 100,
-                name: state.newProductTitle,
-                body: state.newProductDesc,
-                status: 1,
-                unit: 1,
-                price: state.newProductPrice,
-                image: def_prod,
-                category: 1,
-            };
-            return {
-                ...state,
-                products: [...state.products, newProduct],
-                newProductTitle: "",
-                newProductPrice: "",
-                newProductDesc: "",
-            };
-        case UPDATE_NEW_PRODUCT_TITLE:
-            return {
-                ...state,
-                newProductTitle: action.actionKey,
-            };
-        case UPDATE_NEW_PRODUCT_PRICE:
-            return {
-                ...state,
-                newProductPrice: action.actionKey,
-            };
-        case UPDATE_NEW_PRODUCT_DESC:
-            return {
-                ...state,
-                newProductDesc: action.actionKey,
-            };
-        case SET_MODAL_STATE:
-            return {
-                ...state,
-                modalState: action.modalState,
+                loaderOnModalBtn: action.loaderOnModalBtn,
             };
         default:
             return state;
@@ -143,17 +99,10 @@ const toggleLoader = (isFetching) => ({
     type: TOGGLE_LOADER,
     isFetching,
 });
-const toggleBtnPreloader = (addCategoryIsFetching) => ({
+const toggleBtnPreloader = (loaderOnModalBtn) => ({
     type: TOGGLE_BTN_PRELOADER,
-    addCategoryIsFetching,
+    loaderOnModalBtn,
 });
-export const changeNewProductForm = (type, actionKey) => ({ type, actionKey });
-export const addNewProduct = () => ({ type: ADD_NEW_PRODUCT });
-export const setModalState = (modalState) => ({
-    type: SET_MODAL_STATE,
-    modalState,
-});
-
 const getMenuData = (requestType, action, isCategory) => {
     return async (dispatch) => {
         try {
@@ -186,7 +135,7 @@ export const addCategory = (name, image, restoranId) => {
                 restoranId
             );
             dispatch(toggleBtnPreloader(false));
-            dispatch(setModalState(false));
+            dispatch(setCategoryModalState(false));
             dispatch(setCategories(response.data, true));
         } catch (err) {
             console.error("Error: " + err);
@@ -199,7 +148,7 @@ export const editCategory = (categoryId, name, image, restoranId) => {
             dispatch(toggleBtnPreloader(true));
             await productsAPI.editCategory(categoryId, name, image, restoranId);
             dispatch(toggleBtnPreloader(false));
-            dispatch(setModalState(false));
+            dispatch(setCategoryModalState(false));
             dispatch(editCategoryFromState(categoryId, name, image));
         } catch (err) {
             console.error("Error: " + err);

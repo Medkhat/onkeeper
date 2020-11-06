@@ -1,100 +1,185 @@
-import React from 'react'
-import add_prod from './AddProduct.module.css'
-import img_icon from '../../../../img/add_img.png'
-import when_empty from '../../../../img/when_empty.png'
+import React, { useEffect, useState } from "react";
+import { faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { reduxForm } from "redux-form";
+import { required } from "../../../../utils/validators";
+import {
+    CustomField,
+    FormControl,
+} from "../../../common/form-controls/FormControls";
+import {
+    Button,
+    FormGroup,
+    FormInput,
+    FormTextarea,
+    Select,
+} from "../../../common/StyledComponents";
+import styles from "../../Menu.module.css";
+import { LoaderToButton } from "../../../common/preloader/Preloader";
 
-const WhenEmptyForm = () => {
-  return (
-    <div className={add_prod.empty_img_form}>
-      <div className={add_prod.centered} style={{ backgroundImage: `url(${when_empty})` }}></div>
-    </div>
-  )
-}
+const FormElement = FormControl(FormInput);
+const TextArea = FormControl(FormTextarea);
 
-const ProductImages = (props) => {
-  return (
-    <div className={add_prod.img_form}>
-      <div className={add_prod.upload_img}>
-        <label htmlFor="upload_img">
-          <img src={img_icon} alt="IMG_ICON" />
-          <span>Добавить изображение</span>
-        </label>
-        <input type="file" id="upload_img" style={{ display: 'none' }} />
-      </div>
-      <WhenEmptyForm />
-      <button type="button" onClick={props.onclickEvent} className={add_prod.btn}>Добавить</button>
-    </div>
-  )
-}
+const ImgOverlay = ({ setImg, onRemoveImgBtnClick }) => {
+    const onProductImgInputChange = (event) => {
+        setImg(event.target.files[0]);
+    };
 
-const ProductFormInput = props => {
-  return (
-    <div className={add_prod.inputs}>
-      <input
-        type={props.type}
-        className={add_prod.name_desc}
-        id={props.id}
-        placeholder={props.placeholder}
-        onChange={props.onchangeEvent}
-        data-action={props.dataActionType}
-        value={props.value}
-      />
-    </div>
-  )
-}
-
-const AddProduct = (props) => {
-
-  let onAddNewProduct = () => {
-    props.addNewProduct()
-  }
-
-  let onChangeInputs = (e) => {
-    let newProductActionKey = e.target.value
-    let newProductActionType = e.target.dataset.action
-    props.updateNewProductData(newProductActionType, newProductActionKey)
-  }
-
-  let inputProps = [
-    { id: 1, type: "text", placeholder: "Название блюда / напитка", value: props.newProductTitle, onchangeEvent: onChangeInputs, dataActionType: "UPDATE_NEW_PRODUCT_TITLE" },
-    { id: 2, type: "number", placeholder: "0.00", value: props.newProductPrice, onchangeEvent: onChangeInputs, dataActionType: "UPDATE_NEW_PRODUCT_PRICE" },
-  ]
-
-  let ProductFormInputs = inputProps.map(item => {
-    return <ProductFormInput
-      key={item.id}
-      id={item.id}
-      type={item.type}
-      placeholder={item.placeholder}
-      dataActionType={item.dataActionType}
-      onchangeEvent={item.onchangeEvent}
-      value={item.value}
-    />
-  })
-
-  return (
-    <div className={add_prod.wrap}>
-      <h3 className={add_prod.h3}>Добавить новое блюдо</h3>
-      <div className={add_prod.content}>
-        <div className={add_prod.form}>
-          {ProductFormInputs}
-          <div className={add_prod.inputs}>
-            <textarea
-              className={add_prod.name_desc}
-              name="good_desc"
-              id="good_desc"
-              rows="7"
-              placeholder="Описание"
-              data-action="UPDATE_NEW_PRODUCT_DESC"
-              onChange={onChangeInputs}
-              value={props.newProductDesc}
-            ></textarea>
-          </div>
+    return (
+        <div className={styles.overlay}>
+            <div className={styles.centered}>
+                <span
+                    className={styles.remove_img}
+                    onClick={onRemoveImgBtnClick}
+                >
+                    <span style={{ marginRight: "10px" }}>
+                        <FontAwesomeIcon icon={faTimes} />
+                    </span>
+                    <span>Удалить изображение</span>
+                </span>
+                <label className={styles.img_input_label}>
+                    <input
+                        type="file"
+                        name="categoryImg"
+                        style={{ display: "none" }}
+                        accept="image/*"
+                        onChange={onProductImgInputChange}
+                    />{" "}
+                    <FontAwesomeIcon
+                        icon={faImage}
+                        style={{ marginRight: 10 }}
+                    />
+                    Загрузить новое
+                </label>
+            </div>
         </div>
-        <ProductImages onclickEvent={onAddNewProduct} />
-      </div>
-    </div>
-  )
-}
+    );
+};
 
-export default AddProduct;
+const ProductImg = (props) => {
+    return (
+        <div className={styles.img}>
+            <img src={props.imgUrl} alt="PRODUCT_IMG" />
+            <ImgOverlay
+                setImgUrl={props.setImgUrl}
+                setImg={props.setImg}
+                onRemoveImgBtnClick={props.onRemoveImgBtnClick}
+            />
+        </div>
+    );
+};
+
+const AddProductForm = reduxForm({ form: "addProductForm" })(
+    ({ handleSubmit, imgUrl, setImgUrl, IsFetching, enableForEdit }) => {
+        const [img, setImg] = useState(null);
+
+        useEffect(() => {
+            let reader = new FileReader();
+            reader.onloadend = function () {
+                setImgUrl(reader.result);
+            };
+            if (img) reader.readAsDataURL(img);
+        }, [img, setImgUrl]);
+
+        const onProductImgInputChange = (event) => {
+            setImg(event.target.files[0]);
+        };
+
+        const onRemoveImgBtnClick = () => {
+            if (enableForEdit) enableForEdit.image = null;
+            setImg(null);
+            setImgUrl(null);
+        };
+
+        return (
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <FormGroup>
+                    {imgUrl !== null ? (
+                        <ProductImg
+                            imgUrl={imgUrl}
+                            setImg={setImg}
+                            setImgUrl={setImgUrl}
+                            onRemoveImgBtnClick={onRemoveImgBtnClick}
+                        />
+                    ) : (
+                        <label className={styles.img_input_label}>
+                            <input
+                                type="file"
+                                name="productImg"
+                                style={{ display: "none" }}
+                                accept="image/*"
+                                onChange={onProductImgInputChange}
+                            />{" "}
+                            <FontAwesomeIcon
+                                icon={faImage}
+                                style={{ marginRight: 10 }}
+                            />
+                            Загрузить изображение
+                        </label>
+                    )}
+                </FormGroup>
+                <FormGroup>
+                    {CustomField(
+                        "text",
+                        "Название блюда",
+                        "name",
+                        FormElement,
+                        [required],
+                        ""
+                    )}
+                </FormGroup>
+                <FormGroup>
+                    <Select name="status">
+                        <option value="1">Порция</option>
+                        <option value="2">Штук</option>
+                        <option value="3">Литр</option>
+                        <option value="4">Стакан</option>
+                    </Select>
+                </FormGroup>
+                <FormGroup>
+                    {CustomField(
+                        "number",
+                        "Единица измерения",
+                        "unit",
+                        FormElement,
+                        [required],
+                        ""
+                    )}
+                </FormGroup>
+                <FormGroup>
+                    {CustomField(
+                        "number",
+                        "Цена за единицу",
+                        "price",
+                        FormElement,
+                        [required],
+                        ""
+                    )}
+                </FormGroup>
+                <FormGroup>
+                    {CustomField(
+                        "",
+                        "Описание",
+                        "body",
+                        TextArea,
+                        [required],
+                        ""
+                    )}
+                </FormGroup>
+                <FormGroup>
+                    <Button style={{ display: "block" }}>
+                        {IsFetching ? (
+                            <LoaderToButton />
+                        ) : enableForEdit ? (
+                            "Сохранить"
+                        ) : (
+                            "Добавить"
+                        )}
+                    </Button>
+                </FormGroup>
+            </form>
+        );
+    }
+);
+
+export default AddProductForm;

@@ -26,10 +26,10 @@ const Categories = (props) => {
     const onAddCategoryBtnClick = () => {
         setEnableForEdit(null);
         setImgUrl(null);
-        props.setModalState(true);
+        props.setCategoryModalState(true);
     };
 
-    const onAddCategoryFormSubmit = (formData) => {
+    const onSubmit = (formData) => {
         if (enableForEdit)
             props.editCategory(
                 enableForEdit.id,
@@ -48,7 +48,7 @@ const Categories = (props) => {
                 categoryId={item.id}
                 deleteCategory={props.deleteCategory}
                 editCategoryItem={editCategoryItem}
-                setModalState={props.setModalState}
+                setModalState={props.setCategoryModalState}
             />
         );
     });
@@ -72,19 +72,20 @@ const Categories = (props) => {
                 title={
                     enableForEdit ? "Изменить категорию" : "Добавить категорию"
                 }
-                name={enableForEdit ? enableForEdit.name : null}
+                initialValues={{
+                    name: enableForEdit ? enableForEdit.name : null,
+                }}
                 imgUrl={
                     enableForEdit && enableForEdit.image
                         ? enableForEdit.image
                         : imgUrl
                 }
                 enableForEdit={enableForEdit ? enableForEdit : null}
-                setModalState={props.setModalState}
-                modalType="form"
-                onAddCategoryFormSubmit={onAddCategoryFormSubmit}
+                setModalState={props.setCategoryModalState}
+                onSubmit={onSubmit}
                 component={AddCategoryForm}
                 setImgUrl={setImgUrl}
-                addCategoryIsFetching={props.addCategoryIsFetching}
+                IsFetching={props.loaderOnModalBtn}
             />
         </>
     );

@@ -7,7 +7,7 @@ import {
     CustomField,
     FormControl,
 } from "../../common/form-controls/FormControls";
-import { Button, FormGroup, FormInput } from "../../Login/StyledComponents";
+import { Button, FormGroup, FormInput } from "../../common/StyledComponents";
 import styles from "../Menu.module.css";
 import { LoaderToButton } from "../../common/preloader/Preloader";
 
@@ -63,13 +63,7 @@ const CategoryImg = (props) => {
 };
 
 const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
-    ({
-        handleSubmit,
-        imgUrl,
-        setImgUrl,
-        addCategoryIsFetching,
-        enableForEdit,
-    }) => {
+    ({ handleSubmit, imgUrl, setImgUrl, IsFetching, enableForEdit }) => {
         const [img, setImg] = useState(null);
 
         useEffect(() => {
@@ -129,7 +123,7 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
                 </FormGroup>
                 <FormGroup>
                     <Button style={{ display: "block" }}>
-                        {addCategoryIsFetching ? (
+                        {IsFetching ? (
                             <LoaderToButton />
                         ) : enableForEdit ? (
                             "Сохранить"

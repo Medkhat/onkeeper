@@ -53,6 +53,28 @@ export const FormInput = styled.input`
         border-color: rgb(255 0 72 / 65%);
     }
 `;
+export const FormTextarea = styled.textarea`
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    border: 2px solid #e8e8e8;
+    width: 100%;
+    &:focus {
+        border-color: rgb(255 0 72 / 65%);
+    }
+`;
+export const Select = styled.select`
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    border: 2px solid #e8e8e8;
+    width: 100%;
+    &:focus {
+        border-color: rgb(255 0 72 / 65%);
+    }
+`;
 export const Button = styled.button`
     background-color: rgb(255, 0, 72);
     position: relative;
