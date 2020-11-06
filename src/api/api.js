@@ -18,6 +18,19 @@ export const productsAPI = {
             .get(`/admin_rest/products/`)
             .then((response) => response);
     },
+    addProduct(name, body, status, unit, price, image, category) {
+        return instance
+            .post(`/admin_rest/products/`, {
+                name,
+                body,
+                status,
+                unit,
+                price,
+                image,
+                category,
+            })
+            .then((response) => response);
+    },
     getCategories() {
         return instance
             .get(`/admin_rest/restoran/1/category/`)

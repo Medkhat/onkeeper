@@ -1,6 +1,6 @@
 import { productsAPI } from "../api/api";
 import TOGGLE_BTN_PRELOADER from "./auth-reducer";
-import { setCategoryModalState } from "./modal-reducer";
+import { setCategoryModalState, setProductModalState } from "./modal-reducer";
 
 const SET_PRODUCTS = "SET_PRODUCTS";
 const SET_CATEGORIES = "SET_CATEGORIES";
@@ -25,7 +25,9 @@ const menuReducer = (state = initialState, action) => {
         case SET_PRODUCTS:
             return {
                 ...state,
-                products: action.products,
+                products: action.isNewProduct
+                    ? [...state.products, action.products]
+                    : action.products,
             };
         case SET_CATEGORIES:
             return {
@@ -71,15 +73,15 @@ const menuReducer = (state = initialState, action) => {
             return state;
     }
 };
-const setProducts = (products) => ({
+const setProducts = (products, isNewProduct) => ({
     type: SET_PRODUCTS,
-    products: products,
+    products,
+    isNewProduct,
 });
-const setCategories = (categories, isNewCategory, isEditedCategory) => ({
+const setCategories = (categories, isNewCategory) => ({
     type: SET_CATEGORIES,
     categories,
     isNewCategory,
-    isEditedCategory,
 });
 const editCategoryFromState = (categoryId, name, image) => ({
     type: EDIT_CATEGORY,
@@ -103,14 +105,13 @@ const toggleBtnPreloader = (loaderOnModalBtn) => ({
     type: TOGGLE_BTN_PRELOADER,
     loaderOnModalBtn,
 });
-const getMenuData = (requestType, action, isCategory) => {
+const getMenuData = (requestType, action) => {
     return async (dispatch) => {
         try {
             dispatch(toggleLoader(true));
             let response = await requestType();
             dispatch(toggleLoader(false));
-            if (isCategory) dispatch(action(response.data, false));
-            else dispatch(action(response.data));
+            dispatch(action(response.data, false));
         } catch (err) {
             console.error(`Error: ${err}`);
         }
@@ -118,13 +119,40 @@ const getMenuData = (requestType, action, isCategory) => {
 };
 
 export const getProducts = () => {
-    return getMenuData(productsAPI.getProducts, setProducts, false);
+    return getMenuData(productsAPI.getProducts, setProducts);
 };
 
 export const getCategories = () => {
-    return getMenuData(productsAPI.getCategories, setCategories, true);
+    return getMenuData(productsAPI.getCategories, setCategories);
 };
 
+export const addProduct = (
+    name,
+    body,
+    status,
+    unit,
+    price,
+    image,
+    categoryId
+) => async (dispatch) => {
+    try {
+        dispatch(toggleBtnPreloader(true));
+        let response = await productsAPI.addProduct(
+            name,
+            body,
+            status,
+            unit,
+            price,
+            image,
+            categoryId
+        );
+        dispatch(toggleBtnPreloader(false));
+        dispatch(setProductModalState(false));
+        dispatch(setProducts(response.data, true));
+    } catch (error) {
+        console.error("Error: " + error);
+    }
+};
 export const addCategory = (name, image, restoranId) => {
     return async (dispatch) => {
         try {

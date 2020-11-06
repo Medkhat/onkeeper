@@ -70,6 +70,7 @@ export const Select = styled.select`
     outline: none;
     font-size: 15px;
     border: 2px solid #e8e8e8;
+    background-color: #fff;
     width: 100%;
     &:focus {
         border-color: rgb(255 0 72 / 65%);

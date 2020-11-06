@@ -12,6 +12,18 @@ const Products = (props) => {
         props.setProductModalState(true);
     };
 
+    const onSubmit = (formData) => {
+        props.addProduct(
+            formData.name,
+            formData.body,
+            formData.status,
+            formData.unit,
+            formData.price,
+            imgUrl,
+            5
+        );
+    };
+
     return (
         <>
             <div className={styles.products}>
@@ -43,6 +55,7 @@ const Products = (props) => {
                 component={AddProduct}
                 imgUrl={imgUrl}
                 setImgUrl={setImgUrl}
+                onSubmit={onSubmit}
             />
         </>
     );

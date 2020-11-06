@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { reduxForm } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 import { required } from "../../../../utils/validators";
 import {
     CustomField,
@@ -19,6 +19,7 @@ import { LoaderToButton } from "../../../common/preloader/Preloader";
 
 const FormElement = FormControl(FormInput);
 const TextArea = FormControl(FormTextarea);
+const FormSelect = FormControl(Select);
 
 const ImgOverlay = ({ setImg, onRemoveImgBtnClick }) => {
     const onProductImgInputChange = (event) => {
@@ -129,12 +130,12 @@ const AddProductForm = reduxForm({ form: "addProductForm" })(
                     )}
                 </FormGroup>
                 <FormGroup>
-                    <Select name="status">
+                    <Field name="status" component={FormSelect}>
                         <option value="1">Порция</option>
                         <option value="2">Штук</option>
                         <option value="3">Литр</option>
                         <option value="4">Стакан</option>
-                    </Select>
+                    </Field>
                 </FormGroup>
                 <FormGroup>
                     {CustomField(
