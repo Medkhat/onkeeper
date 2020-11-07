@@ -6,6 +6,8 @@ import * as axios from "axios";
 //     Authorization: `Token ${token}`,
 // };
 
+const restoranId = 1;
+
 const instance = axios.create({
     withCredentials: true,
     baseURL: "http://admin07.pythonanywhere.com",
@@ -16,6 +18,13 @@ export const productsAPI = {
     getProducts() {
         return instance
             .get(`/admin_rest/products/`)
+            .then((response) => response);
+    },
+    getOneCategoryProducts(categoryId) {
+        return instance
+            .get(
+                `/admin_rest/restoran/${restoranId}/category/${categoryId}/products/`
+            )
             .then((response) => response);
     },
     addProduct(name, body, status, unit, price, image, category) {
@@ -49,7 +58,7 @@ export const productsAPI = {
     },
     getCategories() {
         return instance
-            .get(`/admin_rest/restoran/1/category/`)
+            .get(`/admin_rest/restoran/${restoranId}/category/`)
             .then((response) => response);
     },
     addCategory(name, image, restoran = 1) {
@@ -59,7 +68,7 @@ export const productsAPI = {
             restoran,
         });
     },
-    editCategory(categoryId, name, image, restoran = 1) {
+    editCategory(categoryId, name, image, restoran = restoranId) {
         return instance.put(`/admin_rest/category/${categoryId}/`, {
             name,
             image,

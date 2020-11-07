@@ -49,6 +49,7 @@ const Categories = (props) => {
                 deleteCategory={props.deleteCategory}
                 editCategoryItem={editCategoryItem}
                 setModalState={props.setCategoryModalState}
+                getOneCategoryProducts={props.getOneCategoryProducts}
             />
         );
     });

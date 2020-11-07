@@ -61,6 +61,7 @@ export const FormTextarea = styled.textarea`
     border: 2px solid #e8e8e8;
     width: 100%;
     height: 130px;
+    font-family: "Roboto Mono", sans-serif;
     &:focus {
         border-color: rgb(255 0 72 / 65%);
     }

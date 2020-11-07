@@ -5,7 +5,6 @@
     display: -ms-flexbox;
     justify-content: space-between;
     align-items: flex-start;
-    height: 100%;
     position: relative;
 }
 
@@ -106,6 +105,7 @@
     color: #ffffff;
     text-decoration: none;
     cursor: pointer;
+    margin: 0;
 }
 .item_btns {
     width: 20%;

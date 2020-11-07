@@ -1,13 +1,14 @@
 import { connect } from "react-redux";
 import Menu from "./Menu";
-import { getProducts, getCategories } from "../../redux/menu-reducer";
+import { getProducts } from "../../redux/product-reducer";
+import { getCategories } from "../../redux/category-reducer";
 import { compose } from "redux";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { setProductModalState } from "../../redux/modal-reducer";
 
 let mapStateToProps = (state) => {
     return {
-        isFetching: state.menuReducer.isFetching,
+        isFetching: state.productReducer.isFetching,
     };
 };
 

@@ -3,14 +3,14 @@ import {
     addProduct,
     deleteProduct,
     editProduct,
-} from "../../../redux/menu-reducer";
+} from "../../../redux/product-reducer";
 import { setProductModalState } from "../../../redux/modal-reducer";
 import Products from "./Products";
 
 let mapStateToProps = (state) => {
     return {
-        products: state.menuReducer.products,
-        IsFetching: state.menuReducer.loaderOnModalBtn,
+        products: state.productReducer.products,
+        IsFetching: state.productReducer.loaderOnModalBtn,
         modalState: state.modalReducer.productsModalState,
     };
 };

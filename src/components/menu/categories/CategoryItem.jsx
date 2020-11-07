@@ -1,6 +1,5 @@
 import React from "react";
-import m from "../Menu.module.css";
-import { NavLink } from "react-router-dom";
+import styles from "../Menu.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,12 +9,16 @@ const CategoryItem = (props) => {
         props.setModalState(true);
     };
 
+    const onCategoryItemClick = () => {
+        props.getOneCategoryProducts(props.categoryId);
+    };
+
     return (
-        <div className={m.item_block} id={props.categoryId}>
-            <NavLink to={"/products/" + props.categoryId} className={m.item}>
+        <div className={styles.item_block} id={props.categoryId}>
+            <p className={styles.item} onClick={onCategoryItemClick}>
                 {props.name}
-            </NavLink>
-            <div className={m.item_btns}>
+            </p>
+            <div className={styles.item_btns}>
                 <button type="button" onClick={onEditCategoryClick}>
                     <FontAwesomeIcon
                         icon={faPencilAlt}

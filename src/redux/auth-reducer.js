@@ -1,7 +1,7 @@
 import { authAPI } from "../api/api";
+import { TOGGLE_BTN_PRELOADER } from "./helper";
 
 const SET_USER_DATA = "SET_USER_DATA";
-export const TOGGLE_PRELOADER = "TOGGLE_PRELOADER";
 
 let initialState = {
     userId: null,
@@ -18,7 +18,7 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 ...action.payload,
             };
-        case TOGGLE_PRELOADER:
+        case TOGGLE_BTN_PRELOADER:
             return {
                 ...state,
                 isFetching: action.isFetching,
@@ -34,7 +34,7 @@ const setUserData = (userId, token, username, isAuth) => ({
 });
 
 const togglePrelader = (isFetching) => ({
-    type: TOGGLE_PRELOADER,
+    type: TOGGLE_BTN_PRELOADER,
     isFetching,
 });
 
