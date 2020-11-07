@@ -5,7 +5,10 @@ import {
     editCategory,
     getOneCategoryProducts,
 } from "../../../redux/category-reducer";
-import { getProducts } from "../../../redux/product-reducer";
+import {
+    getProducts,
+    setCurrentCategory,
+} from "../../../redux/product-reducer";
 import Categories from "./Categories";
 import { connect } from "react-redux";
 import { setCategoryModalState } from "../../../redux/modal-reducer";
@@ -15,6 +18,7 @@ let mapStateToProps = (state) => ({
     modalState: state.modalReducer.categoryModalState,
     loaderOnModalBtn: state.categoryReducer.loaderOnModalBtn,
     isFetching: state.categoryReducer.isFetching,
+    currentCategory: state.productReducer.currentCategory,
 });
 let mapDispatchToProps = {
     getCategories,
@@ -24,6 +28,7 @@ let mapDispatchToProps = {
     addCategory,
     editCategory,
     getOneCategoryProducts,
+    setCurrentCategory,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

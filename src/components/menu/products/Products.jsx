@@ -51,7 +51,7 @@ const Products = (props) => {
                 formData.unit,
                 formData.price,
                 imgUrl,
-                5
+                enableForEdit.category
             );
         } else {
             props.addProduct(
@@ -61,7 +61,7 @@ const Products = (props) => {
                 formData.unit,
                 formData.price,
                 imgUrl,
-                5
+                props.currentCategory
             );
         }
     };
@@ -69,16 +69,18 @@ const Products = (props) => {
     return (
         <>
             <div className={styles.products}>
-                <div
-                    className={`${styles.item_card} ${styles.add_product}`}
-                    onClick={onAddProductsBtnClick}
-                >
-                    <img
-                        src={plusIcon}
-                        className={styles.plus}
-                        alt="ADD_PRODUCT"
-                    />
-                </div>
+                {props.currentCategory && (
+                    <div
+                        className={`${styles.item_card} ${styles.add_product}`}
+                        onClick={onAddProductsBtnClick}
+                    >
+                        <img
+                            src={plusIcon}
+                            className={styles.plus}
+                            alt="ADD_PRODUCT"
+                        />
+                    </div>
+                )}
                 {props.products.map((item) => {
                     return (
                         <ProductItem

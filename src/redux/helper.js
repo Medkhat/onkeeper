@@ -1,3 +1,5 @@
+import { setCurrentCategory } from "./product-reducer";
+
 export const TOGGLE_CATEGORY_LOADER = "TOGGLE_CATEGORY_LOADER";
 export const TOGGLE_PRODUCT_LOADER = "TOGGLE_PRODUCT_LOADER";
 export const TOGGLE_BTN_PRELOADER = "TOGGLE_BTN_PRELOADER";
@@ -17,6 +19,7 @@ export const toggleBtnPreloader = (loaderOnModalBtn) => ({
 export const getMenuData = (requestType, action, loaderType) => {
     return async (dispatch) => {
         try {
+            dispatch(setCurrentCategory(null));
             dispatch(toggleLoader(true, loaderType));
             let response = await requestType();
             dispatch(toggleLoader(false, loaderType));

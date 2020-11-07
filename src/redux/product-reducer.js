@@ -12,9 +12,11 @@ import { setProductModalState } from "./modal-reducer";
 const SET_PRODUCTS = "SET_PRODUCTS";
 const DELETE_PRODUCT = "DELETE_PRODUCT";
 const EDIT_PRODUCT = "EDIT_PRODUCT";
+const SET_CURRENT_CATEGORY = "SET_CURRENT_CATEGORY";
 
 let initialState = {
     products: [],
+    currentCategory: null,
     isFetching: false,
     loaderOnModalBtn: false,
 };
@@ -44,6 +46,11 @@ const productReducer = (state = initialState, action) => {
                 products: state.products.filter(
                     (item) => item.id !== action.productId
                 ),
+            };
+        case SET_CURRENT_CATEGORY:
+            return {
+                ...state,
+                currentCategory: action.currentCategory,
             };
         case TOGGLE_PRODUCT_LOADER:
             return {
@@ -81,6 +88,10 @@ const editProductFromState = (
 const deleteProductFromState = (productId) => ({
     type: DELETE_PRODUCT,
     productId,
+});
+export const setCurrentCategory = (currentCategory) => ({
+    type: SET_CURRENT_CATEGORY,
+    currentCategory,
 });
 
 export const getProducts = () => {

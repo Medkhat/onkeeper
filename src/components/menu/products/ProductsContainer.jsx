@@ -12,6 +12,7 @@ let mapStateToProps = (state) => {
         products: state.productReducer.products,
         IsFetching: state.productReducer.loaderOnModalBtn,
         modalState: state.modalReducer.productsModalState,
+        currentCategory: state.productReducer.currentCategory,
     };
 };
 

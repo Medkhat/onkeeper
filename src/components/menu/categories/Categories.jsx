@@ -51,6 +51,8 @@ const Categories = (props) => {
                 editCategoryItem={editCategoryItem}
                 setModalState={props.setCategoryModalState}
                 getOneCategoryProducts={props.getOneCategoryProducts}
+                currentCategory={props.currentCategory}
+                setCurrentCategory={props.setCurrentCategory}
             />
         );
     });
@@ -68,12 +70,18 @@ const Categories = (props) => {
                     </span>
                 </h3>
                 <div className={styles.category_items}>
-                    <div className={styles.item_block} id={props.categoryId}>
+                    <div
+                        className={`${styles.item_block} ${
+                            !props.currentCategory && styles.active
+                        }`}
+                        id={props.categoryId}
+                        onClick={() => props.setCurrentCategory(null)}
+                    >
                         <p
                             className={styles.item}
                             onClick={() => props.getProducts()}
                         >
-                            All category
+                            All products
                         </p>
                     </div>
                     {props.isFetching ? (

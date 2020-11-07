@@ -100,6 +100,13 @@
     border-radius: 0 15px 15px 0;
     box-shadow: 0 0 20px 0 rgba(255, 0, 72, 0.3);
 }
+.item_block.active {
+    background-color: #ffffff;
+    border: 1px solid #ff0048;
+}
+.item_block.active .item {
+    color: #ff0048;
+}
 .item {
     width: 80%;
     color: #ffffff;

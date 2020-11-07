@@ -10,11 +10,16 @@ const CategoryItem = (props) => {
     };
 
     const onCategoryItemClick = () => {
+        props.setCurrentCategory(props.categoryId);
         props.getOneCategoryProducts(props.categoryId);
     };
 
     return (
-        <div className={styles.item_block} id={props.categoryId}>
+        <div
+            className={`${styles.item_block} ${
+                props.currentCategory === props.categoryId && styles.active
+            }`}
+        >
             <p className={styles.item} onClick={onCategoryItemClick}>
                 {props.name}
             </p>
