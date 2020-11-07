@@ -5,7 +5,6 @@
     display: -ms-flexbox;
     justify-content: space-between;
     align-items: flex-start;
-    padding-top: 30px;
     height: 100%;
     position: relative;
 }
@@ -13,6 +12,9 @@
 /* Styles for category block */
 .categories {
     width: 24%;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 91px;
 }
 .title {
     background-color: #ff0048;
@@ -187,7 +189,7 @@
     margin: 15px;
     font-weight: 500;
     font-size: 15px;
-    display: block;
+    cursor: pointer;
 }
 .product_name:hover {
     color: #ff0048;

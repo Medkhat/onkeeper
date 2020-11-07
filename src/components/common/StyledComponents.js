@@ -60,6 +60,7 @@ export const FormTextarea = styled.textarea`
     font-size: 15px;
     border: 2px solid #e8e8e8;
     width: 100%;
+    height: 130px;
     &:focus {
         border-color: rgb(255 0 72 / 65%);
     }

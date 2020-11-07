@@ -10,6 +10,11 @@ header {
     background-color: #ff0048;
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
     color: #ffffff;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 nav {
     display: flex;

@@ -7,7 +7,9 @@ const SET_CATEGORIES = "SET_CATEGORIES";
 const GET_CERTAIN_CATEGORY = "GET_CERTAIN_CATEGORY";
 const TOGGLE_LOADER = "TOGGLE_LOADER";
 const DELETE_CATEGORY = "DELETE_CATEGORY";
+const DELETE_PRODUCT = "DELETE_PRODUCT";
 const EDIT_CATEGORY = "EDIT_CATEGORY";
+const EDIT_PRODUCT = "EDIT_PRODUCT";
 
 let initialState = {
     categories: [],
@@ -28,6 +30,23 @@ const menuReducer = (state = initialState, action) => {
                 products: action.isNewProduct
                     ? [...state.products, action.products]
                     : action.products,
+            };
+        case EDIT_PRODUCT:
+            return {
+                ...state,
+                products: state.products.map((item) => {
+                    if (item.id === action.productId) {
+                        item = { id: action.productId, ...action.payload };
+                    }
+                    return item;
+                }),
+            };
+        case DELETE_PRODUCT:
+            return {
+                ...state,
+                products: state.products.filter(
+                    (item) => item.id !== action.productId
+                ),
             };
         case SET_CATEGORIES:
             return {
@@ -82,6 +101,24 @@ const setCategories = (categories, isNewCategory) => ({
     type: SET_CATEGORIES,
     categories,
     isNewCategory,
+});
+const editProductFromState = (
+    productId,
+    name,
+    body,
+    status,
+    unit,
+    price,
+    image,
+    category
+) => ({
+    type: EDIT_PRODUCT,
+    productId,
+    payload: { name, body, status, unit, price, image, category },
+});
+const deleteProductFromState = (productId) => ({
+    type: DELETE_PRODUCT,
+    productId,
 });
 const editCategoryFromState = (categoryId, name, image) => ({
     type: EDIT_CATEGORY,
@@ -150,9 +187,51 @@ export const addProduct = (
         dispatch(setProductModalState(false));
         dispatch(setProducts(response.data, true));
     } catch (error) {
-        console.error("Error: " + error);
+        console.error(error);
     }
 };
+export const editProduct = (
+    productId,
+    name,
+    body,
+    status,
+    unit,
+    price,
+    image,
+    categoryId
+) => async (dispatch) => {
+    try {
+        dispatch(toggleBtnPreloader(true));
+        let response = await productsAPI.editProduct(
+            productId,
+            name,
+            body,
+            status,
+            unit,
+            price,
+            image,
+            categoryId
+        );
+        dispatch(toggleBtnPreloader(false));
+        dispatch(setProductModalState(false));
+        if (response.status >= 200 && response.status <= 400)
+            dispatch(
+                editProductFromState(
+                    productId,
+                    name,
+                    body,
+                    status,
+                    unit,
+                    price,
+                    image,
+                    categoryId
+                )
+            );
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 export const addCategory = (name, image, restoranId) => {
     return async (dispatch) => {
         try {
@@ -166,7 +245,7 @@ export const addCategory = (name, image, restoranId) => {
             dispatch(setCategoryModalState(false));
             dispatch(setCategories(response.data, true));
         } catch (err) {
-            console.error("Error: " + err);
+            console.error(err);
         }
     };
 };
@@ -174,25 +253,47 @@ export const editCategory = (categoryId, name, image, restoranId) => {
     return async (dispatch) => {
         try {
             dispatch(toggleBtnPreloader(true));
-            await productsAPI.editCategory(categoryId, name, image, restoranId);
+            let response = await productsAPI.editCategory(
+                categoryId,
+                name,
+                image,
+                restoranId
+            );
             dispatch(toggleBtnPreloader(false));
             dispatch(setCategoryModalState(false));
-            dispatch(editCategoryFromState(categoryId, name, image));
+            if (response.status >= 200 && response.status <= 400)
+                dispatch(editCategoryFromState(categoryId, name, image));
         } catch (err) {
-            console.error("Error: " + err);
+            console.error(err);
         }
     };
 };
-export const deleteCategory = (categoryId) => {
-    return async (dispatch) => {
-        try {
-            let response = await productsAPI.deleteCategory(categoryId);
-            if (response.status >= 200 && response.status <= 400)
-                dispatch(deleteCategoryFromState(categoryId));
-        } catch (err) {
-            console.error("Error: " + err);
-        }
-    };
+
+const deleteFlow = async (apiMethod, fromState, id, dispatch) => {
+    try {
+        let response = await apiMethod(id);
+        if (response.status >= 200 && response.status <= 400)
+            dispatch(fromState(id));
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+export const deleteProduct = (productId) => async (dispatch) => {
+    deleteFlow(
+        productsAPI.deleteProduct.bind(productsAPI),
+        deleteProductFromState,
+        productId,
+        dispatch
+    );
+};
+export const deleteCategory = (categoryId) => async (dispatch) => {
+    deleteFlow(
+        productsAPI.deleteCategory.bind(productsAPI),
+        deleteCategoryFromState,
+        categoryId,
+        dispatch
+    );
 };
 
 export default menuReducer;

@@ -1,17 +1,26 @@
 import React from "react";
-import m from "../Menu.module.css";
-import { NavLink } from "react-router-dom";
+import styles from "../Menu.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const ProductItem = (props) => {
+    const clickHandler = () => {
+        props.editProductItem(props.id);
+        props.setProductModalState(true);
+    };
+
     return (
-        <div className={m.item_card}>
+        <div className={styles.item_card}>
             <img src={props.image} alt="PRODUCT_IMG" />
-            <NavLink to={`${props.href}`} className={m.product_name}>
+            <p className={styles.product_name} onClick={clickHandler}>
                 {props.name}
-            </NavLink>
-            <span className={m.times}>
+            </p>
+            <span
+                className={styles.times}
+                onClick={() => {
+                    props.deleteProduct(props.id);
+                }}
+            >
                 <FontAwesomeIcon
                     icon={faTimesCircle}
                     style={{ backgroundColor: "#fff", borderRadius: "50%" }}

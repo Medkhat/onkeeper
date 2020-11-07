@@ -2,30 +2,26 @@ import React, { useEffect, useState } from "react";
 import { faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { reduxForm, Field } from "redux-form";
-import { required } from "../../../../utils/validators";
+import { required } from "../../../utils/validators";
 import {
     CustomField,
     FormControl,
-} from "../../../common/form-controls/FormControls";
+} from "../../common/form-controls/FormControls";
 import {
     Button,
     FormGroup,
     FormInput,
     FormTextarea,
     Select,
-} from "../../../common/StyledComponents";
-import styles from "../../Menu.module.css";
-import { LoaderToButton } from "../../../common/preloader/Preloader";
+} from "../../common/StyledComponents";
+import styles from "../Menu.module.css";
+import { LoaderToButton } from "../../common/preloader/Preloader";
 
 const FormElement = FormControl(FormInput);
 const TextArea = FormControl(FormTextarea);
 const FormSelect = FormControl(Select);
 
-const ImgOverlay = ({ setImg, onRemoveImgBtnClick }) => {
-    const onProductImgInputChange = (event) => {
-        setImg(event.target.files[0]);
-    };
-
+const ImgOverlay = ({ onRemoveImgBtnClick }) => {
     return (
         <div className={styles.overlay}>
             <div className={styles.centered}>
@@ -38,7 +34,7 @@ const ImgOverlay = ({ setImg, onRemoveImgBtnClick }) => {
                     </span>
                     <span>Удалить изображение</span>
                 </span>
-                <label className={styles.img_input_label}>
+                {/* <label className={styles.img_input_label}>
                     <input
                         type="file"
                         name="categoryImg"
@@ -51,7 +47,7 @@ const ImgOverlay = ({ setImg, onRemoveImgBtnClick }) => {
                         style={{ marginRight: 10 }}
                     />
                     Загрузить новое
-                </label>
+                </label> */}
             </div>
         </div>
     );
@@ -62,7 +58,6 @@ const ProductImg = (props) => {
         <div className={styles.img}>
             <img src={props.imgUrl} alt="PRODUCT_IMG" />
             <ImgOverlay
-                setImgUrl={props.setImgUrl}
                 setImg={props.setImg}
                 onRemoveImgBtnClick={props.onRemoveImgBtnClick}
             />
@@ -99,7 +94,6 @@ const AddProductForm = reduxForm({ form: "addProductForm" })(
                         <ProductImg
                             imgUrl={imgUrl}
                             setImg={setImg}
-                            setImgUrl={setImgUrl}
                             onRemoveImgBtnClick={onRemoveImgBtnClick}
                         />
                     ) : (

@@ -13,11 +13,7 @@ import { LoaderToButton } from "../../common/preloader/Preloader";
 
 const FormElement = FormControl(FormInput);
 
-const ImgOverlay = ({ setImg, onRemoveImgBtnClick }) => {
-    const onCategoryImgInputChange = (event) => {
-        setImg(event.target.files[0]);
-    };
-
+const ImgOverlay = ({ onRemoveImgBtnClick }) => {
     return (
         <div className={styles.overlay}>
             <div className={styles.centered}>
@@ -30,7 +26,7 @@ const ImgOverlay = ({ setImg, onRemoveImgBtnClick }) => {
                     </span>
                     <span>Удалить изображение</span>
                 </span>
-                <label className={styles.img_input_label}>
+                {/* <label className={styles.img_input_label}>
                     <input
                         type="file"
                         name="categoryImg"
@@ -43,7 +39,7 @@ const ImgOverlay = ({ setImg, onRemoveImgBtnClick }) => {
                         style={{ marginRight: 10 }}
                     />
                     Загрузить новое
-                </label>
+                </label> */}
             </div>
         </div>
     );

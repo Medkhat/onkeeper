@@ -31,6 +31,22 @@ export const productsAPI = {
             })
             .then((response) => response);
     },
+    editProduct(id, name, body, status, unit, price, image, category) {
+        return instance
+            .put(`/admin_rest/products/${id}/`, {
+                name,
+                body,
+                status,
+                unit,
+                price,
+                image,
+                category,
+            })
+            .then((response) => response);
+    },
+    deleteProduct(id) {
+        return instance.delete(`/admin_rest/products/${id}/`);
+    },
     getCategories() {
         return instance
             .get(`/admin_rest/restoran/1/category/`)

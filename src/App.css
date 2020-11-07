@@ -1,5 +1,7 @@
 .app_wrapper {
     min-width: 991px;
-    height: calc(100% - 100px);
+    height: calc(100% - 91px);
     font-size: 15px;
+    margin-top: 30px;
+    position: relative;
 }
