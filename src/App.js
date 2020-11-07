@@ -6,7 +6,7 @@ import Login from "./components/Login/Login";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { initializeApp } from "./redux/app-reducer";
-import { Preloader } from "./components/common/preloader/Preloader";
+import { AppPreloader } from "./components/common/preloader/Preloader";
 import { withSuspense } from "./components/hoc/withSuspense";
 
 const MenuContainer = React.lazy(() =>
@@ -42,7 +42,7 @@ function App({ initializeApp, initialized }) {
         initializeApp();
     }, [initializeApp]);
 
-    if (!initialized) return <Preloader />;
+    if (!initialized) return <AppPreloader />;
     return (
         <>
             <Switch>

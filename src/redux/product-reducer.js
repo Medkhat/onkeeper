@@ -1,10 +1,11 @@
 import { productsAPI } from "../api/api";
 import {
     deleteFlow,
+    getMenuData,
     toggleBtnPreloader,
     toggleLoader,
     TOGGLE_BTN_PRELOADER,
-    TOGGLE_LOADER,
+    TOGGLE_PRODUCT_LOADER,
 } from "./helper";
 import { setProductModalState } from "./modal-reducer";
 
@@ -44,7 +45,7 @@ const productReducer = (state = initialState, action) => {
                     (item) => item.id !== action.productId
                 ),
             };
-        case TOGGLE_LOADER:
+        case TOGGLE_PRODUCT_LOADER:
             return {
                 ...state,
                 isFetching: action.isFetching,
@@ -81,21 +82,9 @@ const deleteProductFromState = (productId) => ({
     type: DELETE_PRODUCT,
     productId,
 });
-const getMenuData = (requestType, action) => {
-    return async (dispatch) => {
-        try {
-            dispatch(toggleLoader(true));
-            let response = await requestType();
-            dispatch(toggleLoader(false));
-            dispatch(action(response.data, false));
-        } catch (err) {
-            console.error(`Error: ${err}`);
-        }
-    };
-};
 
 export const getProducts = () => {
-    return getMenuData(productsAPI.getProducts, setProducts);
+    return getMenuData(productsAPI.getProducts, setProducts, "product");
 };
 
 export const getOneCategoryProducts = (categoryId) => async (dispatch) => {

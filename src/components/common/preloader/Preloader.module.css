@@ -21,3 +21,26 @@
 .button_loader {
     width: 7%;
 }
+.card {
+    width: 16%;
+    margin: 10px 3px;
+    border-radius: 10px;
+    position: relative;
+}
+@media only screen and (min-width: 1300px) {
+    .card {
+        width: 15%;
+        margin: 10px 7px;
+    }
+}
+@media only screen and (min-width: 1500px) {
+    .card {
+        width: 13%;
+    }
+}
+@media only screen and (min-width: 1700px) {
+    .card {
+        width: 12%;
+        margin: 10px 15px;
+    }
+}

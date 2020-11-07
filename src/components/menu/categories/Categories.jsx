@@ -1,6 +1,7 @@
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import Modal from "../../common/modal/Modal";
 import styles from "../Menu.module.css";
 import AddCategoryForm from "./AddCategoryForm";
@@ -66,7 +67,21 @@ const Categories = (props) => {
                         <FontAwesomeIcon icon={faPlusCircle} />
                     </span>
                 </h3>
-                <div className={styles.category_items}>{categoryItems}</div>
+                <div className={styles.category_items}>
+                    <div className={styles.item_block} id={props.categoryId}>
+                        <p
+                            className={styles.item}
+                            onClick={() => props.getProducts()}
+                        >
+                            All category
+                        </p>
+                    </div>
+                    {props.isFetching ? (
+                        <Skeleton count={6} height={30} />
+                    ) : (
+                        categoryItems
+                    )}
+                </div>
             </div>
             <Modal
                 show={props.modalState}

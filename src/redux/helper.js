@@ -1,8 +1,12 @@
-export const TOGGLE_LOADER = "TOGGLE_LOADER";
+export const TOGGLE_CATEGORY_LOADER = "TOGGLE_CATEGORY_LOADER";
+export const TOGGLE_PRODUCT_LOADER = "TOGGLE_PRODUCT_LOADER";
 export const TOGGLE_BTN_PRELOADER = "TOGGLE_BTN_PRELOADER";
 
-export const toggleLoader = (isFetching) => ({
-    type: TOGGLE_LOADER,
+export const toggleLoader = (isFetching, loaderType) => ({
+    type:
+        loaderType === "category"
+            ? TOGGLE_CATEGORY_LOADER
+            : TOGGLE_PRODUCT_LOADER,
     isFetching,
 });
 export const toggleBtnPreloader = (loaderOnModalBtn) => ({
@@ -10,12 +14,12 @@ export const toggleBtnPreloader = (loaderOnModalBtn) => ({
     loaderOnModalBtn,
 });
 
-export const getMenuData = (requestType, action) => {
+export const getMenuData = (requestType, action, loaderType) => {
     return async (dispatch) => {
         try {
-            dispatch(toggleLoader(true));
+            dispatch(toggleLoader(true, loaderType));
             let response = await requestType();
-            dispatch(toggleLoader(false));
+            dispatch(toggleLoader(false, loaderType));
             dispatch(action(response.data, false));
         } catch (err) {
             console.error(`Error: ${err}`);

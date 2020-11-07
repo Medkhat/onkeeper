@@ -5,7 +5,7 @@ import {
     toggleBtnPreloader,
     toggleLoader,
     TOGGLE_BTN_PRELOADER,
-    TOGGLE_LOADER,
+    TOGGLE_CATEGORY_LOADER,
 } from "./helper";
 import { setProducts } from "./product-reducer";
 import { setCategoryModalState } from "./modal-reducer";
@@ -47,7 +47,7 @@ const categoryReducer = (state = initialState, action) => {
                     (item) => item.id !== action.categoryId
                 ),
             };
-        case TOGGLE_LOADER:
+        case TOGGLE_CATEGORY_LOADER:
             return {
                 ...state,
                 isFetching: action.isFetching,
@@ -77,10 +77,6 @@ const deleteCategoryFromState = (categoryId) => ({
     categoryId,
 });
 
-export const getProducts = () => {
-    return getMenuData(productsAPI.getProducts, setProducts);
-};
-
 export const getOneCategoryProducts = (categoryId) => async (dispatch) => {
     try {
         dispatch(toggleLoader(true));
@@ -93,7 +89,7 @@ export const getOneCategoryProducts = (categoryId) => async (dispatch) => {
 };
 
 export const getCategories = () => {
-    return getMenuData(productsAPI.getCategories, setCategories);
+    return getMenuData(productsAPI.getCategories, setCategories, "category");
 };
 
 export const addCategory = (name, image, restoranId) => {
