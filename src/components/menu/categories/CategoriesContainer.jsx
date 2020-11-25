@@ -11,19 +11,25 @@ import {
 } from "../../../redux/product-reducer";
 import Categories from "./Categories";
 import { connect } from "react-redux";
-import { setCategoryModalState } from "../../../redux/modal-reducer";
+import {
+    setDeleteCategoryModalState,
+    setCategoryModalState,
+} from "../../../redux/modal-reducer";
 
 let mapStateToProps = (state) => ({
     categories: state.categoryReducer.categories,
-    modalState: state.modalReducer.categoryModalState,
+    categoryModalState: state.modalReducer.categoryModalState,
+    deleteCategoryModalState: state.modalReducer.deleteCategoryModalState,
     loaderOnModalBtn: state.categoryReducer.loaderOnModalBtn,
     isFetching: state.categoryReducer.isFetching,
     currentCategory: state.productReducer.currentCategory,
 });
+
 let mapDispatchToProps = {
     getCategories,
     getProducts,
     setCategoryModalState,
+    setDeleteCategoryModalState,
     deleteCategory,
     addCategory,
     editCategory,

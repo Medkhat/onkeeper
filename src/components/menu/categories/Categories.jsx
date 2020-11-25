@@ -7,6 +7,8 @@ import styles from "../Menu.module.css";
 import AddCategoryForm from "./AddCategoryForm";
 import CategoryItem from "./CategoryItem";
 
+const Confirmation = () => <div>Here should be text</div>;
+
 const Categories = (props) => {
     const [imgUrl, setImgUrl] = useState(null);
     const [enableForEdit, setEnableForEdit] = useState(null);
@@ -53,6 +55,7 @@ const Categories = (props) => {
                 getOneCategoryProducts={props.getOneCategoryProducts}
                 currentCategory={props.currentCategory}
                 setCurrentCategory={props.setCurrentCategory}
+                setConfirmModalState={props.setDeleteCategoryModalState}
             />
         );
     });
@@ -85,14 +88,18 @@ const Categories = (props) => {
                         </p>
                     </div>
                     {props.isFetching ? (
-                        <Skeleton count={6} height={30} />
+                        <Skeleton
+                            count={6}
+                            height={30}
+                            style={{ borderRadius: "0 15px 15px 0" }}
+                        />
                     ) : (
                         categoryItems
                     )}
                 </div>
             </div>
             <Modal
-                show={props.modalState}
+                show={props.categoryModalState}
                 title={
                     enableForEdit ? "Изменить категорию" : "Добавить категорию"
                 }
@@ -110,6 +117,13 @@ const Categories = (props) => {
                 component={AddCategoryForm}
                 setImgUrl={setImgUrl}
                 IsFetching={props.loaderOnModalBtn}
+            />
+
+            <Modal
+                show={props.deleteCategoryModalState}
+                title={"Подтверждение"}
+                component={Confirmation}
+                setModalState={props.setDeleteCategoryModalState}
             />
         </>
     );

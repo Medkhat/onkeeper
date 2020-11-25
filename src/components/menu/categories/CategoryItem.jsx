@@ -14,37 +14,41 @@ const CategoryItem = (props) => {
         props.getOneCategoryProducts(props.categoryId);
     };
 
+    const onDeleteCategoryClick = () => {
+        props.setConfirmModalState(true);
+        // props.deleteCategory(props.categoryId)
+    };
+
     return (
-        <div
-            className={`${styles.item_block} ${
-                props.currentCategory === props.categoryId && styles.active
-            }`}
-        >
-            <p className={styles.item} onClick={onCategoryItemClick}>
-                {props.name}
-            </p>
-            <div className={styles.item_btns}>
-                <button type="button" onClick={onEditCategoryClick}>
-                    <FontAwesomeIcon
-                        icon={faPencilAlt}
-                        style={{
-                            fontSize: "16px",
-                        }}
-                    />
-                </button>
-                <button
-                    type="button"
-                    onClick={() => props.deleteCategory(props.categoryId)}
-                >
-                    <FontAwesomeIcon
-                        icon={faTimesCircle}
-                        style={{
-                            fontSize: "16px",
-                        }}
-                    />
-                </button>
+        <>
+            <div
+                className={`${styles.item_block} ${
+                    props.currentCategory === props.categoryId && styles.active
+                }`}
+            >
+                <p className={styles.item} onClick={onCategoryItemClick}>
+                    {props.name}
+                </p>
+                <div className={styles.item_btns}>
+                    <button type="button" onClick={onEditCategoryClick}>
+                        <FontAwesomeIcon
+                            icon={faPencilAlt}
+                            style={{
+                                fontSize: "16px",
+                            }}
+                        />
+                    </button>
+                    <button type="button" onClick={onDeleteCategoryClick}>
+                        <FontAwesomeIcon
+                            icon={faTimesCircle}
+                            style={{
+                                fontSize: "16px",
+                            }}
+                        />
+                    </button>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
