@@ -101,4 +101,16 @@ export const Button = styled.button`
         -moz-transition: 0.3s;
         -o-transition: 0.3s;
     }
+    ${(props) => {
+        if (props.btnComponent === "confirm")
+            return `
+                display: inline-block !important;
+                width: auto;
+                margin: 0 10px;
+                &:first-child {
+                    background-color: #ccc !important;
+                    color: #000;
+                }
+            `;
+    }}
 `;

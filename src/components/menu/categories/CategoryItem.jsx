@@ -16,7 +16,10 @@ const CategoryItem = (props) => {
 
     const onDeleteCategoryClick = () => {
         props.setConfirmModalState(true);
-        // props.deleteCategory(props.categoryId)
+        props.setEnableForDelete({
+            id: props.categoryId,
+            name: props.name,
+        });
     };
 
     return (

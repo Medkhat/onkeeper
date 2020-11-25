@@ -2,16 +2,16 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import { Confirmation } from "../../common/modal/Confirm";
 import Modal from "../../common/modal/Modal";
 import styles from "../Menu.module.css";
 import AddCategoryForm from "./AddCategoryForm";
 import CategoryItem from "./CategoryItem";
 
-const Confirmation = () => <div>Here should be text</div>;
-
 const Categories = (props) => {
     const [imgUrl, setImgUrl] = useState(null);
     const [enableForEdit, setEnableForEdit] = useState(null);
+    const [enableForDelete, setEnableForDelete] = useState(null);
     const editCategoryItem = (categoryId) => {
         props.categories.forEach((item) => {
             if (item.id === categoryId) {
@@ -56,6 +56,7 @@ const Categories = (props) => {
                 currentCategory={props.currentCategory}
                 setCurrentCategory={props.setCurrentCategory}
                 setConfirmModalState={props.setDeleteCategoryModalState}
+                setEnableForDelete={setEnableForDelete}
             />
         );
     });
@@ -124,6 +125,9 @@ const Categories = (props) => {
                 title={"Подтверждение"}
                 component={Confirmation}
                 setModalState={props.setDeleteCategoryModalState}
+                enableForDelete={enableForDelete}
+                text={"Вы хотите удалить категорию"}
+                deleteCategory={props.deleteCategory}
             />
         </>
     );

@@ -36,6 +36,15 @@
 .iconAsBtn {
     cursor: pointer;
 }
+.confirm h2 {
+    font-size: 21px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.confirm_btns {
+    text-align: center;
+}
 @media only screen and (max-width: 1199px) {
     .wrapper {
         width: 40%;
