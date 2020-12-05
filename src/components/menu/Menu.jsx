@@ -1,34 +1,22 @@
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
-import m from "./Menu.module.css";
+import styles from "./Menu.module.css";
 import CategoriesContainer from "./categories/CategoriesContainer";
 import ProductsContainer from "./products/ProductsContainer";
-import { Preloader } from "../common/preloader/Preloader";
-import AddProductContainer from "./products/add-product/AddProductContainer";
+import { SkeletonCard } from "../common/preloader/Preloader";
 
-const Menu = ({ getCategories, getProducts, ...props }) => {
+const Menu = React.memo(({ getCategories, getProducts, ...props }) => {
     useEffect(() => {
         getProducts();
         getCategories();
     }, [getCategories, getProducts]);
     return (
-        <div className={m.content}>
-            {props.isFetching ? <Preloader /> : null}
+        <div className={styles.content}>
             <CategoriesContainer />
-            <div className={m.menu_content}>
-                <Route
-                    exact
-                    path="/products"
-                    render={() => <ProductsContainer />}
-                />
-                <Route
-                    exact
-                    path="/products/add-product"
-                    render={() => <AddProductContainer />}
-                />
+            <div className={styles.menu_content}>
+                {props.isFetching ? <SkeletonCard /> : <ProductsContainer />}
             </div>
         </div>
     );
-};
+});
 
 export default Menu;

@@ -6,6 +6,8 @@ import * as axios from "axios";
 //     Authorization: `Token ${token}`,
 // };
 
+const restoranId = 1;
+
 const instance = axios.create({
     withCredentials: true,
     baseURL: "http://admin07.pythonanywhere.com",
@@ -18,13 +20,56 @@ export const productsAPI = {
             .get(`/admin_rest/products/`)
             .then((response) => response);
     },
+    getOneCategoryProducts(categoryId) {
+        return instance
+            .get(
+                `/admin_rest/restoran/${restoranId}/category/${categoryId}/products/`
+            )
+            .then((response) => response);
+    },
+    addProduct(name, body, status, unit, price, image, category) {
+        return instance
+            .post(`/admin_rest/products/`, {
+                name,
+                body,
+                status,
+                unit,
+                price,
+                image,
+                category,
+            })
+            .then((response) => response);
+    },
+    editProduct(id, name, body, status, unit, price, image, category) {
+        return instance
+            .put(`/admin_rest/products/${id}/`, {
+                name,
+                body,
+                status,
+                unit,
+                price,
+                image,
+                category,
+            })
+            .then((response) => response);
+    },
+    deleteProduct(id) {
+        return instance.delete(`/admin_rest/products/${id}/`);
+    },
     getCategories() {
         return instance
-            .get(`/admin_rest/restoran/1/category/`)
+            .get(`/admin_rest/restoran/${restoranId}/category/`)
             .then((response) => response);
     },
     addCategory(name, image, restoran = 1) {
         return instance.post(`/admin_rest/category/`, {
+            name,
+            image,
+            restoran,
+        });
+    },
+    editCategory(categoryId, name, image, restoran = restoranId) {
+        return instance.put(`/admin_rest/category/${categoryId}/`, {
             name,
             image,
             restoran,
@@ -38,8 +83,8 @@ export const productsAPI = {
 export const authAPI = {
     authMe() {
         return instance.post(`/user/login`, {
-            username: "User1",
-            password: "users",
+            username: "Admin",
+            password: "admin",
         });
     },
     login(username, password) {

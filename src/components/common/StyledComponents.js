@@ -53,6 +53,31 @@ export const FormInput = styled.input`
         border-color: rgb(255 0 72 / 65%);
     }
 `;
+export const FormTextarea = styled.textarea`
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    border: 2px solid #e8e8e8;
+    width: 100%;
+    height: 130px;
+    font-family: "Roboto Mono", sans-serif;
+    &:focus {
+        border-color: rgb(255 0 72 / 65%);
+    }
+`;
+export const Select = styled.select`
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    border: 2px solid #e8e8e8;
+    background-color: #fff;
+    width: 100%;
+    &:focus {
+        border-color: rgb(255 0 72 / 65%);
+    }
+`;
 export const Button = styled.button`
     background-color: rgb(255, 0, 72);
     position: relative;
@@ -76,4 +101,16 @@ export const Button = styled.button`
         -moz-transition: 0.3s;
         -o-transition: 0.3s;
     }
+    ${(props) => {
+        if (props.btnComponent === "confirm")
+            return `
+                display: inline-block !important;
+                width: auto;
+                margin: 0 10px;
+                &:first-child {
+                    background-color: #ccc !important;
+                    color: #000;
+                }
+            `;
+    }}
 `;

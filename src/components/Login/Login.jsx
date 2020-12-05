@@ -14,7 +14,7 @@ import {
     FormInput,
     LoginWrapper,
     Logo,
-} from "./StyledComponents";
+} from "../../components/common/StyledComponents";
 import { LoaderToButton } from "../common/preloader/Preloader";
 
 const FormElement = FormControl(FormInput);

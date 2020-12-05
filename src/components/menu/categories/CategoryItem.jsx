@@ -1,37 +1,57 @@
 import React from "react";
-import m from "../Menu.module.css";
-import { NavLink } from "react-router-dom";
+import styles from "../Menu.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const CategoryItem = (props) => {
+    const onEditCategoryClick = () => {
+        props.editCategoryItem(props.categoryId);
+        props.setModalState(true);
+    };
+
+    const onCategoryItemClick = () => {
+        props.setCurrentCategory(props.categoryId);
+        props.getOneCategoryProducts(props.categoryId);
+    };
+
+    const onDeleteCategoryClick = () => {
+        props.setConfirmModalState(true);
+        props.setEnableForDelete({
+            id: props.categoryId,
+            name: props.name,
+        });
+    };
+
     return (
-        <div className={m.item_block} id={props.categoryId}>
-            <NavLink to={"/products/" + props.categoryId} className={m.item}>
-                {props.name}
-            </NavLink>
-            <div className={m.item_btns}>
-                <button type="button">
-                    <FontAwesomeIcon
-                        icon={faPencilAlt}
-                        style={{
-                            fontSize: "16px",
-                        }}
-                    />
-                </button>
-                <button
-                    type="button"
-                    onClick={() => props.deleteCategory(props.categoryId)}
-                >
-                    <FontAwesomeIcon
-                        icon={faTimesCircle}
-                        style={{
-                            fontSize: "16px",
-                        }}
-                    />
-                </button>
+        <>
+            <div
+                className={`${styles.item_block} ${
+                    props.currentCategory === props.categoryId && styles.active
+                }`}
+            >
+                <p className={styles.item} onClick={onCategoryItemClick}>
+                    {props.name}
+                </p>
+                <div className={styles.item_btns}>
+                    <button type="button" onClick={onEditCategoryClick}>
+                        <FontAwesomeIcon
+                            icon={faPencilAlt}
+                            style={{
+                                fontSize: "16px",
+                            }}
+                        />
+                    </button>
+                    <button type="button" onClick={onDeleteCategoryClick}>
+                        <FontAwesomeIcon
+                            icon={faTimesCircle}
+                            style={{
+                                fontSize: "16px",
+                            }}
+                        />
+                    </button>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

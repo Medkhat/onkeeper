@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { reduxForm } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 import { required } from "../../../utils/validators";
 import {
     CustomField,
     FormControl,
 } from "../../common/form-controls/FormControls";
-import { Button, FormGroup, FormInput } from "../../common/StyledComponents";
+import {
+    Button,
+    FormGroup,
+    FormInput,
+    FormTextarea,
+    Select,
+} from "../../common/StyledComponents";
 import styles from "../Menu.module.css";
 import { LoaderToButton } from "../../common/preloader/Preloader";
 
 const FormElement = FormControl(FormInput);
+const TextArea = FormControl(FormTextarea);
+const FormSelect = FormControl(Select);
 
 const ImgOverlay = ({ onRemoveImgBtnClick }) => {
     return (
@@ -32,7 +40,7 @@ const ImgOverlay = ({ onRemoveImgBtnClick }) => {
                         name="categoryImg"
                         style={{ display: "none" }}
                         accept="image/*"
-                        onChange={onCategoryImgInputChange}
+                        onChange={onProductImgInputChange}
                     />{" "}
                     <FontAwesomeIcon
                         icon={faImage}
@@ -45,12 +53,11 @@ const ImgOverlay = ({ onRemoveImgBtnClick }) => {
     );
 };
 
-const CategoryImg = (props) => {
+const ProductImg = (props) => {
     return (
         <div className={styles.img}>
-            <img src={props.imgUrl} alt="CATEGORY_IMG" />
+            <img src={props.imgUrl} alt="PRODUCT_IMG" />
             <ImgOverlay
-                setImgUrl={props.setImgUrl}
                 setImg={props.setImg}
                 onRemoveImgBtnClick={props.onRemoveImgBtnClick}
             />
@@ -58,7 +65,7 @@ const CategoryImg = (props) => {
     );
 };
 
-const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
+const AddProductForm = reduxForm({ form: "addProductForm" })(
     ({ handleSubmit, imgUrl, setImgUrl, IsFetching, enableForEdit }) => {
         const [img, setImg] = useState(null);
 
@@ -70,7 +77,7 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
             if (img) reader.readAsDataURL(img);
         }, [img, setImgUrl]);
 
-        const onCategoryImgInputChange = (event) => {
+        const onProductImgInputChange = (event) => {
             setImg(event.target.files[0]);
         };
 
@@ -84,20 +91,19 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
             <form className={styles.form} onSubmit={handleSubmit}>
                 <FormGroup>
                     {imgUrl !== null ? (
-                        <CategoryImg
+                        <ProductImg
                             imgUrl={imgUrl}
                             setImg={setImg}
-                            setImgUrl={setImgUrl}
                             onRemoveImgBtnClick={onRemoveImgBtnClick}
                         />
                     ) : (
                         <label className={styles.img_input_label}>
                             <input
                                 type="file"
-                                name="categoryImg"
+                                name="productImg"
                                 style={{ display: "none" }}
                                 accept="image/*"
-                                onChange={onCategoryImgInputChange}
+                                onChange={onProductImgInputChange}
                             />{" "}
                             <FontAwesomeIcon
                                 icon={faImage}
@@ -110,9 +116,47 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
                 <FormGroup>
                     {CustomField(
                         "text",
-                        "Название категории",
+                        "Название блюда",
                         "name",
                         FormElement,
+                        [required],
+                        ""
+                    )}
+                </FormGroup>
+                <FormGroup>
+                    <Field name="status" component={FormSelect}>
+                        <option value="1">Порция</option>
+                        <option value="2">Штук</option>
+                        <option value="3">Литр</option>
+                        <option value="4">Стакан</option>
+                    </Field>
+                </FormGroup>
+                <FormGroup>
+                    {CustomField(
+                        "number",
+                        "Единица измерения",
+                        "unit",
+                        FormElement,
+                        [required],
+                        ""
+                    )}
+                </FormGroup>
+                <FormGroup>
+                    {CustomField(
+                        "number",
+                        "Цена за единицу",
+                        "price",
+                        FormElement,
+                        [required],
+                        ""
+                    )}
+                </FormGroup>
+                <FormGroup>
+                    {CustomField(
+                        "",
+                        "Описание",
+                        "body",
+                        TextArea,
                         [required],
                         ""
                     )}
@@ -133,4 +177,4 @@ const AddCategoryForm = reduxForm({ form: "addCategoryForm" })(
     }
 );
 
-export default AddCategoryForm;
+export default AddProductForm;
