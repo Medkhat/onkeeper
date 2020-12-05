@@ -30,11 +30,22 @@ export const getMenuData = (requestType, action, loaderType) => {
     };
 };
 
-export const deleteFlow = async (apiMethod, fromState, id, dispatch) => {
+export const deleteFlow = async (
+    apiMethod,
+    fromState,
+    modalState,
+    id,
+    dispatch
+) => {
     try {
+        dispatch(toggleBtnPreloader(true));
         let response = await apiMethod(id);
-        if (response.status >= 200 && response.status <= 400)
+        if (response.status >= 200 && response.status <= 400) {
             dispatch(fromState(id));
+
+            dispatch(toggleBtnPreloader(false));
+            dispatch(modalState(false));
+        }
     } catch (err) {
         console.error(err);
     }

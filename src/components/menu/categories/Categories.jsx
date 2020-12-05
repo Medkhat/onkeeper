@@ -127,7 +127,8 @@ const Categories = (props) => {
                 setModalState={props.setDeleteCategoryModalState}
                 enableForDelete={enableForDelete}
                 text={"Вы хотите удалить категорию"}
-                deleteCategory={props.deleteCategory}
+                delete={props.deleteCategory}
+                IsFetching={props.loaderOnModalBtn}
             />
         </>
     );

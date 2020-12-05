@@ -7,7 +7,10 @@ import {
     TOGGLE_BTN_PRELOADER,
     TOGGLE_PRODUCT_LOADER,
 } from "./helper";
-import { setProductModalState } from "./modal-reducer";
+import {
+    setDeleteProductModalState,
+    setProductModalState,
+} from "./modal-reducer";
 
 const SET_PRODUCTS = "SET_PRODUCTS";
 const DELETE_PRODUCT = "DELETE_PRODUCT";
@@ -182,6 +185,7 @@ export const deleteProduct = (productId) => async (dispatch) => {
     deleteFlow(
         productsAPI.deleteProduct.bind(productsAPI),
         deleteProductFromState,
+        setDeleteProductModalState,
         productId,
         dispatch
     );

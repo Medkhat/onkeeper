@@ -1,10 +1,10 @@
 import React from "react";
+import { LoaderToButton } from "../preloader/Preloader";
 import { Button } from "../StyledComponents";
 import styles from "./Modal.module.css";
 
 export const Confirmation = (props) => {
-    const onSubmitConfirmation = () =>
-        props.deleteCategory(props.enableForDelete.id);
+    const onSubmitConfirmation = () => props.delete(props.enableForDelete.id);
     return (
         <div className={styles.confirm}>
             <h2>
@@ -19,7 +19,7 @@ export const Confirmation = (props) => {
                     btnComponent="confirm"
                     onClick={onSubmitConfirmation}
                 >
-                    Удалить
+                    {props.IsFetching ? <LoaderToButton /> : "Удалить"}
                 </Button>
             </div>
         </div>

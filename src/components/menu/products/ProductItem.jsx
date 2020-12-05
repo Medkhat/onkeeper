@@ -9,18 +9,21 @@ const ProductItem = (props) => {
         props.setProductModalState(true);
     };
 
+    const onDeleteProductClick = () => {
+        props.setConfirmModalState(true);
+        props.setEnableForDelete({
+            id: props.id,
+            name: props.name,
+        });
+    };
+
     return (
         <div className={styles.item_card}>
             <img src={props.image} alt="PRODUCT_IMG" />
             <p className={styles.product_name} onClick={clickHandler}>
                 {props.name}
             </p>
-            <span
-                className={styles.times}
-                onClick={() => {
-                    props.deleteProduct(props.id);
-                }}
-            >
+            <span className={styles.times} onClick={onDeleteProductClick}>
                 <FontAwesomeIcon
                     icon={faTimesCircle}
                     style={{ backgroundColor: "#fff", borderRadius: "50%" }}

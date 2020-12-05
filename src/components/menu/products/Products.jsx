@@ -4,10 +4,12 @@ import ProductItem from "./ProductItem";
 import plusIcon from "./../../../img/plus.png";
 import Modal from "../../common/modal/Modal";
 import AddProduct from "./AddProduct";
+import { Confirmation } from "../../common/modal/Confirm";
 
 const Products = (props) => {
     const [imgUrl, setImgUrl] = useState(null);
     const [enableForEdit, setEnableForEdit] = useState(null);
+    const [enableForDelete, setEnableForDelete] = useState(null);
     let [initialValues, setInitialValues] = useState({});
     const editProductItem = (productId) => {
         props.products.forEach((item) => {
@@ -90,7 +92,10 @@ const Products = (props) => {
                             image={item.image}
                             editProductItem={editProductItem}
                             setProductModalState={props.setProductModalState}
-                            deleteProduct={props.deleteProduct}
+                            setConfirmModalState={
+                                props.setDeleteProductModalState
+                            }
+                            setEnableForDelete={setEnableForDelete}
                         />
                     );
                 })}
@@ -109,6 +114,16 @@ const Products = (props) => {
                 onSubmit={onSubmit}
                 enableForEdit={enableForEdit}
                 initialValues={initialValues}
+                IsFetching={props.IsFetching}
+            />
+            <Modal
+                show={props.deleteProductModalState}
+                title={"Подтверждение"}
+                component={Confirmation}
+                setModalState={props.setDeleteProductModalState}
+                enableForDelete={enableForDelete}
+                text={"Вы хотите удалить "}
+                delete={props.deleteProduct}
                 IsFetching={props.IsFetching}
             />
         </>

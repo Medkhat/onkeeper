@@ -8,7 +8,10 @@ import {
     TOGGLE_CATEGORY_LOADER,
 } from "./helper";
 import { setProducts } from "./product-reducer";
-import { setCategoryModalState } from "./modal-reducer";
+import {
+    setCategoryModalState,
+    setDeleteCategoryModalState,
+} from "./modal-reducer";
 
 const SET_CATEGORIES = "SET_CATEGORIES";
 const DELETE_CATEGORY = "DELETE_CATEGORY";
@@ -133,6 +136,7 @@ export const deleteCategory = (categoryId) => async (dispatch) => {
     deleteFlow(
         productsAPI.deleteCategory.bind(productsAPI),
         deleteCategoryFromState,
+        setDeleteCategoryModalState,
         categoryId,
         dispatch
     );

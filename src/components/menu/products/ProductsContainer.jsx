@@ -4,7 +4,10 @@ import {
     deleteProduct,
     editProduct,
 } from "../../../redux/product-reducer";
-import { setProductModalState } from "../../../redux/modal-reducer";
+import {
+    setDeleteProductModalState,
+    setProductModalState,
+} from "../../../redux/modal-reducer";
 import Products from "./Products";
 
 let mapStateToProps = (state) => {
@@ -13,6 +16,7 @@ let mapStateToProps = (state) => {
         IsFetching: state.productReducer.loaderOnModalBtn,
         modalState: state.modalReducer.productsModalState,
         currentCategory: state.productReducer.currentCategory,
+        deleteProductModalState: state.modalReducer.deleteProductModalState,
     };
 };
 
@@ -21,5 +25,6 @@ const ProductsContainer = connect(mapStateToProps, {
     addProduct,
     editProduct,
     deleteProduct,
+    setDeleteProductModalState,
 })(Products);
 export default ProductsContainer;
